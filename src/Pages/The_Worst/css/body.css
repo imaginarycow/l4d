@@ -1,0 +1,15 @@
+#container {
+  background-color: #ffddaa;
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-rows: 200px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#containerLeft {
+  background-color: blue;
+}
+#containerRight {
+  background-color: green;
+}

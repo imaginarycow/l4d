@@ -6,8 +6,8 @@ export default class Header extends Component {
   render() {
     return (
       <div>
-        <Logo />
-        <Navbar />
+        {/* <Navbar /> */}
+        TEST
       </div>
     );
   }
