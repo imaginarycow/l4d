@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './css/App.css';
-import Navbar from '../../components/navbar';
 import Languages from './components/language_option';
 import Question from './components/question';
 import ChoiceArea from './components/choice_area';
@@ -9,14 +8,14 @@ import { Questions } from './data/questions';
 
 var questionOfTheDay = {};
 
-export default class App extends Component {
+class App extends Component {
 
   componentWillMount() {
     this.getQuestionOfTheDay();
   }
 
   getQuestionOfTheDay() {
-    var d = new Date();
+
     for (var i = 0; i < Questions.length; i++) {
       if (Questions[i].date === '09/16/2017') {
         questionOfTheDay = Questions[i];
@@ -38,3 +37,4 @@ export default class App extends Component {
     );
   }
 }
+export default App;

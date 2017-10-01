@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-//import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
-import { Navbar,Nav,NavItem,MenuItem } from 'react-bootstrap';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Navbar,Nav,NavItem } from 'react-bootstrap';
 import Logo from './logo';
 import '../css/nav.css';
 
