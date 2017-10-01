@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Matchup from './matchup.js';
-import '../App.css';
+import '../css/App.css';
 import image1 from '../assets/image1.png';
 import image2 from '../assets/image2.png';
 

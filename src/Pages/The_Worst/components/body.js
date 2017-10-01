@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Jumbotron from './jumbotron.js';
 import Matchup from './matchup.js';
 //import '../css/container.css';
-import '../App.css';
+import '../css/App.css';
 
 import image3 from '../assets/image3.png';
 import image4 from '../assets/image4.png';

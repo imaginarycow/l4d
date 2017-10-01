@@ -28,7 +28,6 @@ export default class App extends Component {
 
     return (
       <div className="App">
-        {/* <Navbar /> */}
         <h1>QOTD</h1>
         <h5>Question of the Day</h5>
         <Languages />

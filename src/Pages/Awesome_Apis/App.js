@@ -1,14 +1,17 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+
 
 class App extends Component {
-  render () {
+
+  render() {
+
     return (
       <div>
-        <h1>Blog</h1>
+        <h3>Awesome Apis</h3>
       </div>
+
     );
   }
-
 }
 
 export default App;

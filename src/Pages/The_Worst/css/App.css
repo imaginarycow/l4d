@@ -1,6 +1,6 @@
 @font-face {
   font-family: bungee;
-  src: url('bungee.shade.ttf'),
+  src: url('./bungee.shade.ttf'),
 }
 #site {
   display: grid;
