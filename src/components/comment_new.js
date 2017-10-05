@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React,{Component} from 'react';
+
+
 
 export default class NewComment extends Component {
-
-  render() {
+  render () {
     return (
       <div>
         <form>
@@ -10,6 +11,6 @@ export default class NewComment extends Component {
           <input type="submit" value="Post" />
         </form>
       </div>
-    )
+    );
   }
 }

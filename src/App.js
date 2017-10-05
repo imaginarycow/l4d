@@ -10,6 +10,7 @@ import Worst from './Pages/The_Worst/App';
 import Apis from './Pages/Awesome_Apis/App';
 import Comments from './Pages/Contact/App';
 import Login from './Pages/Login/App';
+import Admin from './Pages/Admin/App';
 
 class App extends Component {
   render() {
@@ -25,6 +26,7 @@ class App extends Component {
               <Route path="/Awesome Apis" component={Apis}/>
               <Route path="/Comment Box" component={Comments}/>
               <Route path="/Login" component={Login}/>
+              <Route path="/Admin" component={Admin}/>
           </div>
         </Router>
       </div>

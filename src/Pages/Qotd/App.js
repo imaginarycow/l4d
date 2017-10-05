@@ -3,7 +3,7 @@ import './css/App.css';
 import Languages from './components/language_option';
 import Question from './components/question';
 import ChoiceArea from './components/choice_area';
-import CommentArea from './components/comment_area';
+import CommentArea from '../../components/comment_area';
 import { Questions } from './data/questions';
 
 var questionOfTheDay = {};
