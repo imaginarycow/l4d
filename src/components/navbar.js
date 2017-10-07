@@ -10,13 +10,12 @@ const navbarInstance = () => (
       <Navbar id="navbar" inverse collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
-            <Logo id="logo"/>
+            <Link to="/"><Logo id="logo"/></Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav>
-            <NavItem eventKey={1} ><Link to="/">Home</Link></NavItem>
             <NavItem eventKey={2} ><Link to="/QOTD" >QOTD</Link></NavItem>
             <NavItem eventKey={3} ><Link to="/Blog" >Blog</Link></NavItem>
             <NavItem eventKey={4} ><Link to="/The Worst" >The Worst</Link></NavItem>

@@ -6,7 +6,7 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import './index.css';
 import App from './App';
-import rootReducer from './redux/reducers/index';
+import rootReducer from './redux/reducers/combined_reducer';
 import registerServiceWorker from './registerServiceWorker';
 
 let store = createStore(rootReducer, applyMiddleware(thunk));

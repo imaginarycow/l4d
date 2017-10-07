@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import BView from './views/blog_view';
+import BlogView from './views/blog_view';
 
 let apps = ['Pick App','Blog','Apis','The Worst','QOTD'];
 var options = [];
@@ -36,7 +36,7 @@ export default class Admin extends Component {
       case 'Apis':
         return <div>Apis view</div>;
       case 'Blog':
-        return <div><BView /></div>;
+        return <div><BlogView /></div>;
       case 'The Worst':
         return <div>The Worst view</div>;
       case 'QOTD':

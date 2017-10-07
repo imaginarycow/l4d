@@ -5,7 +5,7 @@ import '../../css/App.css';
 class App extends Component {
 
   componentDidMount() {
-    QOTD();
+
   }
 
   render() {

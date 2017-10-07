@@ -3,7 +3,7 @@ import axios from 'axios';
 function getQuestionOfTheDay(question) {
   console.log("action");
   return {
-    type: 'SET_QOTD',
+    type: 'GET_QOTD',
     payload: question
   }
 }

@@ -18,7 +18,7 @@ import Admin from './Pages/Admin/App';
 class App extends Component {
 
   componentWillMount() {
-    this.props.StoreLoad();
+    //this.props.StoreLoad();
   }
 
   render() {
