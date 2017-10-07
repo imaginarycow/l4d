@@ -1,5 +1,15 @@
 
+const storeLoad= (state = {}, action) => {
+  switch (action.type) {
+    case 'LOAD_STORE':
+      return action.payload.data;
+    default:
+      return state;
+  }
+}
+
 const appsFilter = (state = 'SHOW_ALL', action) => {
+  console.log('appsFilter reducer fired');
   switch (action.type) {
     case 'SET_SELECTED_APP':
       return action.payload;
@@ -9,4 +19,4 @@ const appsFilter = (state = 'SHOW_ALL', action) => {
 }
 
 
-export default appsFilter;
+export {appsFilter, storeLoad};

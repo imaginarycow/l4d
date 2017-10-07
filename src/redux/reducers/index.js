@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux';
-import apps from './apps';
+import { appsFilter, storeLoad } from './apps';
 import qotd from './qotd';
 
 const combReducer = combineReducers({
-  apps,
-  qotd
+  appsFilter,
+  qotd,
+  load: storeLoad
 })
 
 export default combReducer;

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import Navbar from './components/navbar';
+import StoreLoad from './redux/actions/store_load';
 import './css/App.css';
 
 import Home from './Pages/Main/Main';
@@ -13,6 +16,11 @@ import Login from './Pages/Login/App';
 import Admin from './Pages/Admin/App';
 
 class App extends Component {
+
+  componentWillMount() {
+    this.props.StoreLoad();
+  }
+
   render() {
     return (
       <div className="App">
@@ -34,4 +42,14 @@ class App extends Component {
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+    return {...state};
+}
+
+function mapDispatchToProps(dispatch) {
+
+  return bindActionCreators({StoreLoad}, dispatch);
+
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
