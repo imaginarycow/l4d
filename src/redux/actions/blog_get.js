@@ -1,7 +1,19 @@
 import axios from 'axios';
 
-function getTodaysBlog(blog) {
-  console.log("action");
+function getTodaysBlog(blogs) {
+
+  var blog = {};
+
+  //iterate the blogs and return the current blog
+  for (var i in blogs.data) {
+
+    if (blogs.data[i].isCurrent == true) {
+      blog = blogs.data[i];
+    }
+  }
+
+  console.log(blog);
+
   return {
     type: 'GET_BLOG',
     payload: blog
@@ -11,11 +23,10 @@ function getTodaysBlog(blog) {
 export default function BlogLoad() {
 
   return function(dispatch) {
-
     axios.get('https://left4dev-b2aab.firebaseio.com/apps/Blog.json')
-    .then((response) =>
+    .then((response) => {
       dispatch(getTodaysBlog(response))
-    )
+    })
     .catch((error) => {
       console.log(error);
     });

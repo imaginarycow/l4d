@@ -27,7 +27,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <h1>QOTD</h1>
+        <h1>QotD</h1>
         <h5>Question of the Day</h5>
         <Languages />
         <Question text={questionOfTheDay.question}/>

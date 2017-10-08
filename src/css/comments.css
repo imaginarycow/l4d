@@ -1,7 +1,7 @@
-.commentArea {
+#commentArea {
 
 }
-.commentArea ul {
+#commentArea ul {
   list-style-type: none;
-  color: red;
+  color: blue;
 }

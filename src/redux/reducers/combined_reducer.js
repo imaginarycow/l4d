@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
 import { appsFilter, storeLoad } from './apps_reducer';
 import { getQotd, newQotd } from './qotd_reducer';
-import { getBlog, newBlog} from './blog_reducer';
+import { getBlog, newBlog, getBlogComments } from './blog_reducer';
+
 
 const combReducer = combineReducers({
   appsFilter,
@@ -9,7 +10,8 @@ const combReducer = combineReducers({
   newQotd: newQotd,
   load: storeLoad,
   newBlog: newBlog,
-  currBlog: getBlog
+  currBlog: getBlog,
+  blogComments: getBlogComments
 })
 
 export default combReducer;

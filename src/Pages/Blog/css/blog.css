@@ -1,0 +1,32 @@
+#container {
+	display: grid;
+	grid-template-columns: 1fr 4fr 1fr;
+	grid-template-rows: auto;
+	grid-template-areas: 
+	"... title ..."
+	"... date ..."
+	"... img ..."
+	"... text ..."
+	"... comms ..."
+	;
+}
+#title {
+	grid-area: title;
+	font-family: Perpetua, Baskerville, "Big Caslon", "Palatino Linotype", Palatino, "URW Palladio L", "Nimbus Roman No9 L", serif;
+}
+#date {
+	grid-area: date;
+}
+#image {
+	grid-area: img;
+	width: 100%;
+}
+#text {
+	grid-area: text;
+	justify-content: left;
+	font-size: 16px;
+	font-family: Perpetua, Baskerville, "Big Caslon", "Palatino Linotype", Palatino, "URW Palladio L", "Nimbus Roman No9 L", serif;
+}
+#commentArea {
+	grid-area: comms;
+}

@@ -6,16 +6,18 @@ var Comments = [];
 export default class CommentList extends Component {
 
   getComments() {
-    Comments = this.props.comments.map((comm) => {
-      return <Comment key={comm.comment} text={comm.comment} user={comm.user} replies={comm.replies} />
-    })
-
+    console.log(this.props.comments);
+    const comments = this.props.comments;
+    for (var i in comments) {
+      console.log(comments[i]);
+      Comments.push(<Comment key={comments[i]} text={comments[i].text} username={comments[i].username} />);
+    }
   }
 
     render() {
       this.getComments();
       return (
-        <ul className="commentArea">
+        <ul className="commentListArea">
           {Comments}
         </ul>
       );

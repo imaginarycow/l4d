@@ -16,12 +16,12 @@ const navbarInstance = () => (
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav>
-            <NavItem eventKey={2} ><Link to="/QOTD" >QOTD</Link></NavItem>
-            <NavItem eventKey={3} ><Link to="/Blog" >Blog</Link></NavItem>
-            <NavItem eventKey={4} ><Link to="/The Worst" >The Worst</Link></NavItem>
-            <NavItem eventKey={5} ><Link to="/Awesome Apis" >Awesome Apis</Link></NavItem>
-            <NavItem eventKey={6} ><Link to="/Comment Box" >Comment Box</Link></NavItem>
-            <NavItem eventKey={7} ><Link to="/Login" >Login</Link></NavItem>
+            <NavItem eventKey={1} ><Link to="/Blog" >Blog</Link></NavItem>
+            <NavItem eventKey={2} ><Link to="/QotD" >QotD</Link></NavItem>
+            <NavItem eventKey={3} ><Link to="/The Worst" >The Worst</Link></NavItem>
+            <NavItem eventKey={4} ><Link to="/Awesome Apis" >Awesome Apis</Link></NavItem>
+            <NavItem eventKey={5} ><Link to="/Comment Box" >Comment Box</Link></NavItem>
+            <NavItem eventKey={6} ><Link to="/Login" >Login</Link></NavItem>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

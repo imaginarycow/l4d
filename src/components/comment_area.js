@@ -7,9 +7,10 @@ import '../css/comments.css';
 export default class CommentArea extends Component {
 
   render () {
+
     return (
-      <div>
-        <NewComment className="commentArea"/>
+      <div id="commentArea">
+        <NewComment className="newCommentArea"/>
         <CommentList comments={this.props.comments}/>
       </div>
     );
