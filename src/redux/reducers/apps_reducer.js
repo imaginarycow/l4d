@@ -9,7 +9,6 @@ const storeLoad= (state = {}, action) => {
 }
 
 const appsFilter = (state = 'SHOW_ALL', action) => {
-  console.log('appsFilter reducer fired');
   switch (action.type) {
     case 'SET_SELECTED_APP':
       return action.payload;

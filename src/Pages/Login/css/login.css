@@ -1,0 +1,54 @@
+#loginContainer {
+  text-align: left;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+  "... form ..."
+  "... llabel ..."
+  "... elabel ..."
+  "... email ..."
+  "... plabel ..."
+  "... pass ..."
+  "... submit ..."
+  "... label3 ..."
+  "... create ..."
+  ;
+}
+#form {
+  grid-area: form;
+  display: flex;
+  flex-direction: column;
+}
+#loginLabel {
+  text-align: center;
+
+  padding-bottom: 20px;
+}
+#elabel {
+  font-weight: 300;
+}
+#email {
+  margin-bottom: 20px;
+  min-width: 300px;
+}
+#plabel {
+  font-weight: 300;
+}
+#pass {
+  margin-bottom: 20px;
+}
+#submit {
+  margin-bottom: 20px;
+  background-color: green;
+  border-radius: 5px;
+  border: none;
+  color: #fff
+}
+#label3 {
+  text-align: center;
+}
+#create {
+  background-color: #fff;
+  border: none;
+}
