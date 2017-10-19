@@ -2,7 +2,7 @@
 	display: grid;
 	grid-template-columns: 1fr 4fr 1fr;
 	grid-template-rows: auto;
-	grid-template-areas: 
+	grid-template-areas:
 	"... title ..."
 	"... date ..."
 	"... img ..."
@@ -27,6 +27,6 @@
 	font-size: 16px;
 	font-family: Perpetua, Baskerville, "Big Caslon", "Palatino Linotype", Palatino, "URW Palladio L", "Nimbus Roman No9 L", serif;
 }
-#commentArea {
+#comment-area {
 	grid-area: comms;
 }

@@ -1,0 +1,50 @@
+#comment-box {
+  font-family: 'Open Sans Condensed', sans-serif;
+  display: grid;
+  grid-template-columns: 2fr 4fr 2fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+  "... title ..."
+  "... form ..."
+  ;
+  margin-top: 70px;
+}
+#comment-box h3 {
+  grid-area: title;
+  text-align: left;
+}
+#comment-box form {
+
+  grid-area: form;
+  display: grid;
+  grid-template-columns: auto 100px;
+  grid-template-rows: auto;
+  grid-template-areas:
+  "nameinput name"
+  "emailinput email"
+  "comment comment"
+  "... submit"
+  ;
+}
+#comment-box #name {
+  grid-area: name;
+}
+#comment-box #namein {
+  grid-area: nameinput;
+  margin-bottom: 10px;
+}
+#comment-box #emaillabel {
+  grid-area: email;
+}
+#comment-box #emailin {
+  grid-area: emailinput;
+  margin-bottom: 10px;
+}
+#comment-box #comments {
+  grid-area: comment;
+  margin-bottom: 10px;
+  min-height: 150px;
+}
+#comment-box #submit {
+  grid-area: submit;
+}

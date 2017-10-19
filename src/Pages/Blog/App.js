@@ -20,7 +20,7 @@ class App extends Component {
   }
 
   render () {
-    
+
     if (typeof this.props.blog.date !== 'undefined') {
 
       text = this.props.blog.text;
@@ -39,7 +39,7 @@ class App extends Component {
         <h4 id="date">{date}</h4>
         <img id="image" src={url} alt='blog'/>
         <p id="text">{text}</p>
-        <CommentArea id="commentArea" comments={this.props.comments}/>
+        <CommentArea comments={this.props.comments}/>
       </div>
     );
     }

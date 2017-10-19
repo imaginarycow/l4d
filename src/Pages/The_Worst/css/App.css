@@ -3,6 +3,7 @@
   src: url('./bungee.shade.ttf'),
 }
 #site {
+  font-family: 'Open Sans Condensed', sans-serif;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 4fr auto;
@@ -18,7 +19,6 @@
   width: 100%;
   background-color: #003b49;
   text-align: center;
-  font-family: bungee;
   color: #fe901d;
 }
 #footer {
@@ -54,9 +54,8 @@
 }
 #jumbotron {
   grid-area: jumbotron;
-  background-color: #fe901d;
+  /*background-color: #fe901d;*/
   color: #003b49;
-  font-family: bungee;
 }
 #matchUps {
   grid-area: matchUps;

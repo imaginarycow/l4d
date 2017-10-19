@@ -1,4 +1,4 @@
-export default function getCurrentDate() {
+function getFormattedDate() {
 
   let d = new Date();
   let month = d.getMonth() + 1;
@@ -6,3 +6,5 @@ export default function getCurrentDate() {
 
   return stringDate
 }
+
+export { getFormattedDate };

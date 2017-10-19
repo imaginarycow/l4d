@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './css/App.css';
+import './css/qotd.css';
 import Languages from './components/language_option';
 import Question from './components/question';
 import ChoiceArea from './components/choice_area';
@@ -8,7 +8,7 @@ import { Questions } from './data/questions';
 
 var questionOfTheDay = {};
 
-class App extends Component {
+class QOTD extends Component {
 
   componentWillMount() {
     this.getQuestionOfTheDay();
@@ -26,15 +26,15 @@ class App extends Component {
   render() {
 
     return (
-      <div className="App">
+      <div id="QOTD-Page">
         <h1>QotD</h1>
         <h5>Question of the Day</h5>
-        <Languages />
-        <Question text={questionOfTheDay.question}/>
-        <ChoiceArea question={questionOfTheDay}/>
+        <Languages id="language-selector"/>
+        <Question id="question" text={questionOfTheDay.question}/>
+        <ChoiceArea id="choice-area" question={questionOfTheDay}/>
         <CommentArea comments={questionOfTheDay.comments}/>
       </div>
     );
   }
 }
-export default App;
+export default QOTD;

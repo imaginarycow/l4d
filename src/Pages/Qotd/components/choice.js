@@ -27,6 +27,7 @@ export default class Choice extends Component {
         <form onSubmit={this.handleSubmit.bind(this)}>
           <input type="submit" value="vote" />
         </form>
+        <img src={this.props.img} />
       </div>
     );
   }

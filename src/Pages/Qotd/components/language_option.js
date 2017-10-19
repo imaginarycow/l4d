@@ -6,7 +6,7 @@ export default class LanguageOption extends Component {
   render() {
 
     return (
-      <div className="Languages">
+      <div id="language-selector">
         <select>
           {languageOptions.map(function(language) {return(<option key={language}>{language}</option>)})}
         </select>

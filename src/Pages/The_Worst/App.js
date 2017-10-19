@@ -5,16 +5,14 @@ import Body from './components/body.js';
 import './css/App.css';
 
 
-class App extends Component {
+class Worst extends Component {
 
   render() {
 
     return (
       <div>
-        <Header title='Thats-the-Worst'/>
         <div id="site">
           <Body title="Container" />
-          <Footer title='Powered by React'/>
         </div>
       </div>
 
@@ -22,4 +20,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Worst;

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import getCurrentDate from '../../../utils/dates';
+import { getFormattedDate } from '../../../utils/dates';
 import '../css/blog_view_css.css';
 
 const initState = {blog: '', date: '', imgUrl: '', title: '', count: 0};
@@ -10,7 +10,7 @@ class BlogView extends Component {
     super(props);
     this.state = {
       blog: initState.blog,
-      date: getCurrentDate(),
+      date: getFormattedDate(),
       imgUrl: initState.imgUrl,
       title: initState.title,
       wordcount: initState.count

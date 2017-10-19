@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import getCurrentDate from '../../../utils/dates';
+import { getFormattedDate } from '../../../utils/dates';
 import '../css/worst_view_css.css';
 
 const initState = {title: '', date: '', sit1: '', sit2: '', url1: '', url2: ''};
@@ -9,7 +9,7 @@ class WorstView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      date: getCurrentDate(),
+      date: getFormattedDate(),
       title: initState.title,
       sit1: initState.sit1,
       sit2: initState.sit2,

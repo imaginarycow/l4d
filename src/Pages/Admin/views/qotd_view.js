@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import getCurrentDate from '../../../utils/dates';
+import { getFormattedDate } from '../../../utils/dates';
 import '../css/qotd_view_css.css';
 
 const initState = {question: '', date: '', option1: '', option2: '', url1: '', url2: ''};
@@ -9,7 +9,7 @@ class QotdView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      date: getCurrentDate(),
+      date: getFormattedDate(),
       question: initState.question,
       option1: initState.option1,
       option2: initState.option2,

@@ -1,4 +1,5 @@
 #container {
+  font-family: 'Open Sans Condensed', sans-serif;
   background-color: #ffddaa;
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;

@@ -11,7 +11,7 @@ import QOTD from './Pages/Qotd/App';
 import Blog from './Pages/Blog/App';
 import Worst from './Pages/The_Worst/App';
 import Apis from './Pages/Awesome_Apis/App';
-import Comments from './Pages/Contact/App';
+import Comments from './Pages/Comment/App';
 import Login from './Pages/Login/App';
 import Admin from './Pages/Admin/App';
 

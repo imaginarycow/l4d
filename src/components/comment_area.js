@@ -9,7 +9,7 @@ export default class CommentArea extends Component {
   render () {
 
     return (
-      <div id="commentArea">
+      <div id="comment-area">
         <NewComment className="newCommentArea"/>
         <CommentList comments={this.props.comments}/>
       </div>
