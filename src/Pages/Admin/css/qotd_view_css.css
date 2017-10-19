@@ -1,0 +1,7 @@
+#qotd-form {
+  display: grid;
+}
+
+#qotd-form img {
+  max-width: 200px;
+}

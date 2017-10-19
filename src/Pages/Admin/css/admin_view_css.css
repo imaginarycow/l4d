@@ -1,0 +1,21 @@
+#admin-view {
+  display: grid;
+  grid-template-columns: 2fr 4fr 2fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+  "... title ..."
+  "... selector ..."
+  "... view ..."
+  ;
+}
+#admin-view h3 {
+  grid-area: title;
+}
+#admin-view select {
+  grid-area: selector;
+  display: flex;
+  margin-bottom: 15px;
+}
+#selected-view {
+  grid-area: view;
+}

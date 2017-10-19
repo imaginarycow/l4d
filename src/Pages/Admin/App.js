@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import BlogView from './views/blog_view';
+import QotdView from './views/qotd_view';
+import WorstView from './views/worst_view';
+import './css/admin_view_css.css';
 
 let apps = ['Pick App','Blog','Apis','The Worst','QOTD'];
 var options = [];
@@ -34,15 +37,15 @@ export default class Admin extends Component {
   updateDisplay(app) {
     switch(app) {
       case 'Apis':
-        return <div>Apis view</div>;
+        return <div id="selected-view">Apis view</div>;
       case 'Blog':
-        return <div><BlogView /></div>;
+        return <div id="selected-view"><BlogView /></div>;
       case 'The Worst':
-        return <div>The Worst view</div>;
+        return <div id="selected-view"><WorstView /></div>;
       case 'QOTD':
-        return <div>Qotd view</div>;
+        return <div id="selected-view"><QotdView /></div>;
       default:
-        return <div>Select an App</div>;
+        return <div id="selected-view">Select an App</div>;
     }
   }
 
@@ -56,8 +59,8 @@ export default class Admin extends Component {
 
     this.getOptions();
     return (
-      <div>
-        Admin console
+      <div id="admin-view">
+        <h3>Admin console</h3>
         <select onChange={this.handleChange}>
           {options}
         </select>

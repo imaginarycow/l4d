@@ -1,0 +1,7 @@
+#worst-form {
+  display: grid;
+}
+
+#worst-form img {
+  max-width: 200px;
+}

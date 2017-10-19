@@ -1,0 +1,6 @@
+#blog-form {
+  display: grid;
+}
+#blog-form textarea {
+  min-height: 300px;
+}
