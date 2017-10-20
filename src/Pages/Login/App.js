@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { validateEmail, validatePassword } from '../../utils/validations';
 import './css/login.css';
+import firebase from '../../firebase/firebase.js';
 
 var eSuccess = false;
 var pSuccess = false;
 
-class App extends Component {
+class Login extends Component {
 
   constructor() {
     super();
@@ -37,8 +38,20 @@ class App extends Component {
     e.preventDefault();
     //attempt user login with state.email & state.pass
     //after 3 login attempts, deny further attempts
-    console.log('login attempted');
-
+    console.log('login attempted' + this.state.email + ' '+this.state.pass);
+    firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.pass).catch(function(error) {
+    // Handle Errors here.
+    // let attempCount = this.state.attempts + 1;
+    // this.setState({attempts: attempCount});
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    if (errorCode === 'auth/wrong-password') {
+      alert('Wrong password.');
+    } else {
+      alert(errorMessage);
+    }
+    console.log(error);
+    });
   }
   signUp(e) {
     e.preventDefault();
@@ -47,7 +60,20 @@ class App extends Component {
     console.log('signup attempted');
     eSuccess = validateEmail(this.state.email);
     pSuccess = validatePassword(this.state.pass);
-    console.log('validateions: ' + eSuccess + ' ' +pSuccess);
+    console.log('validations: ' + eSuccess + ' ' +pSuccess);
+
+    firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.pass)
+    .catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    if (errorCode == 'auth/weak-password') {
+      alert('The password is too weak.');
+    } else {
+      alert(errorMessage);
+    }
+      console.log(error);
+    });
   }
 
   toggleAccountView(e) {
@@ -97,4 +123,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Login;
