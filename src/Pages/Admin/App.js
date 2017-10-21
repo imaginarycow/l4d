@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import BlogView from './views/blog_view';
+import DoodlesView from './views/doodles_view';
 import QotdView from './views/qotd_view';
 import WorstView from './views/worst_view';
 import './css/admin_view_css.css';
 
-let apps = ['Pick App','Blog','Apis','The Worst','QOTD'];
+let apps = ['Pick App','Blog','Doodles','The Worst','QOTD'];
 var options = [];
 
-export default class Admin extends Component {
+class Admin extends Component {
 
   constructor() {
     super();
@@ -36,8 +37,8 @@ export default class Admin extends Component {
   //update display based on app selected
   updateDisplay(app) {
     switch(app) {
-      case 'Apis':
-        return <div id="selected-view">Apis view</div>;
+      case 'Doodles':
+        return <div id="selected-view"><DoodlesView /></div>;
       case 'Blog':
         return <div id="selected-view"><BlogView /></div>;
       case 'The Worst':
@@ -69,3 +70,5 @@ export default class Admin extends Component {
     );
   }
 }
+
+export default Admin;

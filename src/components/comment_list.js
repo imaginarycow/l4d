@@ -10,7 +10,7 @@ export default class CommentList extends Component {
     const comments = this.props.comments;
     for (var i in comments) {
       console.log(comments[i]);
-      Comments.push(<Comment key={comments[i]} text={comments[i].text} username={comments[i].username} />);
+      Comments.push(<Comment key={comments[i].timestamp} text={comments[i].text} username={comments[i].username} />);
     }
   }
 

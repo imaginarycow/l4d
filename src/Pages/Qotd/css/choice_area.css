@@ -1,0 +1,21 @@
+#choice1 {
+  grid-area: choice1;
+}
+#choice1 img{
+  width: 100%;
+}
+#choice2 {
+  grid-area: choice2;
+}
+#choice2 img{
+  width: 100%;
+}
+#or {
+  grid-area: or;
+}
+#choice1 #votes {
+  color: blue;
+}
+#choice2 #votes {
+  color: green;
+}

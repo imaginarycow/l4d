@@ -3,4 +3,8 @@
 }
 #blog-form textarea {
   min-height: 300px;
+  min-width: 600px;
+}
+#blog-form #selector {
+  display: grid;
 }

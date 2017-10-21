@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { getFormattedDate } from '../../../utils/dates';
+import { getFormattedDate, getUnformattedDate } from '../../../utils/dates';
+import firebase from 'firebase';
 import '../css/qotd_view_css.css';
 
 const initState = {question: '', date: '', option1: '', option2: '', url1: '', url2: ''};
@@ -9,6 +10,7 @@ class QotdView extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      author: '',
       date: getFormattedDate(),
       question: initState.question,
       option1: initState.option1,
@@ -56,6 +58,22 @@ class QotdView extends Component {
     else {
       //submit new QOTD
       alert('New QOTD submitted: ' + this.state.question);
+
+      let qotdKey = getUnformattedDate();
+      let commentGroupId = 'QD' + qotdKey;
+      var database = firebase.database();
+      firebase.database().ref('apps/qotd/' + qotdKey).set({
+        author: this.state.author,
+        commentGroupId: commentGroupId,
+        date: this.state.date,
+        question: this.state.question,
+        option1: this.state.option1,
+        option2: this.state.option2,
+        img1: this.state.url1,
+        img2: this.state.url2,
+        votes1: 0,
+        votes2: 0
+      });
     }
 
   }

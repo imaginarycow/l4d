@@ -57,17 +57,12 @@ class Login extends Component {
     e.preventDefault();
     //attempt create user with state.email & state.pass
     //validate email address, verify unique user
-    console.log('signup attempted');
-    eSuccess = validateEmail(this.state.email);
-    pSuccess = validatePassword(this.state.pass);
-    console.log('validations: ' + eSuccess + ' ' +pSuccess);
-
     firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.pass)
     .catch(function(error) {
     // Handle Errors here.
     var errorCode = error.code;
     var errorMessage = error.message;
-    if (errorCode == 'auth/weak-password') {
+    if (errorCode === 'auth/weak-password') {
       alert('The password is too weak.');
     } else {
       alert(errorMessage);

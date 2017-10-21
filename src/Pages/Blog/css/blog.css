@@ -20,10 +20,11 @@
 #image {
 	grid-area: img;
 	width: 100%;
+	margin-bottom: 15px;
 }
 #text {
 	grid-area: text;
-	justify-content: left;
+	text-align: justify;
 	font-size: 16px;
 	font-family: Perpetua, Baskerville, "Big Caslon", "Palatino Linotype", Palatino, "URW Palladio L", "Nimbus Roman No9 L", serif;
 }

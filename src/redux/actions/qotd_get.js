@@ -1,20 +1,23 @@
 import axios from 'axios';
+import { getUnformattedDate } from '../../utils/dates';
 
 function getQuestionOfTheDay(question) {
-  console.log("action");
+  console.log(question);
   return {
     type: 'GET_QOTD',
     payload: question
   }
 }
 
-export function QOTD() {
+export default function QotdLoad() {
 
   return function(dispatch) {
 
-    axios.get('https://left4dev-b2aab.firebaseio.com/questions.json')
+    let date = getUnformattedDate();
+
+    axios.get('https://left4dev-b2aab.firebaseio.com/apps/qotd/' + date + '.json')
     .then((response) =>
-      dispatch(getQuestionOfTheDay(response))
+      dispatch(getQuestionOfTheDay(response.data))
     )
     .catch((error) => {
       console.log(error);

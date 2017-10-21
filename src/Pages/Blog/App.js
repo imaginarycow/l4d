@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import BlogLoad from '../../redux/actions/blog_get';
-import GetComments from '../../redux/actions/comments_get';
+import GetComments from '../../redux/actions/blog_comments_get';
 import CommentArea from '../../components/comment_area';
 import './css/blog.css';
 
@@ -12,7 +12,7 @@ var title = 'Loading';
 var url = '#';
 var commentsReceived = false;
 
-class App extends Component {
+class Blog extends Component {
 
 
   componentWillMount() {
@@ -23,25 +23,29 @@ class App extends Component {
 
     if (typeof this.props.blog.date !== 'undefined') {
 
-      text = this.props.blog.text;
+      text = this.props.blog.blog;
       date = 'posted '+this.props.blog.date;
       title = this.props.blog.title;
-      url = this.props.blog.imageUrl;
+      url = this.props.blog.imgUrl;
 
       if (this.props.blog.commentGroupId && !commentsReceived) {
         this.props.GetComments(this.props.blog.commentGroupId);
         commentsReceived = true;
       }
 
+      if (document.getElementById("text") !== null) {
+        document.getElementById("text").innerHTML = text;
+      }
+
       return (
-      <div id="container">
-        <h1 id="title">{title}</h1>
-        <h4 id="date">{date}</h4>
-        <img id="image" src={url} alt='blog'/>
-        <p id="text">{text}</p>
-        <CommentArea comments={this.props.comments}/>
-      </div>
-    );
+        <div id="container">
+          <h1 id="title">{title}</h1>
+          <h4 id="date">{date}</h4>
+          <img id="image" src={url} alt='blog'/>
+          <div id="text">Loading...</div>
+          <CommentArea comments={this.props.comments}/>
+        </div>
+      );
     }
 
     return (
@@ -49,7 +53,7 @@ class App extends Component {
         <h1 id="title">{title}</h1>
         <h4 id="date">{date}</h4>
         <img id="image" src={url} alt='blog'/>
-        <p id="text">{text}</p>
+        <div id="text">Loading...</div>
       </div>
     );
   }
@@ -69,4 +73,4 @@ function mapDispatchToProps(dispatch) {
 
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(Blog);

@@ -12,8 +12,6 @@ function getTodaysBlog(blogs) {
     }
   }
 
-  console.log(blog);
-
   return {
     type: 'GET_BLOG',
     payload: blog
@@ -23,7 +21,7 @@ function getTodaysBlog(blogs) {
 export default function BlogLoad() {
 
   return function(dispatch) {
-    axios.get('https://left4dev-b2aab.firebaseio.com/apps/Blog.json')
+    axios.get('https://left4dev-b2aab.firebaseio.com/apps/blog.json')
     .then((response) => {
       dispatch(getTodaysBlog(response))
     })

@@ -35,12 +35,10 @@
 #choice-area {
   grid-area: choices;
   display: grid;
-  grid-template-columns: 4fr 1fr 4fr;
+  grid-template-columns: 5fr 1fr 5fr;
   grid-template-rows: auto;
   grid-template-areas:
-  "option1 ... option2"
-  "votes1 ... votes2"
-  "url1 ... url2"
+  "choice1 or choice2"
   ;
   margin-bottom: 15px;
 }

@@ -10,7 +10,7 @@ import Home from './Pages/Main/Main';
 import QOTD from './Pages/Qotd/App';
 import Blog from './Pages/Blog/App';
 import Worst from './Pages/The_Worst/App';
-import Apis from './Pages/Awesome_Apis/App';
+import Doodles from './Pages/Doodles/App';
 import Comments from './Pages/Comment/App';
 import Login from './Pages/Login/App';
 import Admin from './Pages/Admin/App';
@@ -31,7 +31,7 @@ class App extends Component {
               <Route path="/QOTD" component={QOTD}/>
               <Route path="/Blog" component={Blog}/>
               <Route path="/The Worst" component={Worst}/>
-              <Route path="/Awesome Apis" component={Apis}/>
+              <Route path="/Doodles" component={Doodles}/>
               <Route path="/Comment Box" component={Comments}/>
               <Route path="/Login" component={Login}/>
               <Route path="/Admin" component={Admin}/>

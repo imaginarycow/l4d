@@ -1,0 +1,8 @@
+@font-face {
+  font-family: "Armenia Grunge";
+  src: url("../../../assets/Armenia Grunge Italic.ttf");
+}
+
+#doodles h1 {
+  font-family: Armenia Grunge;
+}

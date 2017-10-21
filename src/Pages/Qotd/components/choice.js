@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import '../css/choice.css';
 
 export default class Choice extends Component {
 
@@ -21,9 +21,9 @@ export default class Choice extends Component {
 
   render() {
     return (
-      <div>
+      <div id="choice">
         <h3>{this.props.text}</h3>
-        <h5>{this.props.votes}</h5>
+        <h5 id="votes">{this.props.votes}</h5>
         <form onSubmit={this.handleSubmit.bind(this)}>
           <input type="submit" value="vote" />
         </form>
