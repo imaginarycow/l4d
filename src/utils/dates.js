@@ -7,13 +7,20 @@ function getFormattedDate() {
   return stringDate
 }
 
-function getUnformattedDate() {
+function getUnformattedDate(date) {
 
-  let d = new Date();
-  let month = d.getMonth() + 1;
-  let stringDate = month + '' + d.getDate() + '' + d.getFullYear();
+  if (date === null || typeof date === 'undefined') {
+    let d = new Date();
+    let month = d.getMonth() + 1;
+    let stringDate = month + '' + d.getDate() + '' + d.getFullYear();
 
-  return stringDate
+    return stringDate
+  }
+  else {
+    return date.replace(/\-/g,'');
+  }
+
+
 }
 
 export { getUnformattedDate, getFormattedDate };

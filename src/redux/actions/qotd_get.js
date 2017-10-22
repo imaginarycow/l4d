@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getUnformattedDate } from '../../utils/dates';
 
 function getQuestionOfTheDay(question) {
-  console.log(question);
+
   return {
     type: 'GET_QOTD',
     payload: question

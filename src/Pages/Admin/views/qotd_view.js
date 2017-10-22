@@ -59,13 +59,14 @@ class QotdView extends Component {
       //submit new QOTD
       alert('New QOTD submitted: ' + this.state.question);
 
-      let qotdKey = getUnformattedDate();
+      let qotdKey = getUnformattedDate(this.state.date);
       let commentGroupId = 'QD' + qotdKey;
       var database = firebase.database();
       firebase.database().ref('apps/qotd/' + qotdKey).set({
         author: this.state.author,
         commentGroupId: commentGroupId,
         date: this.state.date,
+        dateKey: qotdKey,
         question: this.state.question,
         option1: this.state.option1,
         option2: this.state.option2,
@@ -73,6 +74,16 @@ class QotdView extends Component {
         img2: this.state.url2,
         votes1: 0,
         votes2: 0
+      });
+      //clear the form
+      this.setState ({
+        author: '',
+        date: getFormattedDate(),
+        question: initState.question,
+        option1: initState.option1,
+        option2: initState.option2,
+        url1: initState.url1,
+        url2: initState.url2
       });
     }
 
@@ -82,7 +93,7 @@ class QotdView extends Component {
 
     return (
       <form id="qotd-form" onSubmit={this.handleSubmit}>
-        <label>Date: {this.state.date}</label>
+        <label>Active Date: {this.state.date} Unformatted: {getUnformattedDate(this.state.date)}</label>
         <input type="text" name="date" value={this.state.date} onChange={this.handleChange} placeholder="10-21-2017"/>
         <label>New QOTD: {this.state.question}</label>
         <textarea value={this.state.question} name="question" onChange={this.handleChange}></textarea>

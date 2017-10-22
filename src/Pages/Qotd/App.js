@@ -18,6 +18,15 @@ class QOTD extends Component {
 
   render() {
 
+    if (this.props.qotd  === null) {
+      return (
+        <div id="QOTD-Page">
+          <h1>QotD</h1>
+          <h5>Well, that's embarrasing. Please check back soon, we are working on the problem.</h5>
+        </div>
+      );
+    }
+
     return (
       <div id="QOTD-Page">
         <h1>QotD</h1>

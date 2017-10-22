@@ -14,7 +14,6 @@ class BlogView extends Component {
       blog: initState.blog,
       date: getFormattedDate(),
       imgUrl: initState.imgUrl,
-      isCurrent: true,
       subtitle: initState.sub,
       title: initState.title,
       wordcount: initState.count
@@ -43,11 +42,6 @@ class BlogView extends Component {
       this.setState({date: e.target.value});
     }
 
-    if(e.target.name === 'isCurrent') {
-      let val = e.target.value === 'true' ? true : false;
-      this.setState({isCurrent: val});
-    }
-
     if(e.target.name === 'title') {
       this.setState({title: e.target.value});
     }
@@ -64,16 +58,13 @@ class BlogView extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    //var words = this.state.blog.match(/\S+/g).length;
-    // if (this.state.blog === '' || this.state.blog === initState.blog || words < 200) {
-    //   alert('You can do better than that!');
-    // }
-    if (1 > 5) {
+    var words = this.state.blog.match(/\S+/g).length;
+    if (this.state.blog === '' || this.state.blog === initState.blog || words < 200) {
       alert('You can do better than that!');
     }
     else {
       alert('New Blog Post submitted: ' + this.state.blog);
-      let blogKey = getUnformattedDate();
+      let blogKey = getUnformattedDate(this.state.date);
       let commentGroupId = 'BL' + blogKey;
       var database = firebase.database();
       firebase.database().ref('apps/blog/' + blogKey).set({
@@ -81,8 +72,8 @@ class BlogView extends Component {
         blog: this.state.blog,
         commentGroupId: commentGroupId,
         date: this.state.date,
+        dateKey: blogKey,
         imgUrl: this.state.imgUrl,
-        isCurrent: this.state.isCurrent,
         subtitle: this.state.subtitle,
         title: this.state.title,
       });
@@ -92,7 +83,6 @@ class BlogView extends Component {
         blog: initState.blog,
         date: getFormattedDate(),
         imgUrl: initState.imgUrl,
-        isCurrent: true,
         subtitle: initState.sub,
         title: initState.title,
         wordcount: initState.count
@@ -116,10 +106,6 @@ class BlogView extends Component {
         <input type="text" name="subtitle" value={this.state.subtitle} onChange={this.handleChange}/>
         <label>Date Active: {this.state.date}</label>
         <input type="text" name="date" value={this.state.date} onChange={this.handleChange} />
-        <label>Set Current?: {this.state.isCurrent}</label>
-        <label>Yes</label>
-        <input name="isCurrent" type="radio" value="true" checked onChange={this.handleChange} />
-        <label>No</label>
         <input name="isCurrent" type="radio" value="false" onChange={this.handleChange} />
         <label>New Post - Words: {this.state.wordcount}</label>
         <textarea value={this.state.blog} name="blog" onChange={this.handleChange}></textarea>
