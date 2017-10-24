@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { validateEmail, validatePassword } from '../../utils/validations';
 import './css/login.css';
 import firebase from '../../firebase/firebase.js';
 
@@ -21,6 +20,7 @@ class Login extends Component {
     this.login = this.login.bind(this);
     this.signUp = this.signUp.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.sendPasswordReset = this.sendPasswordReset.bind(this);
     this.toggleAccountView = this.toggleAccountView.bind(this);
   }
 
@@ -38,19 +38,28 @@ class Login extends Component {
     e.preventDefault();
     //attempt user login with state.email & state.pass
     //after 3 login attempts, deny further attempts
+    // if (this.state.attempts >= 3) {
+    //   alert('You have failed to login at least 3 times. You can reset your password, or wait 10 minutes and try again.');
+    // }
     console.log('login attempted' + this.state.email + ' '+this.state.pass);
-    firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.pass).catch(function(error) {
-    // Handle Errors here.
-    // let attempCount = this.state.attempts + 1;
-    // this.setState({attempts: attempCount});
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    if (errorCode === 'auth/wrong-password') {
-      alert('Wrong password.');
-    } else {
-      alert(errorMessage);
-    }
-    console.log(error);
+    firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.pass)
+      .then(function(user) {
+
+      })
+      .catch(function(error) {
+        // Handle Errors here.
+        //let attempCount = this.state.attempts + 1;
+        //this.setState({attempts: attempCount});
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        if (errorCode === 'auth/wrong-password') {
+          alert('Invalid password.');
+        }
+        else if (errorCode === 'auth/invalid-email') {
+          alert('Invalid email.');
+        } else {
+          alert(errorMessage);
+        }
     });
   }
   signUp(e) {
@@ -58,16 +67,49 @@ class Login extends Component {
     //attempt create user with state.email & state.pass
     //validate email address, verify unique user
     firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.pass)
+      .catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        if (errorCode === 'auth/weak-password') {
+          alert('The password is too weak.');
+        } else if (errorCode === 'auth/email-already-in-use') {
+          alert('Email already in use.');
+        } else if (errorCode === 'auth/invalid-email') {
+          alert('Invalid email.');
+        } else {
+          alert(errorMessage);
+        }
+          console.log(error);
+      });
+  }
+
+  sendPasswordReset(e) {
+    e.preventDefault();
+
+    //send password reset email
+    var actionCodeSettings = {
+      url: 'https://www.left4dev.com'
+    };
+    firebase.auth().sendPasswordResetEmail(
+    this.state.email, actionCodeSettings)
+    .then(function() {
+      // Password reset email sent.
+      alert('An email to reset your password has been sent to ' + this.state.email);
+    })
     .catch(function(error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    if (errorCode === 'auth/weak-password') {
-      alert('The password is too weak.');
-    } else {
-      alert(errorMessage);
-    }
-      console.log(error);
+      // Error occurred. Inspect error.code.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      if (errorCode === 'auth/invalid-email') {
+        alert('Invalid email.');
+      }
+      if (errorCode === 'auth/user-not-found') {
+        alert('User not found.');
+      }
+      else {
+        alert(errorMessage);
+      }
     });
   }
 
@@ -94,6 +136,7 @@ class Login extends Component {
               <label id="plabel">Password</label>
               <input id="pass" type="password" value={this.state.pass} onChange={this.onChange} name="pass" />
               <input id="submit" type="submit" value="Sign In" />
+              <button id="reset" onClick={this.sendPasswordReset}>I forgot my password.</button>
               <label id="label3">Don't have a Left4Dev acount?</label>
               <button id="create" onClick={this.toggleAccountView}>Create a free account</button>
             </form>
