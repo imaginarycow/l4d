@@ -92,25 +92,40 @@ class BlogView extends Component {
   }
 
   render() {
+    var blogPreview = this.state.blog;
+    if (document.getElementById("blog-preview") !== null) {
+      document.getElementById("blog-preview").innerHTML = this.state.blog;
+    }
+
+    const prevStyle = {
+      textAlign: 'left'
+    }
 
     return (
-      <form id="blog-form" onSubmit={this.handleSubmit}>
-        <label>Image url:</label>
-        <input type="text" name="url" value={this.state.imgUrl} onChange={this.handleChange}/>
-        <img src={this.state.imgUrl} />
-        <label>Author: {this.state.author}</label>
-        <input type="text" name="author" value={this.state.author} onChange={this.handleChange}/>
-        <label>Title: {this.state.title}</label>
-        <input type="text" name="title" value={this.state.title} onChange={this.handleChange}/>
-        <label>Subtitle: {this.state.subtitle}</label>
-        <input type="text" name="subtitle" value={this.state.subtitle} onChange={this.handleChange}/>
-        <label>Date Active: {this.state.date}</label>
-        <input type="text" name="date" value={this.state.date} onChange={this.handleChange} />
-        <input name="isCurrent" type="radio" value="false" onChange={this.handleChange} />
-        <label>New Post - Words: {this.state.wordcount}</label>
-        <textarea value={this.state.blog} name="blog" onChange={this.handleChange}></textarea>
-        <input type="submit" name="submit" value="Publish" />
-      </form>
+      <div>
+        <form id="blog-form" onSubmit={this.handleSubmit}>
+          <label>Image url:</label>
+          <input type="text" name="url" value={this.state.imgUrl} onChange={this.handleChange}/>
+          <label>Author: {this.state.author}</label>
+          <input type="text" name="author" value={this.state.author} onChange={this.handleChange}/>
+          <label>Title: {this.state.title}</label>
+          <input type="text" name="title" value={this.state.title} onChange={this.handleChange}/>
+          <label>Subtitle: {this.state.subtitle}</label>
+          <input type="text" name="subtitle" value={this.state.subtitle} onChange={this.handleChange}/>
+          <label>Date Active: {this.state.date}</label>
+          <input type="text" name="date" value={this.state.date} onChange={this.handleChange} />
+          <label>New Post - Words: {this.state.wordcount}</label>
+          <textarea value={this.state.blog} name="blog" onChange={this.handleChange}></textarea>
+          <input type="submit" name="submit" value="Publish" />
+        </form>
+        <div>
+          <h2>Preview</h2>
+          <div><label>Title: {this.state.title}</label></div>
+          <div><label>Author: {this.state.author}</label></div>
+          <img src={this.state.imgUrl} />
+          <div id="blog-preview" style={prevStyle}></div>
+        </div>
+    </div>
     );
   }
 
