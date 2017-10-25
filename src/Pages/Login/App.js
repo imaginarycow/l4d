@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import './css/login.css';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import LoginUser from '../../redux/actions/user_login';
 import firebase from '../../firebase/firebase.js';
+import './css/login.css';
 
 var eSuccess = false;
 var pSuccess = false;
@@ -42,32 +45,39 @@ class Login extends Component {
     //   alert('You have failed to login at least 3 times. You can reset your password, or wait 10 minutes and try again.');
     // }
     console.log('login attempted' + this.state.email + ' '+this.state.pass);
-    firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.pass)
-      .then(function(user) {
-
-      })
-      .catch(function(error) {
-        // Handle Errors here.
-        //let attempCount = this.state.attempts + 1;
-        //this.setState({attempts: attempCount});
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        if (errorCode === 'auth/wrong-password') {
-          alert('Invalid password.');
-        }
-        else if (errorCode === 'auth/invalid-email') {
-          alert('Invalid email.');
-        } else {
-          alert(errorMessage);
-        }
-    });
+    const email = this.state.email;
+    const pass = this.state.pass;
+    this.props.LoginUser(email, pass);
+    // firebase.auth().signInWithEmailAndPassword(email, pass)
+    //   .then(function(user) {
+    //     console.log(user);
+    //   })
+    //   .catch(function(error) {
+    //     // Handle Errors here.
+    //     //let attempCount = this.state.attempts + 1;
+    //     //this.setState({attempts: attempCount});
+    //     var errorCode = error.code;
+    //     var errorMessage = error.message;
+    //     if (errorCode === 'auth/wrong-password') {
+    //       alert('Invalid password.');
+    //     }
+    //     else if (errorCode === 'auth/invalid-email') {
+    //       alert('Invalid email.');
+    //     } else {
+    //       alert(errorMessage);
+    //     }
+    // });
+    // firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
   }
   signUp(e) {
     e.preventDefault();
     //attempt create user with state.email & state.pass
     //validate email address, verify unique user
     firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.pass)
-      .catch(function(error) {
+      .then((user) => {
+        console.log(user);
+      })
+      .catch((error) => {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
@@ -88,14 +98,12 @@ class Login extends Component {
     e.preventDefault();
 
     //send password reset email
-    var actionCodeSettings = {
-      url: 'https://www.left4dev.com'
-    };
-    firebase.auth().sendPasswordResetEmail(
-    this.state.email, actionCodeSettings)
+
+    const email = this.state.email;
+    firebase.auth().sendPasswordResetEmail(email)
     .then(function() {
       // Password reset email sent.
-      alert('An email to reset your password has been sent to ' + this.state.email);
+      alert('An email to reset your password has been sent to ' + email);
     })
     .catch(function(error) {
       // Error occurred. Inspect error.code.
@@ -161,4 +169,14 @@ class Login extends Component {
   }
 }
 
-export default Login;
+function mapStateToProps(state) {
+    return {...state};
+}
+
+function mapDispatchToProps(dispatch) {
+
+  return bindActionCreators({LoginUser}, dispatch);
+
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
