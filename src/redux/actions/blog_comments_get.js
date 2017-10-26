@@ -9,7 +9,7 @@ function getBlogComments(comms) {
 }
 
 export default function GetBlogComments(commentGroup) {
-
+  console.log('BlogcommentGroup' + commentGroup);
   return function(dispatch) {
 
     axios.get('https://left4dev-b2aab.firebaseio.com/comments/blog/'+commentGroup+'.json')

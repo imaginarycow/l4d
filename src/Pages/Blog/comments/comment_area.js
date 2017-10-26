@@ -1,7 +1,8 @@
 import React,{Component} from 'react';
 import NewComment from './comment_new';
 import CommentList from './comment_list';
-import '../css/comments.css';
+import HR from './horizontal_rule';
+import './comments.css';
 
 
 export default class CommentArea extends Component {
@@ -10,7 +11,8 @@ export default class CommentArea extends Component {
 
     return (
       <div id="comment-area">
-        <NewComment className="newCommentArea"/>
+        <HR />
+        <NewComment id="newCommentArea" app={this.props.app} commentGroupId={this.props.commentGroupId} />
         <CommentList comments={this.props.comments}/>
       </div>
     );

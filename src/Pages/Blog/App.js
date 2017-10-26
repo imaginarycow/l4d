@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import BlogLoad from '../../redux/actions/blog_get';
 import GetComments from '../../redux/actions/blog_comments_get';
-import CommentArea from '../../components/comment_area';
+import CommentArea from './comments/comment_area';
 import './css/blog.css';
 
 var text = '';
@@ -13,7 +13,6 @@ var url = '#';
 var commentsReceived = false;
 
 class Blog extends Component {
-
 
   componentWillMount() {
     this.props.BlogLoad();
@@ -28,7 +27,7 @@ class Blog extends Component {
       title = this.props.blog.title;
       url = this.props.blog.imgUrl;
 
-      if (this.props.blog.commentGroupId && !commentsReceived) {
+      if (typeof this.props.blog.commentGroupId !== 'undefined' && !commentsReceived) {
         this.props.GetComments(this.props.blog.commentGroupId);
         commentsReceived = true;
       }
@@ -43,7 +42,7 @@ class Blog extends Component {
           <h4 id="date">{date}</h4>
           <img id="image" src={url} alt='blog'/>
           <div id="text">Loading...</div>
-          <CommentArea comments={this.props.comments}/>
+          <CommentArea app="blog" commentGroupId={this.props.blog.commentGroupId} comments={this.props.comments}/>
         </div>
       );
     }

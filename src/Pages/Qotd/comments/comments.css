@@ -1,0 +1,9 @@
+#comment-area {
+  display: grid;
+}
+#comment-area #newCommentArea {
+
+}
+#comment-area ul {
+  list-style-type: none;
+}

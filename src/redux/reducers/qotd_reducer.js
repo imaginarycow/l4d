@@ -17,5 +17,14 @@ const newQotd = (state = {}, action) => {
   }
 }
 
+const getQotdComments = (state = {}, action) => {
+  switch (action.type) {
+    case 'GET_QOTD_COMMENTS':
+      return action.payload;
+    default:
+      return state;
+  }
+}
 
-export {getQotd, newQotd};
+
+export {getQotd, newQotd, getQotdComments};
