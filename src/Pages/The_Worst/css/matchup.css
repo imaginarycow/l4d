@@ -8,10 +8,13 @@
   font-family: bungee;
   display: grid;
   grid-template-columns: 1fr 4fr 1fr 4fr 1fr;
-  grid-template-rows: 1fr 4fr;
+  grid-template-rows: 1fr auto 4fr auto auto;
   grid-template-areas:
     "... vote1 ... vote2 ..."
-    "... image1 or image2 ...";
+    "... butt1 ... butt2 ..."
+    "... image1 or image2 ..."
+    "... view view view ..."
+    "... comms comms comms ...";
   margin-bottom: 10px;
 }
 #image1 {
@@ -31,4 +34,19 @@
 }
 #matchUp img {
   width: 80%;
+}
+#comment-area {
+  grid-area: comms;
+}
+#button1 {
+  grid-area: butt1;
+  max-width: 100px;
+}
+#button2 {
+  grid-area: butt2;
+  max-width: 100px;
+}
+#viewCommentsButton {
+  grid-area: view;
+  margin-top: 10px;
 }

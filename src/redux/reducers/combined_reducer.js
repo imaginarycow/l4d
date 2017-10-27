@@ -4,6 +4,7 @@ import { getQotd, newQotd, getQotdComments } from './qotd_reducer';
 import { getBlog, newBlog, getBlogComments } from './blog_reducer';
 import { loginUser, createUser } from './user_reducer';
 import { getDoodles } from './doodles_reducer';
+import { getWorstMatchups, getWorstComments, newWorstMatchup } from './worst_reducer';
 
 
 const combReducer = combineReducers({
@@ -16,7 +17,9 @@ const combReducer = combineReducers({
   newBlog: newBlog,
   currBlog: getBlog,
   blogComments: getBlogComments,
-  user: loginUser
+  user: loginUser,
+  worstMatchups: getWorstMatchups,
+  worstComments: getWorstComments
 })
 
 export default combReducer;

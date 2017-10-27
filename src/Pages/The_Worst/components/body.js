@@ -1,36 +1,41 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import WorstLoad from '../../../redux/actions/worst_get';
 import Jumbotron from './jumbotron.js';
 import Matchup from './matchup.js';
 //import '../css/container.css';
 import '../css/App.css';
 
-import image3 from '../assets/image3.png';
-import image4 from '../assets/image4.png';
-import image5 from '../assets/image5.png';
-import image6 from '../assets/image6.png';
+var Matchups = [];
 
+class Body extends Component {
 
-export default class Body extends Component {
+  componentWillMount() {
+    this.props.WorstLoad();
+  }
 
   render() {
+
+    if (this.props.matchups != null) {
+      const matchups = this.props.matchups;
+      for (var i in matchups) {
+
+        Matchups.push(<Matchup key={matchups[i]} image1={matchups[i].image1} image1text={matchups[i].img1text}
+          image1votes={matchups[i].img1votes} image2={matchups[i].image2} image2text={matchups[i].img2text}
+          image2votes={matchups[i].img2votes} commentGroupId={matchups[i].commentGroupId}/>);
+      }
+    }
+
     return (
 
       <div id="body">
         <div id="bodyContainer">
           <div id="adSpace1">AdSpace1</div>
-          <Jumbotron id="jumbotron" title="Which is Worse?" />
           <div id="adSpace2">AdSpace2</div>
           <div id="matchUps">
-            <Matchup image1={image3} image2={image4} image1Votes="153" image2Votes="386"/>
-            <Matchup image1={image5} image2={image6} image1Votes="741" image2Votes="935"/>
-            <Matchup image1={image3} image2={image4} image1Votes="153" image2Votes="386"/>
-            <Matchup image1={image5} image2={image6} image1Votes="741" image2Votes="935"/>
-            <Matchup image1={image3} image2={image4} image1Votes="153" image2Votes="386"/>
-            <Matchup image1={image5} image2={image6} image1Votes="741" image2Votes="935"/>
-            <Matchup image1={image3} image2={image4} image1Votes="153" image2Votes="386"/>
-            <Matchup image1={image5} image2={image6} image1Votes="741" image2Votes="935"/>
-            <Matchup image1={image3} image2={image4} image1Votes="153" image2Votes="386"/>
-            <Matchup image1={image5} image2={image6} image1Votes="741" image2Votes="935"/>
+            <h2>Which is Worse?</h2>
+            {Matchups}
           </div>
         </div>
       </div>
@@ -38,3 +43,17 @@ export default class Body extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+    return {
+      matchups: state.worstMatchups,
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+
+  return bindActionCreators({WorstLoad}, dispatch);
+
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Body);
