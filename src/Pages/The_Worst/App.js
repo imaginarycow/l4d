@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import Header from './components/header.js';
-import Footer from './components/footer.js';
 import Body from './components/body.js';
 import CommentArea from './comments/comment_area';
 import './css/App.css';
