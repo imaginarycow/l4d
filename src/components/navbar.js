@@ -6,7 +6,6 @@ import firebase from '../firebase/firebase.js';
 import Logo from './logo';
 import '../css/nav.css';
 
-var link = 'Login';
 
 class navbarInstance extends Component {
 
@@ -28,9 +27,7 @@ class navbarInstance extends Component {
         console.log('no logged in user');
       }
 
-      if (this.props.user.email !== '') {
-        link = this.props.user.email;
-      }
+      const loginLink = this.props.user.email !== 'undefined' ? this.props.user.email : 'Login';
 
       return(
 
@@ -49,7 +46,7 @@ class navbarInstance extends Component {
               <NavItem eventKey={3} ><Link to="/The Worst" >The Worst</Link></NavItem>
               <NavItem eventKey={4} ><Link to="/Doodles" >Doodles</Link></NavItem>
               <NavItem eventKey={5} ><Link to="/Comment Box" >Comment Box</Link></NavItem>
-              <NavItem eventKey={6} ><Link to="/Login" >{link}</Link></NavItem>
+              <NavItem eventKey={6} ><Link to="/Login" >{loginLink}</Link></NavItem>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
@@ -62,12 +59,3 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, null)(navbarInstance);
-
-
-            {/* <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
-              <MenuItem eventKey={3.1}>Action</MenuItem>
-              <MenuItem eventKey={3.2}>Another action</MenuItem>
-              <MenuItem eventKey={3.3}>Something else here</MenuItem>
-              <MenuItem divider />
-              <MenuItem eventKey={3.3}>Separated link</MenuItem>
-            </NavDropdown> */}

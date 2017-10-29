@@ -9,6 +9,8 @@
   "... llabel ..."
   "... elabel ..."
   "... email ..."
+  "... ulabel ..."
+  "... username ..."
   "... plabel ..."
   "... pass ..."
   "... submit ..."
@@ -32,6 +34,11 @@
 #email {
   margin-bottom: 20px;
   min-width: 300px;
+}#ulabel {
+
+}
+#username {
+  margin-bottom: 20px;
 }
 #plabel {
   font-weight: 300;

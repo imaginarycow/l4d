@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import WorstLoad from '../../../redux/actions/worst_get';
-import Jumbotron from './jumbotron.js';
 import Matchup from './matchup.js';
 //import '../css/container.css';
 import '../css/App.css';

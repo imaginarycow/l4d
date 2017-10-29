@@ -6,7 +6,6 @@ import './css/qotd.css';
 import Question from './components/question';
 import ChoiceArea from './components/choice_area';
 import CommentArea from './comments/comment_area';
-import { Questions } from './data/questions';
 import GetComments from '../../redux/actions/qotd_comments_get';
 
 var commentsReceived = false;
@@ -19,7 +18,7 @@ class QOTD extends Component {
 
   render() {
 
-    if (commentsReceived == false && typeof this.props.qotd.commentGroupId != 'undefined') {
+    if (commentsReceived === false && typeof this.props.qotd.commentGroupId !== 'undefined') {
         this.props.GetComments(this.props.qotd.commentGroupId);
         commentsReceived = true;
     }

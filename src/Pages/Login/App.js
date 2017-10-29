@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import LoginUser from '../../redux/actions/user_login';
 import firebase from '../../firebase/firebase.js';
 import './css/login.css';
 
-var eSuccess = false;
-var pSuccess = false;
 
 class Login extends Component {
 
@@ -17,12 +16,14 @@ class Login extends Component {
       needsAccount: false,
       email: '',
       pass: '',
-      attempts: 0
+      username: '',
+      attempts: 0,
     }
 
     this.login = this.login.bind(this);
     this.signUp = this.signUp.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.redirect = this.redirect.bind(this);
     this.sendPasswordReset = this.sendPasswordReset.bind(this);
     this.toggleAccountView = this.toggleAccountView.bind(this);
   }
@@ -32,9 +33,15 @@ class Login extends Component {
     if (e.target.name === 'email') {
       this.setState({email: e.target.value});
     }
+    if (e.target.name === 'username') {
+      this.setState({username: e.target.value});
+    }
     if (e.target.name === 'pass') {
       this.setState({pass: e.target.value});
     }
+  }
+  redirect(page) {
+    this.setState({ redirect: true });
   }
 
   login(e) {
@@ -51,6 +58,7 @@ class Login extends Component {
     // firebase.auth().signInWithEmailAndPassword(email, pass)
     //   .then(function(user) {
     //     console.log(user);
+    //     return <Redirect to='/'/>;
     //   })
     //   .catch(function(error) {
     //     // Handle Errors here.
@@ -66,7 +74,7 @@ class Login extends Component {
     //     } else {
     //       alert(errorMessage);
     //     }
-    // });
+    //   });
     // firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
   }
   signUp(e) {
@@ -123,6 +131,7 @@ class Login extends Component {
 
   toggleAccountView(e) {
     e.preventDefault();
+
     console.log('toggle account view');
     if (this.state.needsAccount) {
       this.setState({needsAccount: false, pass: ''});
@@ -134,7 +143,14 @@ class Login extends Component {
   }
 
   render() {
+
+    if (this.props.user.email !== 'undefined') {
+      console.log(this.props.user);
+      return <Redirect to='/'/>;
+    }
+
       if (!this.state.needsAccount) {
+
         return (
           <div id="loginContainer">
             <form id="form" onSubmit={this.login}>
@@ -158,6 +174,8 @@ class Login extends Component {
               <h3 id="loginLabel">Create a new account</h3>
               <label id="elabel">Email</label>
               <input id="email" type="text" value={this.state.email} onChange={this.onChange} name="email" />
+              <label id="ulabel">Alias</label>
+              <input id="username" type="text" value={this.state.username} onChange={this.onChange} name="username" />
               <label id="plabel">Password</label>
               <input id="pass" type="password" placeholder="must be at least 8 characters" value={this.state.pass} onChange={this.onChange} name="pass" />
               <input id="submit" type="submit" value="Create Account" />
@@ -170,7 +188,7 @@ class Login extends Component {
 }
 
 function mapStateToProps(state) {
-    return {...state};
+    return {user: state.user};
 }
 
 function mapDispatchToProps(dispatch) {

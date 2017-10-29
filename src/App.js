@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Navbar from './components/navbar';
-import StoreLoad from './redux/actions/store_load';
+import firebase from './firebase/firebase.js';
 import './css/App.css';
 
 import Home from './Pages/Main/Main';
@@ -22,6 +22,15 @@ class App extends Component {
   }
 
   render() {
+
+    var user = firebase.auth().currentUser;
+    if (user) {
+      console.log('user logged in:' + user.email);
+    } else {
+      console.log('no logged in user');
+    }
+      
+
     return (
       <div className="App">
         <Router>
@@ -46,10 +55,10 @@ function mapStateToProps(state) {
     return {...state};
 }
 
-function mapDispatchToProps(dispatch) {
+// function mapDispatchToProps(dispatch) {
+//
+//   return bindActionCreators({}, dispatch);
+//
+// }
 
-  return bindActionCreators({StoreLoad}, dispatch);
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, null)(App);
