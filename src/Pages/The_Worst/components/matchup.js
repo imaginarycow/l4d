@@ -14,7 +14,7 @@ class Matchup extends Component {
     this.state = {
       commArea: <div></div>,
       viewComments: false,
-      commentButtonLabel: 'View Comments'
+      commentButtonLabel: 'comments'
     }
 
     this.toggleComments = this.toggleComments.bind(this);
@@ -27,14 +27,14 @@ class Matchup extends Component {
       this.setState({
         commArea: <CommentArea app="worst" commentGroupId={this.props.commentGroupId} comments={this.props.comments}/>,
         viewComments: true,
-        commentButtonLabel: 'Hide Comments'
+        commentButtonLabel: 'hide'
       });
       this.setState({});
     } else {
       this.setState({
         commArea: <div></div>,
         viewComments: false,
-        commentButtonLabel: 'View Comments'
+        commentButtonLabel: 'comments'
       });
     }
   }
@@ -42,13 +42,27 @@ class Matchup extends Component {
   render() {
     return (
       <div id="matchUp">
-        <h4 id="vote1">Votes: {this.props.image1votes}</h4>
-        <img id="image1" src={this.props.image1} alt="image1"/>
-        <button id="button1">Vote</button>
+
+        <div id="button1">
+          <h4>Votes: {this.props.image1votes}</h4>
+          <button><img src="../assets/thumbsUp.png" /></button>
+        </div>
+
+        <div id="image1">
+          <img src={this.props.image1} alt="image1"/>
+        </div>
+
         <h3 id="or">Vs</h3>
-        <h4 id="vote2">Votes: {this.props.image2votes}</h4>
-        <img id="image2" src={this.props.image2} alt="image2"/>
-        <button id="button2">Vote</button>
+
+        <div id="button2">
+          <h4>Votes: {this.props.image2votes}</h4>
+          <button><img src="../assets/thumbsUp.png" /></button>
+        </div>
+
+        <div id="image2">
+          <img src={this.props.image2} alt="image2"/>
+        </div>
+
         <button id="viewCommentsButton" onClick={this.toggleComments}>{this.state.commentButtonLabel}</button>
         {this.state.commArea}
       </div>

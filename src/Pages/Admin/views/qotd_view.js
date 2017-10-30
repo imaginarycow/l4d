@@ -57,8 +57,6 @@ class QotdView extends Component {
     }
     else {
       //submit new QOTD
-      alert('New QOTD submitted: ' + this.state.question);
-
       let qotdKey = getUnformattedDate(this.state.date);
       let commentGroupId = 'QD' + qotdKey;
       var database = firebase.database();
@@ -74,6 +72,12 @@ class QotdView extends Component {
         img2: this.state.url2,
         votes1: 0,
         votes2: 0
+      })
+      .then(() => {
+        alert('New QOTD submitted: ' + this.state.question);
+      })
+      .catch((error) => {
+        alert('error submitting QOTD');
       });
       //clear the form
       this.setState ({
