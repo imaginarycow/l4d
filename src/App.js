@@ -23,13 +23,26 @@ class App extends Component {
 
   render() {
 
-    var user = firebase.auth().currentUser;
-    if (user) {
-      console.log('user logged in:' + user.email);
-    } else {
-      console.log('no logged in user');
+    //check if user exists in store
+    if (this.props.user.email === 'undefined') {
+      console.log('user not logged in');
+      const user = firebase.auth().currentUser;
+      if (user !== null) {
+        //set user in Redux
+        user.providerData.forEach(function (profile) {
+
+
+
+          console.log("  Name: "+profile.displayName);
+          console.log("  Email: "+profile.email);
+          console.log("  Photo URL: "+profile.photoURL);
+        });
+
+        console.log('user logged in:' + user.email);
+      } else {
+        console.log('no logged in user');
+      }
     }
-      
 
     return (
       <div className="App">
@@ -52,13 +65,13 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
-    return {...state};
+    return {user: state.user};
 }
 
-// function mapDispatchToProps(dispatch) {
-//
-//   return bindActionCreators({}, dispatch);
-//
-// }
+function mapDispatchToProps(dispatch) {
+
+  return bindActionCreators({}, dispatch);
+
+}
 
 export default connect(mapStateToProps, null)(App);

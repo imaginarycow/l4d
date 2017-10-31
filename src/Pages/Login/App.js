@@ -51,31 +51,9 @@ class Login extends Component {
     // if (this.state.attempts >= 3) {
     //   alert('You have failed to login at least 3 times. You can reset your password, or wait 10 minutes and try again.');
     // }
-    console.log('login attempted' + this.state.email + ' '+this.state.pass);
     const email = this.state.email;
     const pass = this.state.pass;
     this.props.LoginUser(email, pass);
-    // firebase.auth().signInWithEmailAndPassword(email, pass)
-    //   .then(function(user) {
-    //     console.log(user);
-    //     return <Redirect to='/'/>;
-    //   })
-    //   .catch(function(error) {
-    //     // Handle Errors here.
-    //     //let attempCount = this.state.attempts + 1;
-    //     //this.setState({attempts: attempCount});
-    //     var errorCode = error.code;
-    //     var errorMessage = error.message;
-    //     if (errorCode === 'auth/wrong-password') {
-    //       alert('Invalid password.');
-    //     }
-    //     else if (errorCode === 'auth/invalid-email') {
-    //       alert('Invalid email.');
-    //     } else {
-    //       alert(errorMessage);
-    //     }
-    //   });
-    // firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
   }
   signUp(e) {
     e.preventDefault();

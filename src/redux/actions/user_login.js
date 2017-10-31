@@ -2,9 +2,16 @@ import firebase from '../../firebase/firebase.js';
 
 function logUserIn(user) {
 
+  const loggedInUser = {
+
+    email: user.email,
+    username: user.displayName,
+    image: user.photoURL
+  }
+
   return {
     type: 'LOGIN_USER',
-    payload: user
+    payload: loggedInUser
   }
 }
 
@@ -19,8 +26,6 @@ export default function LoginUser(email, pass) {
       firebase.auth().signInWithEmailAndPassword(email, pass)
       .then((response) => {
         dispatch(logUserIn(response));
-        //window.location.replace("https://www.left4dev.com");
-
       })
       .catch((error) => {
         var errorCode = error.code;

@@ -1,7 +1,6 @@
 const loginUser = (state = {email: 'undefined'}, action) => {
   switch (action.type) {
     case 'LOGIN_USER':
-    console.log('inside user reducer'+action.payload);
       return action.payload;
     default:
       return state;
