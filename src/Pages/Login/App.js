@@ -21,9 +21,7 @@ class Login extends Component {
     }
 
     this.login = this.login.bind(this);
-    this.signUp = this.signUp.bind(this);
     this.onChange = this.onChange.bind(this);
-    this.redirect = this.redirect.bind(this);
     this.sendPasswordReset = this.sendPasswordReset.bind(this);
     this.toggleAccountView = this.toggleAccountView.bind(this);
   }
@@ -40,9 +38,6 @@ class Login extends Component {
       this.setState({pass: e.target.value});
     }
   }
-  redirect(page) {
-    this.setState({ redirect: true });
-  }
 
   login(e) {
     e.preventDefault();
@@ -54,30 +49,6 @@ class Login extends Component {
     const email = this.state.email;
     const pass = this.state.pass;
     this.props.LoginUser(email, pass);
-  }
-  signUp(e) {
-    e.preventDefault();
-    //attempt create user with state.email & state.pass
-    //validate email address, verify unique user
-    firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.pass)
-      .then((user) => {
-        console.log(user);
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        if (errorCode === 'auth/weak-password') {
-          alert('The password is too weak.');
-        } else if (errorCode === 'auth/email-already-in-use') {
-          alert('Email already in use.');
-        } else if (errorCode === 'auth/invalid-email') {
-          alert('Invalid email.');
-        } else {
-          alert(errorMessage);
-        }
-          console.log(error);
-      });
   }
 
   sendPasswordReset(e) {
@@ -110,14 +81,17 @@ class Login extends Component {
   toggleAccountView(e) {
     e.preventDefault();
 
-    console.log('toggle account view');
     if (this.state.needsAccount) {
       this.setState({needsAccount: false, pass: ''});
     }
     else {
-      this.setState({needsAccount: true, pass: ''});
+      this.setState({
+        needsAccount: true,
+        email: '',
+        pass: ''
+      });
     }
-
+    return <Redirect to='/'/>;
   }
 
   render() {
@@ -127,41 +101,25 @@ class Login extends Component {
       return <Redirect to='/'/>;
     }
 
-      if (!this.state.needsAccount) {
+    if (this.state.needsAccount) {
+      return <Redirect to='/Signup' />;
+    }
 
-        return (
-          <div id="loginContainer">
-            <form id="form" onSubmit={this.login}>
-              <h3 id="loginLabel">Login</h3>
-              <label id="elabel">Email</label>
-              <input id="email" type="text" value={this.state.email} onChange={this.onChange} name="email" />
-              <label id="plabel">Password</label>
-              <input id="pass" type="password" value={this.state.pass} onChange={this.onChange} name="pass" />
-              <input id="submit" type="submit" value="Sign In" />
-              <button id="reset" onClick={this.sendPasswordReset}>I forgot my password.</button>
-              <label id="label3">Don't have a Left4Dev acount?</label>
-              <button id="create" onClick={this.toggleAccountView}>Create a free account</button>
-            </form>
-          </div>
-        );
-      }
-      else {
-        return (
-          <div id="loginContainer">
-            <form id="form" onSubmit={this.signUp}>
-              <h3 id="loginLabel">Create a new account</h3>
-              <label id="elabel">Email</label>
-              <input id="email" type="text" value={this.state.email} onChange={this.onChange} name="email" />
-              <label id="ulabel">Alias</label>
-              <input id="username" type="text" value={this.state.username} onChange={this.onChange} name="username" />
-              <label id="plabel">Password</label>
-              <input id="pass" type="password" placeholder="must be at least 8 characters" value={this.state.pass} onChange={this.onChange} name="pass" />
-              <input id="submit" type="submit" value="Create Account" />
-              <button id="create" onClick={this.toggleAccountView}>Back to sign in</button>
-            </form>
-          </div>
-        );
-      }
+    return (
+      <div id="loginContainer">
+        <form id="form" onSubmit={this.login}>
+          <h3 id="loginLabel">Login</h3>
+          <label id="elabel">Email</label>
+          <input id="email" type="text" value={this.state.email} onChange={this.onChange} name="email" />
+          <label id="plabel">Password</label>
+          <input id="pass" type="password" value={this.state.pass} onChange={this.onChange} name="pass" />
+          <input id="submit" type="submit" value="Sign In" />
+          <button id="reset" onClick={this.sendPasswordReset}>I forgot my password.</button>
+          <label id="label3">Don't have a Left4Dev acount?</label>
+          <button id="create" onClick={this.toggleAccountView}>Create a free account</button>
+        </form>
+      </div>
+    );
   }
 }
 

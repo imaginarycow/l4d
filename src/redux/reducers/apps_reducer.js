@@ -1,8 +1,8 @@
 
-const storeLoad= (state = {}, action) => {
+const lastPage = (state = 'Home', action) => {
   switch (action.type) {
-    case 'LOAD_STORE':
-      return action.payload.data;
+    case 'LAST_PAGE':
+      return action.payload;
     default:
       return state;
   }
@@ -18,4 +18,4 @@ const appsFilter = (state = 'SHOW_ALL', action) => {
 }
 
 
-export {appsFilter, storeLoad};
+export {appsFilter, lastPage};

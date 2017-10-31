@@ -1,0 +1,12 @@
+#preview {
+  width: 300px;
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+#preview img{
+  border-radius: 100px;
+  width: 200px;
+  height: 200px;
+}

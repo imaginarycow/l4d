@@ -17,7 +17,7 @@ function getUnformattedDate(date) {
     return stringDate
   }
   else {
-    return date.replace(/\-/g,'');
+    return date.replace(/-/g,'');
   }
 }
 

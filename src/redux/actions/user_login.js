@@ -1,6 +1,6 @@
 import firebase from '../../firebase/firebase.js';
 
-function logUserIn(user) {
+export function logUserIn(user) {
 
   const loggedInUser = {
 
