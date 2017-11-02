@@ -1,7 +1,7 @@
-import axios from 'axios';
+import firebase from '../../firebase/firebase.js';
 
 function getBlogComments(comms) {
-
+  console.log('comments returned' + comms);
   return {
     type: 'GET_BLOG_COMMENTS',
     payload: comms
@@ -12,13 +12,9 @@ export default function GetBlogComments(commentGroup) {
   console.log('BlogcommentGroup' + commentGroup);
   return function(dispatch) {
 
-    axios.get('https://left4dev-b2aab.firebaseio.com/comments/blog/'+commentGroup+'.json')
-    .then((response) => {
-      console.log(response);
-      dispatch(getBlogComments(response.data))
-    })
-    .catch((error) => {
-      console.log(error);
+    var blogCommentsRef = firebase.database().ref('comments/blog/'+commentGroup).orderByChild('timestamp');
+    blogCommentsRef.on('value', function(snapshot) {
+      dispatch(getBlogComments(snapshot.val()));
     });
 
   }

@@ -15,6 +15,7 @@ export default class CommentList extends Component {
   getComments() {
 
     const comments = this.props.comments;
+    console.log(comments);
 
     for (var i in comments) {
       Comments.push(<Comment key={comments[i].timestamp} text={comments[i].text}
@@ -27,9 +28,7 @@ export default class CommentList extends Component {
 
   render() {
 
-    if (commentsReceived == false) {
-      this.getComments();
-    }
+    this.getComments();
 
     return (
       <ul className="commentListArea">

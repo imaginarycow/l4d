@@ -4,6 +4,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { logUserIn } from '../../redux/actions/user_login';
 import firebase from '../../firebase/firebase.js';
+import toastr from 'toastr';
+import '../../toastr/build/toastr.css';
 import './css/login.css';
 
 
@@ -18,7 +20,7 @@ class Signup extends Component {
       pass: '',
       stepTwo: false
     }
-
+    toastr.options.positionClass = "toast-top-full-width";
     this.signUp = this.signUp.bind(this);
     this.onChange = this.onChange.bind(this);
     this.toggleAccountView = this.toggleAccountView.bind(this);
@@ -45,10 +47,13 @@ class Signup extends Component {
         this.setState({stepTwo: true});
         this.props.logUserIn(user);
         user.sendEmailVerification().then(() => {
-            alert('An email verification has been sent to '+user.email+'.' +
-              'If you do not see it, check your junk folder. ');
+            // alert('An email verification has been sent to '+user.email+'.' +
+            //   'If you do not see it, check your junk folder. ');
+            toastr.success('An email verification has been sent to '+user.email+'.' +
+               'If you do not see it, check your junk folder. ');
         }).catch(() => {
-          alert('Something went wrong, please try that again.');
+          //alert('Something went wrong, please try that again.');
+          toastr.error('Something went wrong, please try that again.');
         });
 
       })
@@ -56,15 +61,16 @@ class Signup extends Component {
         var errorCode = error.code;
         var errorMessage = error.message;
         if (errorCode === 'auth/weak-password') {
-          alert('The password is too weak.');
+          errorMessage = 'The password is too weak.';
         } else if (errorCode === 'auth/email-already-in-use') {
-          alert('Email already in use.');
+          errorMessage = 'Email already in use.';
         } else if (errorCode === 'auth/invalid-email') {
-          alert('Invalid email.');
+          errorMessage = 'Invalid email.';
         } else {
-          alert(errorMessage);
+          errorMessage = error.message;
         }
-          console.log(error);
+        toastr.error(errorMessage);
+          //console.log(error);
       });
 
   }
@@ -94,6 +100,7 @@ class Signup extends Component {
 
     return (
       <div id="loginContainer">
+
         <form id="form" onSubmit={this.signUp}>
           <h3 id="loginLabel">Create a new account</h3>
           <label id="elabel">Email</label>

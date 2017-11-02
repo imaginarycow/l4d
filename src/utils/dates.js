@@ -38,7 +38,11 @@ function getCommentDate(date) {
   const min = rawMin > 9 ? rawMin : '0'+rawMin;
   const rawHours = date.getHours();
   const hours = rawHours > 12 ? rawHours - 12 : rawHours;
-  const isPM = rawHours > 12 ? 'PM' : 'AM';
+  var isPM = rawHours > 11 ? 'PM' : 'AM';
+
+  if (rawHours === 24) {
+    isPM = 'AM';
+  }
 
   return month + ' ' + day + ', ' + year
           + ' ' + hours + ":" + min + ' ' + isPM;

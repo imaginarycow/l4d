@@ -6,13 +6,19 @@ import GetComments from '../../redux/actions/blog_comments_get';
 import CommentArea from './comments/comment_area';
 import './css/blog.css';
 
+
 var text = '';
 var date = '';
 var title = 'Loading';
 var url = '#';
-var commentsReceived = false;
+var commentsFetched = false;
 
 class Blog extends Component {
+
+  constructor() {
+    super();
+
+  }
 
   componentWillMount() {
     this.props.BlogLoad();
@@ -27,9 +33,9 @@ class Blog extends Component {
       title = this.props.blog.title;
       url = this.props.blog.imgUrl;
 
-      if (typeof this.props.blog.commentGroupId !== 'undefined' && !commentsReceived) {
+      if (typeof this.props.blog.commentGroupId !== 'undefined' && commentsFetched == false) {
         this.props.GetComments(this.props.blog.commentGroupId);
-        commentsReceived = true;
+        commentsFetched = true;
       }
 
       if (document.getElementById("text") !== null) {
