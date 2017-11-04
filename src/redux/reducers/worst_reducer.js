@@ -17,10 +17,10 @@ const newWorstMatchup = (state = '', action) => {
   }
 }
 
-const getWorstComments = (state = '', action) => {
+const getWorstComments = (state = null, action) => {
   switch (action.type) {
     case 'GET_WORST_COMMENTS':
-    console.log('blog comment reducer fired');
+    console.log('worst comment reducer fired');
       return action.payload;
     default:
       return state;

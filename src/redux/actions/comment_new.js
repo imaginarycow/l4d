@@ -14,18 +14,4 @@ export default function PostNewComment(app, commentGroup, newKey, newComment) {
       console.log(error);
     });
   }
-
-
-
-  // return function(dispatch) {
-  //
-  //   axios.post(postUrl, newComment)
-  //   .then((response) => {
-  //     console.log(response);
-  //   })
-  //   .catch((error) => {
-  //     console.log(error);
-  //   });
-  //
-  // }
 }

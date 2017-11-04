@@ -3,7 +3,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import BlogLoad from '../../redux/actions/blog_get';
 import GetComments from '../../redux/actions/blog_comments_get';
-import CommentArea from './comments/comment_area';
+//import CommentArea from './comments/comment_area';
+import CommentArea from '../../components/comments/comment_area';
 import './css/blog.css';
 
 

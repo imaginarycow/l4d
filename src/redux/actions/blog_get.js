@@ -1,4 +1,4 @@
-import axios from 'axios';
+import firebase from '../../firebase/firebase.js';
 import { getUnformattedDate } from '../../utils/dates';
 
 function getTodaysBlog(blogs) {
@@ -22,12 +22,10 @@ function getTodaysBlog(blogs) {
 export default function BlogLoad() {
 
   return function(dispatch) {
-    axios.get('https://left4dev-b2aab.firebaseio.com/apps/blog.json')
-    .then((response) => {
-      dispatch(getTodaysBlog(response.data))
-    })
-    .catch((error) => {
-      console.log(error);
+
+    var blogRef = firebase.database().ref('apps/blog/');
+    blogRef.once('value', function(snapshot) {
+      dispatch(getTodaysBlog(snapshot.val()));
     });
 
   }

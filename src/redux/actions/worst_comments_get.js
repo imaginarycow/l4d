@@ -1,24 +1,20 @@
-import axios from 'axios';
+import firebase from '../../firebase/firebase.js';
 
 function getWorstComments(comms) {
 
   return {
-    type: 'GET_BLOG_COMMENTS',
+    type: 'GET_WORST_COMMENTS',
     payload: comms
   }
 }
 
-export default function GetBlogComments(commentGroup) {
+export default function GetWorstComments(commentGroup) {
 
   return function(dispatch) {
 
-    axios.get('https://left4dev-b2aab.firebaseio.com/comments/worst/'+commentGroup+'.json')
-    .then((response) => {
-      console.log(response);
-      dispatch(getWorstComments(response.data))
-    })
-    .catch((error) => {
-      console.log(error);
+    var worstCommentsRef = firebase.database().ref('comments/worst/'+commentGroup);
+    worstCommentsRef.on('value', function(snapshot) {
+      dispatch(getWorstComments(snapshot.val()));
     });
 
   }

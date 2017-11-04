@@ -2,6 +2,8 @@ import React,{Component} from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PostComment from '../../../redux/actions/comment_new';
+import toastr from 'toastr';
+import '../../../toastr/build/toastr.css';
 import './comment_new.css';
 
 
@@ -16,7 +18,8 @@ class NewComment extends Component {
       timestamp: Date.now(),
       username: '',
       uid: '',
-      userimage: ''
+      userimage: '',
+      defaultimage: 'https://firebasestorage.googleapis.com/v0/b/left4dev-b2aab.appspot.com/o/default_image.png?alt=media&token=c25561dd-b553-48ad-b53c-6b82dd38fdc7'
     }
 
     this.onChange = this.onChange.bind(this);
@@ -25,6 +28,11 @@ class NewComment extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+
+    if (this.props.user.email === 'undefined') {
+      toastr.error('You must be logged in to post a comment. Login or signup for a free account.');
+      return;
+    }
 
     if (this.state.charCount < 5) {
       alert('Your comment is too short, must be a minimum of 5 characters!');
@@ -36,7 +44,7 @@ class NewComment extends Component {
         isFlagged: false,
         timestamp: this.state.timestamp,
         text: this.state.comment,
-        userimage: this.state.userimage,
+        userimage: this.state.userimage === '' ? this.state.defaultimage : this.state.userimage,
         username: this.state.username
       };
       this.props.PostComment(this.props.app, this.props.commentGroupId, newKey, newComment);
@@ -67,8 +75,14 @@ class NewComment extends Component {
   }
 }
 
+function mapStateToProps(state) {
+    return {
+      user: state.user
+    };
+}
+
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({PostComment}, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(NewComment);
+export default connect(mapStateToProps, mapDispatchToProps)(NewComment);

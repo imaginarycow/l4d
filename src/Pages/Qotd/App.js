@@ -5,7 +5,8 @@ import QotdLoad from '../../redux/actions/qotd_get';
 import './css/qotd.css';
 import Question from './components/question';
 import ChoiceArea from './components/choice_area';
-import CommentArea from './comments/comment_area';
+//import CommentArea from './comments/comment_area';
+import CommentArea from '../../components/comments/comment_area';
 import GetComments from '../../redux/actions/qotd_comments_get';
 
 var commentsReceived = false;

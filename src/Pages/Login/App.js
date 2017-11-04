@@ -97,7 +97,6 @@ class Login extends Component {
   render() {
 
     if (this.props.user.email !== 'undefined') {
-      console.log(this.props.user);
       return <Redirect to='/'/>;
     }
 

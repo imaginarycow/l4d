@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import CommentArea from '../comments/comment_area';
 import GetComments from '../../../redux/actions/worst_comments_get';
+import CommentArea from '../../../components/comments/comment_area';
 import '../css/matchup.css';
 
 
@@ -12,7 +12,6 @@ class Matchup extends Component {
     super();
 
     this.state = {
-      commArea: <div></div>,
       viewComments: false,
       commentButtonLabel: 'comments'
     }
@@ -22,17 +21,18 @@ class Matchup extends Component {
 
   toggleComments(e) {
     e.preventDefault();
-    console.log('view comments button tapped');
-    if (this.state.viewComments === false) {
+
+    if (!this.state.viewComments) {
+      this.props.GetComments(this.props.commentGroupId);
+
       this.setState({
-        commArea: <CommentArea app="worst" commentGroupId={this.props.commentGroupId} comments={this.props.comments}/>,
         viewComments: true,
         commentButtonLabel: 'hide'
       });
-      this.setState({});
-    } else {
+
+    }
+    else {
       this.setState({
-        commArea: <div></div>,
         viewComments: false,
         commentButtonLabel: 'comments'
       });
@@ -40,6 +40,38 @@ class Matchup extends Component {
   }
 
   render() {
+
+    if (this.state.viewComments) {
+      return (
+        <div id="matchUp">
+
+          <div id="button1">
+            <h4>Votes: {this.props.image1votes}</h4>
+            <button><img src="../assets/thumbsUp.png" /></button>
+          </div>
+
+          <div id="image1">
+            <img src={this.props.image1} alt="image1"/>
+          </div>
+
+          <h3 id="or">Vs</h3>
+
+          <div id="button2">
+            <h4>Votes: {this.props.image2votes}</h4>
+            <button><img src="../assets/thumbsUp.png" /></button>
+          </div>
+
+          <div id="image2">
+            <img src={this.props.image2} alt="image2"/>
+          </div>
+
+          <button id="viewCommentsButton" onClick={this.toggleComments}>{this.state.commentButtonLabel}</button>
+          <CommentArea app="worst" commentGroupId={this.props.commentGroupId} comments={this.props.comments}/>;
+          <button id="closeCommentsButton" onClick={this.toggleComments}>{this.state.commentButtonLabel}</button>
+        </div>
+      );
+    }
+
     return (
       <div id="matchUp">
 
@@ -64,7 +96,7 @@ class Matchup extends Component {
         </div>
 
         <button id="viewCommentsButton" onClick={this.toggleComments}>{this.state.commentButtonLabel}</button>
-        {this.state.commArea}
+
       </div>
     );
   }

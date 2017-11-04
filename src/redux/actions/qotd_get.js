@@ -1,4 +1,4 @@
-import axios from 'axios';
+import firebase from '../../firebase/firebase.js';
 import { getUnformattedDate } from '../../utils/dates';
 
 function getQuestionOfTheDay(question) {
@@ -15,12 +15,9 @@ export default function QotdLoad() {
 
     let date = getUnformattedDate();
 
-    axios.get('https://left4dev-b2aab.firebaseio.com/apps/qotd/' + date + '.json')
-    .then((response) =>
-      dispatch(getQuestionOfTheDay(response.data))
-    )
-    .catch((error) => {
-      console.log(error);
+    var qotdRef = firebase.database().ref('apps/qotd/'+date);
+    qotdRef.once('value', function(snapshot) {
+      dispatch(getQuestionOfTheDay(snapshot.val()));
     });
 
   }

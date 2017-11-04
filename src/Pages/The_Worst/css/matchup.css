@@ -8,12 +8,13 @@
   font-family: 'Open Sans Condensed', sans-serif;
   display: grid;
   grid-template-columns: 1fr 4fr 1fr 4fr 1fr;
-  grid-template-rows: 1fr auto auto auto;
+  grid-template-rows: 1fr auto auto auto auto;
   grid-template-areas:
     "... butt1 ... butt2 ..."
     "... image1 or image2 ..."
     "... ... view ... ..."
-    "... comms comms comms ...";
+    "... comms comms comms ..."
+    "... ... close ... ...";
   margin-bottom: 10px;
   align-content: center;
 }
@@ -70,6 +71,14 @@
 }
 #viewCommentsButton {
   grid-area: view;
+  margin-top: 10px;
+  background-color: #3eddae;
+  margin-bottom: 3px;
+  border-radius: 5px;
+  border: none;
+}
+#closeCommentsButton {
+  grid-area: close;
   margin-top: 10px;
   background-color: #3eddae;
   margin-bottom: 3px;

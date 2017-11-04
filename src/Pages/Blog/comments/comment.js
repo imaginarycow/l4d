@@ -21,8 +21,6 @@ export default class Comment extends Component {
           <p id="text">{this.props.text}</p>
         </div>
       </li>
-
-
     );
   }
 }

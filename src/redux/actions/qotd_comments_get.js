@@ -1,4 +1,4 @@
-import axios from 'axios';
+import firebase from '../../firebase/firebase.js';
 
 function getQotdComments(comms) {
   console.log(comms);
@@ -8,17 +8,14 @@ function getQotdComments(comms) {
   }
 }
 
-export default function GetQotdComments(commentGroupId) {
-  console.log('commentGroupId' + commentGroupId);
+export default function GetQotdComments(commentGroup) {
+  console.log('commentGroupId' + commentGroup);
   return function(dispatch) {
 
-    axios.get('https://left4dev-b2aab.firebaseio.com/comments/qotd/'+commentGroupId+'.json')
-    .then((response) => {
-      console.log(response);
-      dispatch(getQotdComments(response.data))
-    })
-    .catch((error) => {
-      console.log(error);
+    var blogCommentsRef = firebase.database().ref('comments/qotd/'+commentGroup).orderByChild('timestamp');
+    blogCommentsRef.on('value', function(snapshot) {
+      dispatch(getQotdComments(snapshot.val()));
     });
+
   }
 }

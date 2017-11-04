@@ -17,7 +17,7 @@ const newBlog = (state = '', action) => {
   }
 }
 
-const getBlogComments = (state = '', action) => {
+const getBlogComments = (state = null, action) => {
   switch (action.type) {
     case 'GET_BLOG_COMMENTS':
     console.log('blog comment reducer fired');

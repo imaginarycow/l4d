@@ -13,6 +13,7 @@ import Worst from './Pages/The_Worst/App';
 import Doodles from './Pages/Doodles/App';
 import Comments from './Pages/Comment/App';
 import Login from './Pages/Login/App';
+import Logout from './Pages/Login/Logout';
 import Signup from './Pages/Login/Signup';
 import Profile from './Pages/Login/Profile';
 import Admin from './Pages/Admin/App';
@@ -58,6 +59,7 @@ class App extends Component {
               <Route path="/Doodles" component={Doodles}/>
               <Route path="/Comment Box" component={Comments}/>
               <Route path="/Login" component={Login}/>
+              <Route path="/Logout" component={Logout}/>
               <Route path="/Signup" component={Signup}/>
               <Route path="/Profile" component={Profile}/>
               <Route path="/Admin" component={Admin}/>

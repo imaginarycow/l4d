@@ -13,21 +13,30 @@ class navbarInstance extends Component {
       super();
 
       this.state = {
-        loginLink: 'Login',
+        loginLink: '/Login',
+        loginLabel: 'Login',
         loggedInUser: {}
       }
     }
 
     render() {
+      var that = this;
 
-      var user = firebase.auth().currentUser;
+      firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
-        console.log('user logged in:' + user.email);
+        that.setState({loginLabel: user.email,
+          loginLink: '/Logout'});
+        // const loginLabel = user.email;
+        // const loginLink = '/Logout';
       } else {
-        console.log('no logged in user');
+        that.setState({loginLabel: 'Login',
+          loginLink: '/Login'});
+        // const loginLabel = 'Login';
+        // const loginLink = '/Login';
       }
+      });
 
-      const loginLink = this.props.user.email !== 'undefined' ? this.props.user.email : 'Login';
+
 
       return(
 
@@ -46,7 +55,7 @@ class navbarInstance extends Component {
               <NavItem eventKey={3} ><Link to="/The Worst" >The Worst</Link></NavItem>
               <NavItem eventKey={4} ><Link to="/Doodles" >Doodles</Link></NavItem>
               <NavItem eventKey={5} ><Link to="/Comment Box" >Comment Box</Link></NavItem>
-              <NavItem eventKey={6} ><Link to="/Login" >{loginLink}</Link></NavItem>
+              <NavItem eventKey={6} ><Link to={this.state.loginLink} >{this.state.loginLabel}</Link></NavItem>
             </Nav>
           </Navbar.Collapse>
         </Navbar>

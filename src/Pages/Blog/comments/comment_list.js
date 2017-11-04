@@ -1,38 +1,41 @@
 import React,{Component} from 'react';
 import Comment from './comment';
 
-var Comments = [];
-var commentsReceived = false;
 
 export default class CommentList extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      comments: null,
+      commentsReceived: false
+    }
 
     this.getComments = this.getComments.bind(this);
   }
+  componentWillMount() {
+    console.log(this.props);
+  }
 
-  getComments() {
+  getComments(comments) {
 
-    const comments = this.props.comments;
-    console.log(comments);
-
+    var CommentsArray = [];
     for (var i in comments) {
-      Comments.push(<Comment key={comments[i].timestamp} text={comments[i].text}
+      CommentsArray.push(<Comment key={comments[i].timestamp+i} text={comments[i].text}
                       username={comments[i].username} imgUrl={comments[i].userimage}
                       timestamp={comments[i].timestamp} />);
-
-                      commentsReceived = true;
     }
+    return CommentsArray;
   }
 
   render() {
 
-    this.getComments();
+    const mappedComments = this.getComments(this.props.comments);
 
     return (
       <ul className="commentListArea">
-        {Comments}
+        {mappedComments}
       </ul>
     );
   }

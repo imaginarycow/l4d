@@ -1,0 +1,42 @@
+#logoutContainer {
+  font-family: 'Open Sans Condensed', sans-serif;
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+  "... cont ..."
+  ;
+}
+#innerContainer {
+  grid-area: cont;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#plabel {
+  text-align: center;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+#elabel {
+  font-weight: 300;
+}
+#username {
+  margin-bottom: 20px;
+}
+#ulabel {
+
+}
+#userimage {
+  max-width: 600px;
+}
+#userimage img{
+  max-width: 150px;
+  border-radius: 75px;
+  margin: 10px;
+}
+#logoutButton button {
+  margin-top: 30px;
+}

@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
+import { getCommentDate } from '../../../utils/dates.js';
 import './comment.css';
 
 var replies = [];
 
-var dt = new Date();
-var utcDate = dt.toString();
 
 export default class Comment extends Component {
+
   render() {
+
     const stamp = new Date (this.props.timestamp);
-    const formattedDate = stamp.toString();
-
-
+    const formattedDate = getCommentDate(stamp);
 
     return (
       <li>
@@ -22,8 +21,6 @@ export default class Comment extends Component {
           <p id="text">{this.props.text}</p>
         </div>
       </li>
-
-
     );
   }
 }
