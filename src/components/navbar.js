@@ -17,28 +17,29 @@ class navbarInstance extends Component {
         loginLabel: 'Login',
         loggedInUser: {}
       }
+
+      this.getLoginLink = this.getLoginLink.bind(this);
+    }
+
+    getLoginLink() {
+      console.log('getLoginLink called');
+      var link;
+      firebase.auth().onAuthStateChanged(function(user) {
+        console.log(user);
+      if (user !== null) {
+        link = <NavItem eventKey={6} ><Link to="/Logout" >Logout</Link></NavItem>;
+      } else {
+        link = <NavItem eventKey={6} ><Link to="/Login" >Login</Link></NavItem>;
+      }
+      });
+      return link;
     }
 
     render() {
-      var that = this;
-
-      firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        that.setState({loginLabel: user.email,
-          loginLink: '/Logout'});
-        // const loginLabel = user.email;
-        // const loginLink = '/Logout';
-      } else {
-        that.setState({loginLabel: 'Login',
-          loginLink: '/Login'});
-        // const loginLabel = 'Login';
-        // const loginLink = '/Login';
-      }
-      });
-
-
 
       return(
+
+
 
         <Navbar id="navbar" inverse collapseOnSelect>
           <Navbar.Header>
@@ -55,7 +56,7 @@ class navbarInstance extends Component {
               <NavItem eventKey={3} ><Link to="/The Worst" >The Worst</Link></NavItem>
               <NavItem eventKey={4} ><Link to="/Doodles" >Doodles</Link></NavItem>
               <NavItem eventKey={5} ><Link to="/Comment Box" >Comment Box</Link></NavItem>
-              <NavItem eventKey={6} ><Link to={this.state.loginLink} >{this.state.loginLabel}</Link></NavItem>
+              {this.getLoginLink()}
             </Nav>
           </Navbar.Collapse>
         </Navbar>

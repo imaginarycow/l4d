@@ -73,7 +73,6 @@ class Profile extends Component {
     }).catch(function(error) {
       console.log('Something went wrong. Please try again');
     });
-
   }
 
   selectButton(e) {
