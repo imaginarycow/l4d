@@ -5,6 +5,7 @@ import PostComment from '../../redux/actions/comment_new';
 import toastr from 'toastr';
 import '../../toastr/build/toastr.css';
 import './comment_new.css';
+import firebase from '../../firebase/firebase.js';
 
 
 class NewComment extends Component {
@@ -16,6 +17,7 @@ class NewComment extends Component {
       charCount: 0,
       comment: '',
       timestamp: Date.now(),
+      email: '',
       username: '',
       uid: '',
       userimage: '',
@@ -26,10 +28,23 @@ class NewComment extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount() {
+
+    firebase.auth().onAuthStateChanged((user) => {
+
+      if (user !== null) {
+        this.setState({email: user.email,
+          username: user.displayName,
+          userimage: user.photoURL});
+      }
+
+    });
+  }
+
   handleSubmit(e) {
     e.preventDefault();
 
-    if (this.props.user.email === 'undefined') {
+    if (this.state.email === '') {
       toastr.error('You must be logged in to post a comment. Login or signup for a free account.');
       return;
     }
@@ -44,7 +59,7 @@ class NewComment extends Component {
         isFlagged: false,
         timestamp: this.state.timestamp,
         text: this.state.comment,
-        userimage: this.state.userimage === '' ? this.state.defaultimage : this.state.userimage,
+        userimage: this.state.userimage,
         username: this.state.username
       };
       this.props.PostComment(this.props.app, this.props.commentGroupId, newKey, newComment);
@@ -65,6 +80,7 @@ class NewComment extends Component {
     return (
       <div>
         <form id="new-comment" onSubmit={this.handleSubmit}>
+          <img src={this.state.userimage} />
           <textarea id="text" placeholder="Comment: 500 characters max" name="comment"
               value={this.state.comment} onChange={this.onChange} maxLength="500"/>
           <label id="charCount">Characters remaining: {500 - this.state.charCount}</label>

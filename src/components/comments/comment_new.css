@@ -9,6 +9,12 @@
   "... newc newc newc ..."
   "... char post ... ...";
 }
+#new-comment img {
+  grid-area: pic;
+  max-width: 50px;
+  max-height: 50px;
+  border-radius: 25px;
+}
 #new-comment #text {
   grid-area: newc;
   resize: none;

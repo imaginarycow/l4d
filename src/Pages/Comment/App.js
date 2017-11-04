@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import firebase from '../../firebase/firebase.js';
+import toastr from 'toastr';
+import '../../toastr/build/toastr.css';
 import './comment_box.css';
 
 
@@ -9,16 +12,26 @@ class CommentBox extends Component {
     this.state = {
       name: '',
       email: '',
-      comment: '',
+      comment: ''
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount() {
+
+    firebase.auth().onAuthStateChanged(user => {
+      if (user !== null) {
+        this.setState({email: user.email, name: user.displayName});
+      }
+    })
+  }
+
   handleChange(e) {
 
     e.preventDefault();
+
     if(e.target.name === 'name') {
       this.setState({name: e.target.value});
     }
@@ -34,15 +47,44 @@ class CommentBox extends Component {
   }
 
   handleSubmit(event) {
-    var words = this.state.comment.match(/\S+/g).length;
-    if (this.state.name === '' || this.state.email === '' || words > 150) {
-      alert('Either you left something blank, or your comment is too long!');
-    }
-    else {
-      alert('Your comment has been submitted!: ');
-    }
 
     event.preventDefault();
+
+    toastr.options = {
+    "positionClass": "toast-top-center",
+    }
+
+    var words = this.state.comment.match(/\S+/g).length;
+
+    if (this.state.email === '') {
+      toastr.error('Your email is required!');
+      return;
+    }
+    else if (words > 150) {
+      toastr.error('Your comment is too long. Please shorten it to 150 words or less. Thank you.');
+      return;
+    }
+    else if (words < 2) {
+      toastr.error('Your comment is too short.');
+      return;
+    }
+    const newKey = Date.now();
+    const newComment = {
+      name: this.state.name,
+      email: this.state.email,
+      comment: this.state.comment
+    }
+    const postUrl = 'feedback/'+'/'+newKey+'/';
+    firebase.database().ref(postUrl).set(newComment)
+    .then((response) => {
+      toastr.success('Your feedback is appreciated.  Thanks!');
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+    this.setState({
+      comment: ''
+    });
   }
 
   render() {

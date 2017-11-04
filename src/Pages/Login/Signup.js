@@ -70,7 +70,6 @@ class Signup extends Component {
           errorMessage = error.message;
         }
         toastr.error(errorMessage);
-          //console.log(error);
       });
 
   }

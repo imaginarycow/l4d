@@ -20,7 +20,7 @@ export default function LoginUser(email, pass) {
   return function(dispatch) {
 
 
-    firebase.auth().setPersistence(firebase.firebase_.auth.Auth.Persistence.SESSION)
+    firebase.auth().setPersistence(firebase.firebase_.auth.Auth.Persistence.LOCAL)
     .then(function() {
 
       firebase.auth().signInWithEmailAndPassword(email, pass)

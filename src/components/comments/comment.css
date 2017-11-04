@@ -12,6 +12,7 @@
   grid-area: img;
   max-width: 40px;
   max-height: 40px;
+  border-radius: 20px;
 }
 #user {
   grid-area: user;

@@ -40,8 +40,10 @@
   grid-area: emailinput;
   margin-bottom: 10px;
 }
-#comment-box #comments {
+#comments {
   grid-area: comment;
+  width: 100%;
+  resize: none;
   margin-bottom: 10px;
   min-height: 150px;
 }

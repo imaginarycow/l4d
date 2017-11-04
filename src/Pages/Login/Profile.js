@@ -8,6 +8,18 @@ import toastr from 'toastr';
 import '../../toastr/build/toastr.css';
 import './css/profile.css';
 
+const src1 = 'https://firebasestorage.googleapis.com/v0/b/left4dev-b2aab.appspot.com/o/profileImages%2FuserImage1.png?alt=media&token=eb366724-4c6d-44d5-8672-dbb2fa06457c';
+const src2 = 'https://firebasestorage.googleapis.com/v0/b/left4dev-b2aab.appspot.com/o/profileImages%2FuserImage2.png?alt=media&token=c89d945c-230d-41da-bb0a-c016a16abb5e';
+const src3 = 'https://firebasestorage.googleapis.com/v0/b/left4dev-b2aab.appspot.com/o/profileImages%2FuserImage3.png?alt=media&token=4ead53ef-e040-4a44-9c53-1c8cb913f6ee';
+const src4 = 'https://firebasestorage.googleapis.com/v0/b/left4dev-b2aab.appspot.com/o/profileImages%2FuserImage4.png?alt=media&token=97ea6c39-0bb0-4139-b69c-49726542e37d';
+const src5 = 'https://firebasestorage.googleapis.com/v0/b/left4dev-b2aab.appspot.com/o/profileImages%2FuserImage5.png?alt=media&token=db768196-984b-4529-8f91-3b54f1db4d4e';
+const src6 = 'https://firebasestorage.googleapis.com/v0/b/left4dev-b2aab.appspot.com/o/profileImages%2FuserImage6.png?alt=media&token=29bf02ee-1f9d-4656-a7d0-9222d0394b1a';
+const src7 = 'https://firebasestorage.googleapis.com/v0/b/left4dev-b2aab.appspot.com/o/profileImages%2FuserImage7.png?alt=media&token=38cb29e8-c27a-4a74-9618-1b92ba2f7022';
+const src8 = 'https://firebasestorage.googleapis.com/v0/b/left4dev-b2aab.appspot.com/o/profileImages%2FuserImage8.png?alt=media&token=6b0b106f-2ec5-4326-8afe-d2dec72a298a';
+const src9 = 'https://firebasestorage.googleapis.com/v0/b/left4dev-b2aab.appspot.com/o/profileImages%2FuserImage9.png?alt=media&token=b07ef388-5b24-4537-90d1-0c66f54837de';
+const src10 = 'https://firebasestorage.googleapis.com/v0/b/left4dev-b2aab.appspot.com/o/profileImages%2FuserImage10.png?alt=media&token=14e748c8-4637-4eae-ace0-be9436a6585a';
+const src11 = 'https://firebasestorage.googleapis.com/v0/b/left4dev-b2aab.appspot.com/o/profileImages%2FuserImage11.png?alt=media&token=25fc910b-8a28-4612-9ae1-f72968ebd707';
+const src12 = 'https://firebasestorage.googleapis.com/v0/b/left4dev-b2aab.appspot.com/o/profileImages%2FuserImage12.png?alt=media&token=dc61d240-d3cc-4713-b5d0-acce09513505';
 
 class Profile extends Component {
 
@@ -15,10 +27,12 @@ class Profile extends Component {
     super();
 
     this.state = {
-      username: '',
+      username: null,
       file: '',
-      imageUrl: 'https://firebasestorage.googleapis.com/v0/b/left4dev-b2aab.appspot.com/o/profileImages%2FuserImage1.png?alt=media&token=eb366724-4c6d-44d5-8672-dbb2fa06457c',
+      firebaseUser: null,
+      imageUrl: null,
       imagePreviewUrl: '',
+      defaultImage: 'https://firebasestorage.googleapis.com/v0/b/left4dev-b2aab.appspot.com/o/profileImages%2FuserImage3.png?alt=media&token=4ead53ef-e040-4a44-9c53-1c8cb913f6ee',
       editing: true
     }
 
@@ -26,6 +40,44 @@ class Profile extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.selectButton = this.selectButton.bind(this);
     this.handleImageChange = this.handleImageChange.bind(this);
+  }
+
+  componentDidMount() {
+
+    firebase.auth().onAuthStateChanged((user) => {
+      console.log(user);
+    if (user !== null) {
+      this.setState({email: user.email,
+        firebaseUser: user,
+        username: user.displayName,
+        imageUrl: user.photoURL});
+    } else {
+
+      toastr.error('Looks like you are not logged in.  Pleas login to edit your profile.');
+    }
+    });
+
+//     var storage = firebase.storage().ref();
+//     var imagesRef = storage.child('profileImages');
+//     image12 = imagesRef.child('userImage12.png').getDownloadURL().then(function(url) {
+//   // `url` is the download URL for 'images/stars.jpg'
+//
+//   // This can be downloaded directly:
+//   var xhr = new XMLHttpRequest();
+//   xhr.responseType = 'blob';
+//   xhr.onload = function(event) {
+//     var blob = xhr.response;
+//   };
+//   xhr.open('GET', url);
+//   xhr.send();
+//
+//   // Or inserted into an <img> element:
+//   var img = document.getElementById('myimg');
+//   return url;
+// }).catch(function(error) {
+//   // Handle any errors
+// });
+
   }
 
   onChange(e) {
@@ -55,24 +107,33 @@ class Profile extends Component {
 
 
   handleSubmit(e) {
+
     e.preventDefault();
 
-    if (this.state.username === '') {
+    if (this.state.username === '' || this.state.username === null) {
       toastr.warning('Please enter a username that will be visible to other users');
       return;
     }
+    if (this.state.imageUrl === null) {
+      this.setState({imageUrl: this.state.defaultImage});
+    }
 
-    var user = firebase.auth().currentUser;
+    if (this.state.firebaseUser !== null) {
 
-    user.updateProfile({
-      displayName: this.state.username,
-      photoURL: this.state.imageUrl
-    }).then(function() {
-      toastr.success('Thanks for setting up your account. You can now add comments.');
-      this.setState({editing: false});
-    }).catch(function(error) {
-      console.log('Something went wrong. Please try again');
-    });
+      this.state.firebaseUser.updateProfile({
+        displayName: this.state.username,
+        photoURL: this.state.imageUrl
+      }).then(function() {
+        toastr.success('Successfully edited your account.');
+      }).catch(function(error) {
+        return;
+      });
+
+    } else {
+      toastr.error('Looks like you are not logged in.  Please login to edit your profile.');
+    }
+    this.setState({editing: false});
+
   }
 
   selectButton(e) {
@@ -85,15 +146,6 @@ class Profile extends Component {
   }
 
   render() {
-    const that = this;
-
-    firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
-      // that.setUser(user);
-    } else {
-      console.log('nu user logged in');
-    }
-    });
 
     if (!this.state.editing) {
       return <Redirect to='/' />;
@@ -104,7 +156,7 @@ class Profile extends Component {
 
     return (
       <div id="loginContainer">
-        <form id="form" onSubmit={this.login}>
+        <form id="form" onSubmit={this.handleSubmit}>
           <h3 id="loginLabel">Edit Profile</h3>
           <label id="elabel">Email: {this.state.email}</label>
           <label id="">Username</label>
@@ -116,16 +168,20 @@ class Profile extends Component {
           </div> */}
           <label id="">Pick your button</label>
           <div id="userimage">
-            <img onClick={this.selectButton} name="button1" src="https://firebasestorage.googleapis.com/v0/b/left4dev-b2aab.appspot.com/o/profileImages%2FuserImage1.png?alt=media&token=eb366724-4c6d-44d5-8672-dbb2fa06457c" alt="user"/>
-            <img onClick={this.selectButton} name="button2" src="https://firebasestorage.googleapis.com/v0/b/left4dev-b2aab.appspot.com/o/profileImages%2FuserImage2.png?alt=media&token=c89d945c-230d-41da-bb0a-c016a16abb5e" alt="user" />
-            <img onClick={this.selectButton} name="button3" src="https://firebasestorage.googleapis.com/v0/b/left4dev-b2aab.appspot.com/o/profileImages%2FuserImage3.png?alt=media&token=4ead53ef-e040-4a44-9c53-1c8cb913f6ee" alt="user" />
-            <img onClick={this.selectButton} name="button4" src="https://firebasestorage.googleapis.com/v0/b/left4dev-b2aab.appspot.com/o/profileImages%2FuserImage4.png?alt=media&token=97ea6c39-0bb0-4139-b69c-49726542e37d" alt="user" />
-            <img onClick={this.selectButton} name="button5" src="https://firebasestorage.googleapis.com/v0/b/left4dev-b2aab.appspot.com/o/profileImages%2FuserImage5.png?alt=media&token=db768196-984b-4529-8f91-3b54f1db4d4e" alt="user" />
-            <img onClick={this.selectButton} name="button6" src="https://firebasestorage.googleapis.com/v0/b/left4dev-b2aab.appspot.com/o/profileImages%2FuserImage6.png?alt=media&token=29bf02ee-1f9d-4656-a7d0-9222d0394b1a" alt="user" />
-            {/* <img src={this.props.user.image} alt="user"/> */}
+            <img onClick={this.selectButton} name="button1" src={src1} alt="user"/>
+            <img onClick={this.selectButton} name="button2" src={src2} alt="user" />
+            <img onClick={this.selectButton} name="button3" src={src3} alt="user" />
+            <img onClick={this.selectButton} name="button4" src={src4} alt="user" />
+            <img onClick={this.selectButton} name="button5" src={src5} alt="user" />
+            <img onClick={this.selectButton} name="button6" src={src6} alt="user" />
+            <img onClick={this.selectButton} name="button7" src={src7} alt="user" />
+            <img onClick={this.selectButton} name="button8" src={src8} alt="user" />
+            <img onClick={this.selectButton} name="button9" src={src9} alt="user" />
+            <img onClick={this.selectButton} name="button10" src={src10} alt="user" />
+            <img onClick={this.selectButton} name="button11" src={src11} alt="user" />
+            <img onClick={this.selectButton} name="button12" src={src12} alt="user" />
           </div>
-
-          <input id="submit" type="submit" value="Done" onSubmit={this.handleSubmit}/>
+          <input id="submit" type="submit" value="Done Editing" />
         </form>
       </div>
     );

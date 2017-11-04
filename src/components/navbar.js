@@ -18,28 +18,27 @@ class navbarInstance extends Component {
         loggedInUser: {}
       }
 
-      this.getLoginLink = this.getLoginLink.bind(this);
+      //this.getLoginLink = this.getLoginLink.bind(this);
     }
 
-    getLoginLink() {
-      console.log('getLoginLink called');
-      var link;
-      firebase.auth().onAuthStateChanged(function(user) {
+    componentDidMount() {
+
+      firebase.auth().onAuthStateChanged((user) => {
         console.log(user);
       if (user !== null) {
-        link = <NavItem eventKey={6} ><Link to="/Logout" >Logout</Link></NavItem>;
+
+        this.setState({loginLabel: user.email, loginLink: '/Profile'});
+
       } else {
-        link = <NavItem eventKey={6} ><Link to="/Login" >Login</Link></NavItem>;
+
+        this.setState({loginLabel: 'Login', loginLink: '/Login'});
       }
       });
-      return link;
     }
 
     render() {
 
       return(
-
-
 
         <Navbar id="navbar" inverse collapseOnSelect>
           <Navbar.Header>
@@ -56,7 +55,7 @@ class navbarInstance extends Component {
               <NavItem eventKey={3} ><Link to="/The Worst" >The Worst</Link></NavItem>
               <NavItem eventKey={4} ><Link to="/Doodles" >Doodles</Link></NavItem>
               <NavItem eventKey={5} ><Link to="/Comment Box" >Comment Box</Link></NavItem>
-              {this.getLoginLink()}
+              <NavItem eventKey={6} ><Link to={this.state.loginLink} >{this.state.loginLabel}</Link></NavItem>
             </Nav>
           </Navbar.Collapse>
         </Navbar>

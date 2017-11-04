@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { getFormattedDate } from '../../../utils/dates';
+import { getFormattedDate, getUnformattedDate } from '../../../utils/dates';
+import firebase from 'firebase';
 import '../css/worst_view_css.css';
 
 const initState = {title: '', date: '', sit1: '', sit2: '', url1: '', url2: ''};
@@ -55,7 +56,31 @@ class WorstView extends Component {
     }
     else {
       //submit new QOTD
-      alert('New Worst Matchup submitted: ' + this.state.question);
+      alert('New WORST Post submitted: ' + this.state.title);
+      let worstKey = getUnformattedDate(this.state.date);
+      let commentGroupId = 'WO' + worstKey;
+      var database = firebase.database();
+      firebase.database().ref('apps/worst/' + worstKey).set({
+        commentGroupId: commentGroupId,
+        date: this.state.date,
+        dateKey: worstKey,
+        image1: this.state.url1,
+        img1votes: 0,
+        img1text: this.state.sit1,
+        image2: this.state.url2,
+        img2votes: 0,
+        img2text: this.state.sit2,
+        title: this.state.title,
+      });
+
+      this.setState ({
+        date: getFormattedDate(),
+        title: initState.title,
+        sit1: initState.sit1,
+        sit2: initState.sit2,
+        url1: initState.url1,
+        url2: initState.url2
+      });
     }
 
   }
