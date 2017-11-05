@@ -10,6 +10,7 @@ class CommentBox extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      user: null,
       name: '',
       email: '',
       comment: ''
@@ -23,7 +24,7 @@ class CommentBox extends Component {
 
     firebase.auth().onAuthStateChanged(user => {
       if (user !== null) {
-        this.setState({email: user.email, name: user.displayName});
+        this.setState({user: user, email: user.email, name: user.displayName});
       }
     })
   }
@@ -56,8 +57,8 @@ class CommentBox extends Component {
 
     var words = this.state.comment.match(/\S+/g).length;
 
-    if (this.state.email === '') {
-      toastr.error('Your email is required!');
+    if (this.state.user === null) {
+      toastr.error('You must be signed in to leave a comment.!');
       return;
     }
     else if (words > 150) {

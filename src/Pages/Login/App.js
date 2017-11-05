@@ -98,6 +98,8 @@ class Login extends Component {
 
     if (this.props.user.email !== 'undefined') {
       return <Redirect to='/'/>;
+      // console.log(this.props.lastPage.link);
+      // return <Redirect to={this.props.lastPage.link}/>;
     }
 
     if (this.state.needsAccount) {
@@ -123,7 +125,7 @@ class Login extends Component {
 }
 
 function mapStateToProps(state) {
-    return {user: state.user};
+    return {user: state.user, lastPage: state.lastPage};
 }
 
 function mapDispatchToProps(dispatch) {

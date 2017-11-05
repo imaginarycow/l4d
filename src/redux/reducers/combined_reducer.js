@@ -5,6 +5,7 @@ import { getBlog, newBlog, getBlogComments } from './blog_reducer';
 import { loginUser } from './user_reducer';
 import { getDoodles } from './doodles_reducer';
 import { getWorstMatchups, getWorstComments, newWorstMatchup } from './worst_reducer';
+import { setLastPage } from './page_reducer';
 
 
 const combReducer = combineReducers({
@@ -19,7 +20,8 @@ const combReducer = combineReducers({
   blogComments: getBlogComments,
   user: loginUser,
   worstMatchups: getWorstMatchups,
-  worstComments: getWorstComments
+  worstComments: getWorstComments,
+  lastPage: setLastPage
 })
 
 export default combReducer;

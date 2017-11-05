@@ -5,6 +5,7 @@
   grid-template-columns: 1fr auto 1fr;
   grid-template-rows: auto;
   grid-template-areas:
+  "... outB ..."
   "... form ..."
   "... llabel ..."
   "... elabel ..."
@@ -17,6 +18,13 @@
   "... label3 ..."
   "... create ..."
   ;
+}
+#logoutDiv {
+  grid-area: outB;
+  text-align: center;
+}
+#logoutButton {
+
 }
 #form {
   grid-area: form;
@@ -45,6 +53,9 @@
 }
 #pass {
   margin-bottom: 20px;
+}
+#doneButton {
+  text-align: center;
 }
 #submit {
   margin-bottom: 20px;

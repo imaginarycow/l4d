@@ -33,10 +33,12 @@ class Profile extends Component {
       imageUrl: null,
       imagePreviewUrl: '',
       defaultImage: 'https://firebasestorage.googleapis.com/v0/b/left4dev-b2aab.appspot.com/o/profileImages%2FuserImage3.png?alt=media&token=4ead53ef-e040-4a44-9c53-1c8cb913f6ee',
-      editing: true
+      editing: true,
+      returnToLogin: false
     }
 
     this.onChange = this.onChange.bind(this);
+    this.logout = this.logout.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.selectButton = this.selectButton.bind(this);
     this.handleImageChange = this.handleImageChange.bind(this);
@@ -145,10 +147,24 @@ class Profile extends Component {
     this.setState({email: user.email});
   }
 
+  logout(e) {
+    e.preventDefault();
+
+    firebase.auth().signOut().then(function() {
+      toastr.success('You are now logged out');
+    }, function(error) {
+      console.log(error);
+    });
+    this.setState({returnToLogin: true});
+  }
+
   render() {
 
     if (!this.state.editing) {
       return <Redirect to='/' />;
+    }
+    if (this.state.returnToLogin) {
+      return <Redirect to='/Login' />;
     }
     // if (this.state.file !== '') {
     //   console.log(this.state.file);
@@ -156,6 +172,10 @@ class Profile extends Component {
 
     return (
       <div id="loginContainer">
+        <div id="logoutDiv">
+          <button id="logoutButton" onClick={this.logout}>Logout</button>
+        </div>
+
         <form id="form" onSubmit={this.handleSubmit}>
           <h3 id="loginLabel">Edit Profile</h3>
           <label id="elabel">Email: {this.state.email}</label>
@@ -181,7 +201,10 @@ class Profile extends Component {
             <img onClick={this.selectButton} name="button11" src={src11} alt="user" />
             <img onClick={this.selectButton} name="button12" src={src12} alt="user" />
           </div>
-          <input id="submit" type="submit" value="Done Editing" />
+          <div id="doneButton">
+            <input id="submit" type="submit" value="Done Editing" />
+          </div>
+
         </form>
       </div>
     );
