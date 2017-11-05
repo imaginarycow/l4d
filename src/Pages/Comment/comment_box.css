@@ -5,6 +5,7 @@
   grid-template-rows: auto;
   grid-template-areas:
   "... title ..."
+  "... sub ..."
   "... form ..."
   ;
   margin-top: 70px;
@@ -12,6 +13,11 @@
 #comment-box h3 {
   grid-area: title;
   text-align: left;
+}
+#comment-box h5 {
+  grid-area: sub;
+  text-align: left;
+  margin-bottom: 15px;
 }
 #comment-box form {
 

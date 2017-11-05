@@ -21,7 +21,7 @@ class NewComment extends Component {
       username: '',
       uid: '',
       userimage: '',
-      defaultimage: 'https://firebasestorage.googleapis.com/v0/b/left4dev-b2aab.appspot.com/o/default_image.png?alt=media&token=c25561dd-b553-48ad-b53c-6b82dd38fdc7'
+      defaultimage: '../../assets/profile_images/userImage1.png'
     }
 
     this.onChange = this.onChange.bind(this);
@@ -35,7 +35,8 @@ class NewComment extends Component {
       if (user !== null) {
         this.setState({email: user.email,
           username: user.displayName,
-          userimage: user.photoURL});
+          userimage: user.photoURL
+        });
       }
 
     });
@@ -64,6 +65,7 @@ class NewComment extends Component {
       };
       this.props.PostComment(this.props.app, this.props.commentGroupId, newKey, newComment);
     }
+    this.setState({comment: ''});
 
   }
   onChange(e) {

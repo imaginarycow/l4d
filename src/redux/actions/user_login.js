@@ -1,4 +1,6 @@
 import firebase from '../../firebase/firebase.js';
+import toastr from 'toastr';
+import '../../toastr/build/toastr.css';
 
 export function logUserIn(user) {
 
@@ -19,6 +21,9 @@ export default function LoginUser(email, pass) {
 
   return function(dispatch) {
 
+    toastr.options = {
+      "positionClass": "toast-top-center",
+    }
 
     firebase.auth().setPersistence(firebase.firebase_.auth.Auth.Persistence.LOCAL)
     .then(function() {
@@ -31,12 +36,13 @@ export default function LoginUser(email, pass) {
         var errorCode = error.code;
         var errorMessage = error.message;
         if (errorCode === 'auth/wrong-password') {
-          alert('Invalid password.');
+          toastr.error('Invalid password.');
         }
         else if (errorCode === 'auth/invalid-email') {
-          alert('Invalid email.');
-        } else {
-          alert(errorMessage);
+          toastr.error('Invalid email.');
+        }
+         else if (errorCode === 'auth/user-not-found'){
+          toastr.error('No user found with this email address');
         }
       });
 

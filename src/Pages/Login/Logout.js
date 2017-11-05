@@ -6,7 +6,6 @@ import LogoutUser from '../../redux/actions/user_logout';
 import firebase from '../../firebase/firebase.js';
 import './css/logout.css';
 
-var image = require('../../assets/userImage1.png');
 
 class Logout extends Component {
 

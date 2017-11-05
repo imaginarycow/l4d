@@ -58,7 +58,7 @@ class CommentBox extends Component {
     var words = this.state.comment.match(/\S+/g).length;
 
     if (this.state.user === null) {
-      toastr.error('You must be signed in to leave a comment.!');
+      toastr.error('You must be signed in to leave a comment.');
       return;
     }
     else if (words > 150) {
@@ -93,6 +93,7 @@ class CommentBox extends Component {
     return (
       <div id="comment-box">
         <h3>Speak Your Mind</h3>
+        <h5>(login to leave a message)</h5>
         <form onSubmit={this.handleSubmit}>
           <label id="name">Name</label>
           <input id="namein" type="text" name="name" value={this.state.name} onChange={this.handleChange}/>

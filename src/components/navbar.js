@@ -18,16 +18,15 @@ class navbarInstance extends Component {
         loggedInUser: {}
       }
 
-      //this.getLoginLink = this.getLoginLink.bind(this);
     }
 
     componentDidMount() {
 
       firebase.auth().onAuthStateChanged((user) => {
-        console.log(user);
-      if (user !== null) {
 
-        this.setState({loginLabel: user.email, loginLink: '/Profile'});
+      if (user !== null) {
+        var label = user.displayName !== null ? user.displayName : user.email
+        this.setState({loginLabel: label, loginLink: '/Profile'});
 
       } else {
 

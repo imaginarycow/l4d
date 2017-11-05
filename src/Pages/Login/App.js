@@ -24,6 +24,7 @@ class Login extends Component {
     this.onChange = this.onChange.bind(this);
     this.sendPasswordReset = this.sendPasswordReset.bind(this);
     this.toggleAccountView = this.toggleAccountView.bind(this);
+
   }
 
   onChange(e) {

@@ -7,19 +7,9 @@ import firebase from '../../firebase/firebase.js';
 import toastr from 'toastr';
 import '../../toastr/build/toastr.css';
 import './css/profile.css';
+import {imageArray} from '../../assets/profile_images/image_exporter';
 
-const src1 = 'https://firebasestorage.googleapis.com/v0/b/left4dev-b2aab.appspot.com/o/profileImages%2FuserImage1.png?alt=media&token=eb366724-4c6d-44d5-8672-dbb2fa06457c';
-const src2 = 'https://firebasestorage.googleapis.com/v0/b/left4dev-b2aab.appspot.com/o/profileImages%2FuserImage2.png?alt=media&token=c89d945c-230d-41da-bb0a-c016a16abb5e';
-const src3 = 'https://firebasestorage.googleapis.com/v0/b/left4dev-b2aab.appspot.com/o/profileImages%2FuserImage3.png?alt=media&token=4ead53ef-e040-4a44-9c53-1c8cb913f6ee';
-const src4 = 'https://firebasestorage.googleapis.com/v0/b/left4dev-b2aab.appspot.com/o/profileImages%2FuserImage4.png?alt=media&token=97ea6c39-0bb0-4139-b69c-49726542e37d';
-const src5 = 'https://firebasestorage.googleapis.com/v0/b/left4dev-b2aab.appspot.com/o/profileImages%2FuserImage5.png?alt=media&token=db768196-984b-4529-8f91-3b54f1db4d4e';
-const src6 = 'https://firebasestorage.googleapis.com/v0/b/left4dev-b2aab.appspot.com/o/profileImages%2FuserImage6.png?alt=media&token=29bf02ee-1f9d-4656-a7d0-9222d0394b1a';
-const src7 = 'https://firebasestorage.googleapis.com/v0/b/left4dev-b2aab.appspot.com/o/profileImages%2FuserImage7.png?alt=media&token=38cb29e8-c27a-4a74-9618-1b92ba2f7022';
-const src8 = 'https://firebasestorage.googleapis.com/v0/b/left4dev-b2aab.appspot.com/o/profileImages%2FuserImage8.png?alt=media&token=6b0b106f-2ec5-4326-8afe-d2dec72a298a';
-const src9 = 'https://firebasestorage.googleapis.com/v0/b/left4dev-b2aab.appspot.com/o/profileImages%2FuserImage9.png?alt=media&token=b07ef388-5b24-4537-90d1-0c66f54837de';
-const src10 = 'https://firebasestorage.googleapis.com/v0/b/left4dev-b2aab.appspot.com/o/profileImages%2FuserImage10.png?alt=media&token=14e748c8-4637-4eae-ace0-be9436a6585a';
-const src11 = 'https://firebasestorage.googleapis.com/v0/b/left4dev-b2aab.appspot.com/o/profileImages%2FuserImage11.png?alt=media&token=25fc910b-8a28-4612-9ae1-f72968ebd707';
-const src12 = 'https://firebasestorage.googleapis.com/v0/b/left4dev-b2aab.appspot.com/o/profileImages%2FuserImage12.png?alt=media&token=dc61d240-d3cc-4713-b5d0-acce09513505';
+const defImage = require('../../assets/profile_images/userImage1.png');
 
 class Profile extends Component {
 
@@ -32,8 +22,9 @@ class Profile extends Component {
       firebaseUser: null,
       imageUrl: null,
       imagePreviewUrl: '',
-      defaultImage: 'https://firebasestorage.googleapis.com/v0/b/left4dev-b2aab.appspot.com/o/profileImages%2FuserImage3.png?alt=media&token=4ead53ef-e040-4a44-9c53-1c8cb913f6ee',
+      defaultImage: defImage,
       editing: true,
+      usernameError: false,
       returnToLogin: false
     }
 
@@ -42,53 +33,38 @@ class Profile extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.selectButton = this.selectButton.bind(this);
     this.handleImageChange = this.handleImageChange.bind(this);
+    this.getImageButtons = this.getImageButtons.bind(this);
+
+    toastr.options = {
+      "positionClass": "toast-top-center",
+    }
   }
 
   componentDidMount() {
 
     firebase.auth().onAuthStateChanged((user) => {
-      console.log(user);
-    if (user !== null) {
-      this.setState({email: user.email,
-        firebaseUser: user,
-        username: user.displayName,
-        imageUrl: user.photoURL});
-    } else {
 
-      toastr.error('Looks like you are not logged in.  Pleas login to edit your profile.');
-    }
+      if (user !== null) {
+
+        var photo = user.photoURL !== null ? user.photoURL : this.state.defaultImage;
+        this.setState({email: user.email,
+          firebaseUser: user,
+          username: user.displayName,
+          imageUrl: photo});
+      } else {
+        this.setState({imageUrl: this.state.defaultImage});
+        toastr.error('Looks like you are not logged in.  Please login to edit your profile.');
+      }
     });
-
-//     var storage = firebase.storage().ref();
-//     var imagesRef = storage.child('profileImages');
-//     image12 = imagesRef.child('userImage12.png').getDownloadURL().then(function(url) {
-//   // `url` is the download URL for 'images/stars.jpg'
-//
-//   // This can be downloaded directly:
-//   var xhr = new XMLHttpRequest();
-//   xhr.responseType = 'blob';
-//   xhr.onload = function(event) {
-//     var blob = xhr.response;
-//   };
-//   xhr.open('GET', url);
-//   xhr.send();
-//
-//   // Or inserted into an <img> element:
-//   var img = document.getElementById('myimg');
-//   return url;
-// }).catch(function(error) {
-//   // Handle any errors
-// });
 
   }
 
   onChange(e) {
     e.preventDefault();
 
-    if (e.target.name === 'username') {
+    if (e.target.value.length <= 20) {
       this.setState({username: e.target.value});
     }
-
   }
 
   handleImageChange(e) {
@@ -140,8 +116,21 @@ class Profile extends Component {
 
   selectButton(e) {
     e.preventDefault();
+
     this.setState({imageUrl: e.target.src});
     toastr.success('Got it, ill use that one.');
+
+    if (this.state.firebaseUser !== null) {
+
+      this.state.firebaseUser.updateProfile({
+        photoURL: e.target.src
+      }).then(function() {
+        console.log('success editing account in firebase');
+      }).catch(function(error) {
+        return;
+      });
+
+    }
   }
   setUser(user) {
     this.setState({email: user.email});
@@ -158,6 +147,15 @@ class Profile extends Component {
     this.setState({returnToLogin: true});
   }
 
+  getImageButtons() {
+    var newArray = [];
+    for (var i in imageArray) {
+      newArray.push(<img onClick={this.selectButton} key={imageArray[i].src}
+        name={imageArray[i].name} src={imageArray[i].src} alt={imageArray[i].alt}/>);
+    }
+    return newArray;
+  }
+
   render() {
 
     if (!this.state.editing) {
@@ -170,6 +168,8 @@ class Profile extends Component {
     //   console.log(this.state.file);
     // }
 
+    const imagesToRender = this.getImageButtons();
+
     return (
       <div id="loginContainer">
         <div id="logoutDiv">
@@ -180,26 +180,18 @@ class Profile extends Component {
           <h3 id="loginLabel">Edit Profile</h3>
           <label id="elabel">Email: {this.state.email}</label>
           <label id="">Username</label>
-          <input id="" type="text" value={this.state.username} onChange={this.onChange} name="username" />
+          <input id="" type="text" value={this.state.username} onChange={this.onChange} name="username" maxlength="20" />
           {/* <label id="">Upload a Profile pic</label>
           <input type="file" id="profile_pic" name="profile_pic" accept="image/*" onChange={this.handleImageChange} />
           <div id="preview">
             <img src={this.state.imagePreviewUrl} alt=''/>
           </div> */}
-          <label id="">Pick your button</label>
+          <label id="yourButtonLabel">Select a button</label>
+          <div id="userButtonPreview">
+            <img src={this.state.imageUrl} alt="Select one"/>
+          </div>
           <div id="userimage">
-            <img onClick={this.selectButton} name="button1" src={src1} alt="user"/>
-            <img onClick={this.selectButton} name="button2" src={src2} alt="user" />
-            <img onClick={this.selectButton} name="button3" src={src3} alt="user" />
-            <img onClick={this.selectButton} name="button4" src={src4} alt="user" />
-            <img onClick={this.selectButton} name="button5" src={src5} alt="user" />
-            <img onClick={this.selectButton} name="button6" src={src6} alt="user" />
-            <img onClick={this.selectButton} name="button7" src={src7} alt="user" />
-            <img onClick={this.selectButton} name="button8" src={src8} alt="user" />
-            <img onClick={this.selectButton} name="button9" src={src9} alt="user" />
-            <img onClick={this.selectButton} name="button10" src={src10} alt="user" />
-            <img onClick={this.selectButton} name="button11" src={src11} alt="user" />
-            <img onClick={this.selectButton} name="button12" src={src12} alt="user" />
+            {imagesToRender}
           </div>
           <div id="doneButton">
             <input id="submit" type="submit" value="Done Editing" />
