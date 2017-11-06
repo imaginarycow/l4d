@@ -1,5 +1,5 @@
 
-const getQotd = (state = {}, action) => {
+const getQotd = (state = null, action) => {
   switch (action.type) {
     case 'GET_QOTD':
       return action.payload;
@@ -17,7 +17,7 @@ const newQotd = (state = {}, action) => {
   }
 }
 
-const getQotdComments = (state = {}, action) => {
+const getQotdComments = (state = null, action) => {
   switch (action.type) {
     case 'GET_QOTD_COMMENTS':
       return action.payload;

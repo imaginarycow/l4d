@@ -21,31 +21,41 @@ import Admin from './Pages/Admin/App';
 class App extends Component {
 
   componentWillMount() {
-    console.log(this.props);
+
+    firebase.auth().onAuthStateChanged((user) => {
+
+      if (user !== null && user.email !== null) {
+        // User is signed in. Do nothing
+      } else {
+        // No user is signed in. Login anonymously
+        firebase.auth().signInAnonymously().catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // ...
+        });
+      }
+    });
+
+
+    // var user = firebase.auth().currentUser;
+    //
+    // if (user) {
+    //   // User is signed in. Do nothing
+    // } else {
+    //   // No user is signed in. Login anonymously
+    //   firebase.auth().signInAnonymously().catch(function(error) {
+    //   // Handle Errors here.
+    //   var errorCode = error.code;
+    //   var errorMessage = error.message;
+    //   // ...
+    //   });
+    // }
   }
 
   render() {
 
-    //check if user exists in store
-    if (this.props.user.email === 'undefined') {
-      console.log('user not logged in');
-      var user = firebase.auth().currentUser;
-      if (user !== null) {
-        //set user in Redux
-        user.providerData.forEach(function (profile) {
-
-
-
-          console.log("  Name: "+profile.displayName);
-          console.log("  Email: "+profile.email);
-          console.log("  Photo URL: "+profile.photoURL);
-        });
-
-        console.log('user logged in:' + user.email);
-      } else {
-        console.log('no logged in user');
-      }
-    }
+    //check if user is logged in
 
     return (
       <div className="App">

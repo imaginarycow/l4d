@@ -5,29 +5,44 @@ import Doodle from './doodle';
 import DoodlesLoad from '../../redux/actions/doodles_get';
 import './css/doodles.css';
 
-var doodlesArray = [];
+var loaded = false;
 
 class Doodles extends Component {
 
+  constructor() {
+    super();
+
+    this.state = {doodlesArray: [], loaded: false}
+
+    this.getDoodles = this.getDoodles.bind(this);
+  }
+
   componentWillMount() {
     this.props.DoodlesLoad();
+  }
+
+  getDoodles(doods) {
+
+    if (doods === null) {
+      return [];
+    }
+
+    var doodsArray = [];
+
+    for (var i in doods) {
+      doodsArray.push(<Doodle key={doods[i].imgUrl} author={doods[i].author}
+        title={doods[i].title} imgUrl={doods[i].imgUrl}/>);
+    }
+    return doodsArray;
 
   }
 
   render() {
 
-    if (typeof this.props.doodles !== 'undefined') {
-      console.log(this.props.doodles);
-      let doods = this.props.doodles;
-      for (var i in doods) {
-        doodlesArray.push(<Doodle author={doods[i].author} title={doods[i].title} imgUrl={doods[i].imgUrl}/>);
-      }
-    }
-
     return (
       <div id="doodles">
         <h1>Doodles</h1>
-        {doodlesArray}
+        {this.getDoodles(this.props.doodles)}
       </div>
 
     );
@@ -36,7 +51,7 @@ class Doodles extends Component {
 
 function mapStateToProps(state) {
     return {
-      doodles: state.doodles,
+      doodles: state.doodles
     };
 }
 

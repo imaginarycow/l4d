@@ -1,4 +1,4 @@
-const getDoodles = (state = '', action) => {
+const getDoodles = (state = null, action) => {
   switch (action.type) {
     case 'GET_DOODLES':
       return action.payload;

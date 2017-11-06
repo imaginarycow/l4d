@@ -18,12 +18,18 @@ class CommentBox extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+
+    toastr.options = {
+      "positionClass": "toast-top-center",
+      "closeButton": true
+    }
+
   }
 
   componentDidMount() {
 
     firebase.auth().onAuthStateChanged(user => {
-      if (user !== null) {
+      if (user !== null && user.email !== null) {
         this.setState({user: user, email: user.email, name: user.displayName});
       }
     })
@@ -51,14 +57,14 @@ class CommentBox extends Component {
 
     event.preventDefault();
 
-    toastr.options = {
-    "positionClass": "toast-top-center",
-    }
-
-    var words = this.state.comment.match(/\S+/g).length;
+    var words = this.state.comment === '' ? 0 : this.state.comment.match(/\S+/g).length;
 
     if (this.state.user === null) {
       toastr.error('You must be signed in to leave a comment.');
+      return;
+    }
+    else if (words === 0) {
+      toastr.error('You cannot submit a blank comment.');
       return;
     }
     else if (words > 150) {

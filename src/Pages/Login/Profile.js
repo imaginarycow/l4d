@@ -44,7 +44,7 @@ class Profile extends Component {
 
     firebase.auth().onAuthStateChanged((user) => {
 
-      if (user !== null) {
+      if (user !== null && user.email !== null) {
 
         var photo = user.photoURL !== null ? user.photoURL : this.state.defaultImage;
         this.setState({email: user.email,
@@ -53,7 +53,6 @@ class Profile extends Component {
           imageUrl: photo});
       } else {
         this.setState({imageUrl: this.state.defaultImage});
-        toastr.error('Looks like you are not logged in.  Please login to edit your profile.');
       }
     });
 
@@ -92,25 +91,31 @@ class Profile extends Component {
       toastr.warning('Please enter a username that will be visible to other users');
       return;
     }
+    const pattern = new RegExp(/[~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/); //unacceptable chars
+    if (pattern.test(this.state.username)) {
+        toastr.error("Special characters (!@#$%^&*, etc.) are not allowed.");
+        return;
+    }
     if (this.state.imageUrl === null) {
       this.setState({imageUrl: this.state.defaultImage});
     }
 
-    if (this.state.firebaseUser !== null) {
+    if (this.state.firebaseUser !== null && this.state.firebaseUser.email !== null) {
 
       this.state.firebaseUser.updateProfile({
         displayName: this.state.username,
-        photoURL: this.state.imageUrl
+        photoURL: this.state.imageUrl,
       }).then(function() {
         toastr.success('Successfully edited your account.');
       }).catch(function(error) {
         return;
       });
+      this.setState({editing: false});
 
     } else {
       toastr.error('Looks like you are not logged in.  Please login to edit your profile.');
+      this.setState({returnToLogin: true});
     }
-    this.setState({editing: false});
 
   }
 
@@ -179,8 +184,8 @@ class Profile extends Component {
         <form id="form" onSubmit={this.handleSubmit}>
           <h3 id="loginLabel">Edit Profile</h3>
           <label id="elabel">Email: {this.state.email}</label>
-          <label id="">Username</label>
-          <input id="" type="text" value={this.state.username} onChange={this.onChange} name="username" maxlength="20" />
+          <label>Username</label>
+          <input type="text" value={this.state.username} onChange={this.onChange} name="username" maxLength="20" />
           {/* <label id="">Upload a Profile pic</label>
           <input type="file" id="profile_pic" name="profile_pic" accept="image/*" onChange={this.handleImageChange} />
           <div id="preview">

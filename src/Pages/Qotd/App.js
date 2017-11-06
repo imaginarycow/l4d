@@ -5,7 +5,6 @@ import QotdLoad from '../../redux/actions/qotd_get';
 import './css/qotd.css';
 import Question from './components/question';
 import ChoiceArea from './components/choice_area';
-//import CommentArea from './comments/comment_area';
 import CommentArea from '../../components/comments/comment_area';
 import GetComments from '../../redux/actions/qotd_comments_get';
 
@@ -19,12 +18,24 @@ class QOTD extends Component {
 
   render() {
 
-    if (commentsReceived === false && typeof this.props.qotd.commentGroupId !== 'undefined') {
-        this.props.GetComments(this.props.qotd.commentGroupId);
-        commentsReceived = true;
-    }
+    if (this.props.qotd !== null) {
 
-    if (this.props.qotd === null) {
+      if (this.props.comments === null && commentsReceived === false) {
+          this.props.GetComments(this.props.qotd.commentGroupId);
+          commentsReceived = true;
+      }
+
+      return (
+        <div id="QOTD-Page">
+          <h1>QotD</h1>
+          <h5>Question of the Day</h5>
+          <Question id="question" text={this.props.qotd.question}/>
+          <ChoiceArea id="choice-area" question={this.props.qotd}/>
+          <CommentArea app="qotd" commentGroupId={this.props.qotd.commentGroupId} comments={this.props.comments}/>
+        </div>
+      );
+    }
+    else {
       return (
         <div id="QOTD-Page">
           <h1>QotD</h1>
@@ -32,16 +43,6 @@ class QOTD extends Component {
         </div>
       );
     }
-
-    return (
-      <div id="QOTD-Page">
-        <h1>QotD</h1>
-        <h5>Question of the Day</h5>
-        <Question id="question" text={this.props.qotd.question}/>
-        <ChoiceArea id="choice-area" question={this.props.qotd}/>
-        <CommentArea app="qotd" commentGroupId={this.props.qotd.commentGroupId} comments={this.props.comments}/>
-      </div>
-    );
   }
 }
 

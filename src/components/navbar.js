@@ -17,22 +17,31 @@ class navbarInstance extends Component {
         loginLabel: 'Login',
         loggedInUser: {}
       }
-
+      this.updateState = this.updateState.bind(this);
     }
 
     componentDidMount() {
+      var link = '/Login';
+      var label = 'Login';
 
       firebase.auth().onAuthStateChanged((user) => {
+        console.log(user);
+        if (user !== null && user.email !== null) {
+          label = user.displayName !== null ? user.displayName : user.email;
+          link = '/Profile';
+          this.updateState(label, link);
 
-      if (user !== null) {
-        var label = user.displayName !== null ? user.displayName : user.email
-        this.setState({loginLabel: label, loginLink: '/Profile'});
+        } else {
 
-      } else {
-
-        this.setState({loginLabel: 'Login', loginLink: '/Login'});
-      }
+          label = 'Login';
+          link =  '/Login';
+          this.updateState(label, link);
+        }
       });
+
+    }
+    updateState(label, link) {
+      this.setState({loginLabel: label, loginLink: link});
     }
 
     render() {

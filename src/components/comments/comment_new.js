@@ -32,7 +32,7 @@ class NewComment extends Component {
 
     firebase.auth().onAuthStateChanged((user) => {
 
-      if (user !== null) {
+      if (user !== null && user.email !== null) {
         this.setState({email: user.email,
           username: user.displayName,
           userimage: user.photoURL

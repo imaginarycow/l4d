@@ -12,8 +12,8 @@ export default function GetQotdComments(commentGroup) {
   console.log('commentGroupId' + commentGroup);
   return function(dispatch) {
 
-    var blogCommentsRef = firebase.database().ref('comments/qotd/'+commentGroup).orderByChild('timestamp');
-    blogCommentsRef.on('value', function(snapshot) {
+    var qotdCommentsRef = firebase.database().ref('comments/qotd/'+commentGroup);
+    qotdCommentsRef.on('value', function(snapshot) {
       dispatch(getQotdComments(snapshot.val()));
     });
 
