@@ -4,14 +4,16 @@ import { connect } from 'react-redux';
 import GetComments from '../../../redux/actions/worst_comments_get';
 import CommentArea from '../../../components/comments/comment_area';
 import '../css/matchup.css';
+import HR from './hr.js';
 
 
 class Matchup extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
+      key: props.matchKey,
       viewComments: false,
       commentButtonLabel: 'comments'
     }
@@ -68,10 +70,12 @@ class Matchup extends Component {
           <button id="viewCommentsButton" onClick={this.toggleComments}>{this.state.commentButtonLabel}</button>
           <CommentArea app="worst" commentGroupId={this.props.commentGroupId} comments={this.props.comments}/>;
           <button id="closeCommentsButton" onClick={this.toggleComments}>{this.state.commentButtonLabel}</button>
+          <HR id="newHR"/>
         </div>
       );
     }
 
+    //comments not being viewed
     return (
       <div id="matchUp">
 
@@ -96,7 +100,7 @@ class Matchup extends Component {
         </div>
 
         <button id="viewCommentsButton" onClick={this.toggleComments}>{this.state.commentButtonLabel}</button>
-
+        <HR id="hr"/>
       </div>
     );
   }

@@ -1,15 +1,22 @@
 import firebase from '../../firebase/firebase.js';
 
 function getBlogComments(comms) {
-  console.log('comments returned' + comms);
+  console.log(comms);
+
   return {
     type: 'GET_BLOG_COMMENTS',
     payload: comms
   }
 }
 
+function sortArray(comms) {
+  comms.sort(function(a, b) {
+    return a.timestamp < b.timestamp;
+  });
+}
+
 export default function GetBlogComments(commentGroup) {
-  console.log('BlogcommentGroup' + commentGroup);
+
   return function(dispatch) {
 
     var blogCommentsRef = firebase.database().ref('comments/blog/'+commentGroup).orderByChild('timestamp');

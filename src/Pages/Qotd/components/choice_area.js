@@ -17,10 +17,10 @@ export default class ChoiceArea extends Component {
 
     if (typeof this.props.question.date !== 'undefined') {
       let question = this.props.question;
-      console.log('question: ' + this.props.question.date);
-      choice1 = (<Choice id="option1" key={question.option1}
+
+      choice1 = (<Choice id="option1" key={question.option1} option="1" qotdKey={question.dateKey}
         text={question.option1} votes={question.votes1} img={question.img1}/>);
-      choice2 = (<Choice id="option2" key={question.option2}
+      choice2 = (<Choice id="option2" key={question.option2} option="2" qotdKey={question.dateKey}
         text={question.option2} votes={question.votes2} img={question.img2} />);
     }
 

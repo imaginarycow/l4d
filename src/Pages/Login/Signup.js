@@ -20,7 +20,12 @@ class Signup extends Component {
       pass: '',
       stepTwo: false
     }
-    toastr.options.positionClass = "toast-top-full-width";
+    toastr.options = {
+      "positionClass": "toast-top-full-width",
+      "closeButton": true,
+      "preventDuplicates": true
+    }
+
     this.signUp = this.signUp.bind(this);
     this.onChange = this.onChange.bind(this);
     this.toggleAccountView = this.toggleAccountView.bind(this);

@@ -16,7 +16,7 @@ export default function QotdLoad() {
     let date = getUnformattedDate();
 
     var qotdRef = firebase.database().ref('apps/qotd/'+date);
-    qotdRef.once('value', function(snapshot) {
+    qotdRef.on('value', function(snapshot) {
       dispatch(getQuestionOfTheDay(snapshot.val()));
     });
 

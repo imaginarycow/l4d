@@ -1,22 +1,43 @@
 import React, { Component } from 'react';
+import firebase from '../../../firebase/firebase.js';
+import toastr from 'toastr';
+import '../../../toastr/build/toastr.css';
 import '../css/choice.css';
 
 export default class Choice extends Component {
 
-  componentWillMount() {
-    this.setState({voted:false});
+  constructor() {
+    super();
+
+    this.state = {voted: false};
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+
+    toastr.options = {
+      "closeButton": true,
+      "preventDuplicates": true
+    }
   }
 
   handleSubmit(e) {
     e.preventDefault();
 
-    if (this.state.voted != null && this.state.voted === false) {
-      this.setState({
-        voted: true
-      });
+    if (this.state.voted !== null && this.state.voted === false) {
+      this.setState({voted: true});
     } else {
-      alert("You cannot vote more than once!");
+      toastr.warning("You cannot vote more than once!");
+      return;
     }
+    const qotdKey = this.props.qotdKey;
+    var voteKey = e.target.name === "1" ? "votes1" : "votes2";
+    var voteCountRef = firebase.database().ref('apps/qotd/'+qotdKey+'/'+voteKey);
+    voteCountRef.once('value', function(snapshot) {
+      var updates = {};
+      const newCount = snapshot.val() + 1;
+      updates['apps/qotd/'+qotdKey+'/'+voteKey] = newCount;
+      return firebase.database().ref().update(updates);
+    });
+
   }
 
   render() {
@@ -24,7 +45,7 @@ export default class Choice extends Component {
       <div id="choice">
         <h3>{this.props.text}</h3>
         <h5 id="votes">{this.props.votes}</h5>
-        <form onSubmit={this.handleSubmit.bind(this)}>
+        <form onSubmit={this.handleSubmit} name={this.props.option}>
           <input type="submit" value="vote" />
         </form>
         <img src={this.props.img} />

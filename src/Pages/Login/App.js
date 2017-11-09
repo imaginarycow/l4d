@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import LoginUser from '../../redux/actions/user_login';
 import firebase from '../../firebase/firebase.js';
 import './css/login.css';
-
+import toastr from 'toastr';
+import '../../toastr/build/toastr.css';
 
 class Login extends Component {
 
@@ -25,6 +26,11 @@ class Login extends Component {
     this.sendPasswordReset = this.sendPasswordReset.bind(this);
     this.toggleAccountView = this.toggleAccountView.bind(this);
 
+    toastr.options = {
+      "positionClass": "toast-top-full-width",
+      "closeButton": true,
+      "preventDuplicates": true
+    }
   }
 
   onChange(e) {

@@ -17,7 +17,7 @@ class Profile extends Component {
     super();
 
     this.state = {
-      username: null,
+      username: '',
       file: '',
       firebaseUser: null,
       imageUrl: null,
@@ -37,6 +37,8 @@ class Profile extends Component {
 
     toastr.options = {
       "positionClass": "toast-top-center",
+      "closeButton": true,
+      "preventDuplicates": true
     }
   }
 
@@ -49,7 +51,7 @@ class Profile extends Component {
         var photo = user.photoURL !== null ? user.photoURL : this.state.defaultImage;
         this.setState({email: user.email,
           firebaseUser: user,
-          username: user.displayName,
+          username: user.displayName === null ? '' : user.displayName,
           imageUrl: photo});
       } else {
         this.setState({imageUrl: this.state.defaultImage});
