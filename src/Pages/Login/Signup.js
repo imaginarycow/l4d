@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { logUserIn } from '../../redux/actions/user_login';
 import firebase from '../../firebase/firebase.js';
 import toastr from 'toastr';
 import '../../toastr/build/toastr.css';
@@ -50,17 +49,23 @@ class Signup extends Component {
       .then((user) => {
         console.log(user);
         this.setState({stepTwo: true});
-        this.props.logUserIn(user);
         user.sendEmailVerification().then(() => {
-            // alert('An email verification has been sent to '+user.email+'.' +
-            //   'If you do not see it, check your junk folder. ');
             toastr.success('An email verification has been sent to '+user.email+'.' +
                'If you do not see it, check your junk folder. ');
         }).catch(() => {
-          //alert('Something went wrong, please try that again.');
           toastr.error('Something went wrong, please try that again.');
         });
-
+        //create user in realtime database
+        const newUser = {
+          email: user.email,
+          photoURL: user.photoURL,
+          displayName: user.displayName,
+          uid: user.uid,
+          isSuspended: false,
+          isBanned: false,
+          votes: []
+        };
+        firebase.database().ref('users/'+user.uid).set(newUser);
       })
       .catch((error) => {
         var errorCode = error.code;
@@ -123,10 +128,10 @@ function mapStateToProps(state) {
     return {user: state.user};
 }
 
-function mapDispatchToProps(dispatch) {
+// function mapDispatchToProps(dispatch) {
+//
+//   return bindActionCreators({logUserIn}, dispatch);
+//
+// }
 
-  return bindActionCreators({logUserIn}, dispatch);
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Signup);
+export default connect(mapStateToProps, null)(Signup);

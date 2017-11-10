@@ -103,6 +103,14 @@ class Profile extends Component {
     }
 
     if (this.state.firebaseUser !== null && this.state.firebaseUser.email !== null) {
+      //firebase.database().ref('users/'+this.state.firebaseUser.uid).set(existUser);
+
+      var updates = {};
+      updates['users/'+this.state.firebaseUser.uid+'/displayName'] = this.state.firebaseUser.displayName;
+      firebase.database().ref().update(updates);
+      updates = {};
+      updates['users/'+this.state.firebaseUser.uid+'/photoURL'] = this.state.firebaseUser.photoURL;
+      firebase.database().ref().update(updates);
 
       this.state.firebaseUser.updateProfile({
         displayName: this.state.username,
@@ -136,7 +144,9 @@ class Profile extends Component {
       }).catch(function(error) {
         return;
       });
-
+      var updates = {};
+      updates['users/'+this.state.firebaseUser.uid+'/photoURL'] = e.target.src;
+      return firebase.database().ref().update(updates);
     }
   }
   setUser(user) {

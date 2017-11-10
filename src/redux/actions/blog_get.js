@@ -7,8 +7,9 @@ function getTodaysBlog(blogs) {
 
   //iterate the blogs and return the current blog
   for (var i in blogs) {
-    const tommorrow = getUnformattedDate() + 1;
-    if (blogs[i].dateKey > blog.dateKey && blogs[i].dateKey < tommorrow) {
+    const today = parseInt(getUnformattedDate());
+    console.log(today);
+    if (blogs[i].dateKey > blog.dateKey && blogs[i].dateKey <= today) {
       blog = blogs[i];
     }
   }

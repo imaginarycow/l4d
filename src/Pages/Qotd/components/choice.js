@@ -6,10 +6,10 @@ import '../css/choice.css';
 
 export default class Choice extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
-    this.state = {voted: false};
+    this.state = {voted: false, option: props.option};
 
     this.handleSubmit = this.handleSubmit.bind(this);
 
