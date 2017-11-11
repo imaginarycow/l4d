@@ -4,12 +4,14 @@ import toastr from 'toastr';
 import '../../../toastr/build/toastr.css';
 import '../css/choice.css';
 
+
 export default class Choice extends Component {
 
   constructor(props) {
     super(props);
 
-    this.state = {voted: false, option: props.option};
+    console.log(props);
+    this.state = {voted: props.voted, option: props.option};
 
     this.handleSubmit = this.handleSubmit.bind(this);
 
@@ -22,8 +24,15 @@ export default class Choice extends Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    if (this.state.voted !== null && this.state.voted === false) {
-      this.setState({voted: true});
+    var user = firebase.auth().currentUser;
+
+    if (user === null) {
+      toastr.error('Login to vote');
+      return;
+    }
+
+    if (this.state.voted === null) {
+      this.props.vote(e.target.name);
     } else {
       toastr.warning("You cannot vote more than once!");
       return;

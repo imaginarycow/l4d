@@ -27,10 +27,11 @@ class navbarInstance extends Component {
       firebase.auth().onAuthStateChanged((user) => {
         console.log(user);
         if (user !== null && user.email !== null) {
-          label = user.displayName !== null ? user.displayName : user.email;
+          var name = user.displayName
+          label = name !== null ? name : user.email;;
           link = '/Profile';
           this.updateState(label, link);
-
+          
         } else {
 
           label = 'Login';

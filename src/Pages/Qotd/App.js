@@ -12,6 +12,12 @@ var commentsReceived = false;
 
 class QOTD extends Component {
 
+  constructor() {
+    super();
+
+    this.state = {user: null};
+  }
+
   componentWillMount() {
     this.props.QotdLoad();
   }

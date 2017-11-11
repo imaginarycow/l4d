@@ -1,4 +1,8 @@
 export function validateEmail(email) {
+
+//unacceptable chars
+const pattern = new RegExp(/[~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/);
+
   //1. Validate good email
 
 
@@ -14,5 +18,17 @@ export function validatePassword(pass) {
 
   //2. Validate correct length
   console.log('test password validation on: ' + pass);
+  return true;
+}
+
+export function validateString(text) {
+  //1. Validate only good characters
+  //unacceptable chars
+  const pattern = new RegExp(/[~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/);
+  if (pattern.test(text)) {
+    return false;
+  }
+  //2. Validate correct length
+  console.log('test password validation on: ' + text);
   return true;
 }

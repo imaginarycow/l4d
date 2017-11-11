@@ -2,7 +2,7 @@ import firebase from '../../firebase/firebase.js';
 import { getUnformattedDate } from '../../utils/dates';
 
 function getTodaysBlog(blogs) {
-
+  console.log(blogs);
   var blog = {dateKey: 1};
 
   //iterate the blogs and return the current blog

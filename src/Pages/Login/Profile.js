@@ -8,6 +8,7 @@ import toastr from 'toastr';
 import '../../toastr/build/toastr.css';
 import './css/profile.css';
 import {imageArray} from '../../assets/profile_images/image_exporter';
+import {validateString} from '../../utils/validations';
 
 const defImage = require('../../assets/profile_images/userImage1.png');
 
@@ -93,8 +94,8 @@ class Profile extends Component {
       toastr.warning('Please enter a username that will be visible to other users');
       return;
     }
-    const pattern = new RegExp(/[~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/); //unacceptable chars
-    if (pattern.test(this.state.username)) {
+
+    if (!validateString(this.state.username)) {
         toastr.error("Special characters (!@#$%^&*, etc.) are not allowed.");
         return;
     }
@@ -103,21 +104,19 @@ class Profile extends Component {
     }
 
     if (this.state.firebaseUser !== null && this.state.firebaseUser.email !== null) {
-      //firebase.database().ref('users/'+this.state.firebaseUser.uid).set(existUser);
-
-      var updates = {};
-      updates['users/'+this.state.firebaseUser.uid+'/displayName'] = this.state.firebaseUser.displayName;
-      firebase.database().ref().update(updates);
-      updates = {};
-      updates['users/'+this.state.firebaseUser.uid+'/photoURL'] = this.state.firebaseUser.photoURL;
-      firebase.database().ref().update(updates);
 
       this.state.firebaseUser.updateProfile({
         displayName: this.state.username,
         photoURL: this.state.imageUrl,
       }).then(function() {
         toastr.success('Successfully edited your account.');
-      }).catch(function(error) {
+      }).then(() => {
+        var updates = {};
+
+        updates['users/'+this.state.firebaseUser.uid+'/displayName'] = this.state.username;
+        firebase.database().ref().update(updates);
+      })
+      .catch(function(error) {
         return;
       });
       this.setState({editing: false});

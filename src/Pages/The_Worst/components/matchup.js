@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import GetComments from '../../../redux/actions/worst_comments_get';
-import CommentArea from '../../../components/comments/comment_area';
+// import CommentArea from '../../../components/comments/comment_area';
 import '../css/matchup.css';
 import HR from './hr.js';
 
@@ -67,9 +67,9 @@ class Matchup extends Component {
             <img src={this.props.image2} alt="image2"/>
           </div>
 
-          <button id="viewCommentsButton" onClick={this.toggleComments}>{this.state.commentButtonLabel}</button>
+          {/* <button id="viewCommentsButton" onClick={this.toggleComments}>{this.state.commentButtonLabel}</button>
           <CommentArea app="worst" commentGroupId={this.props.commentGroupId} comments={this.props.comments}/>;
-          <button id="closeCommentsButton" onClick={this.toggleComments}>{this.state.commentButtonLabel}</button>
+          <button id="closeCommentsButton" onClick={this.toggleComments}>{this.state.commentButtonLabel}</button> */}
           <HR id="newHR"/>
         </div>
       );
@@ -99,7 +99,7 @@ class Matchup extends Component {
           <img src={this.props.image2} alt="image2"/>
         </div>
 
-        <button id="viewCommentsButton" onClick={this.toggleComments}>{this.state.commentButtonLabel}</button>
+        {/* <button id="viewCommentsButton" onClick={this.toggleComments}>{this.state.commentButtonLabel}</button> */}
         <HR id="hr"/>
       </div>
     );
