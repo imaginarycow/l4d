@@ -3,6 +3,8 @@ import BlogView from './views/blog_view';
 import DoodlesView from './views/doodles_view';
 import QotdView from './views/qotd_view';
 import WorstView from './views/worst_view';
+import { Redirect } from 'react-router-dom';
+import firebase from '../../firebase/firebase.js';
 import './css/admin_view_css.css';
 
 let apps = ['Pick App','Blog','Doodles','The Worst','QOTD'];
@@ -15,12 +17,26 @@ class Admin extends Component {
 
     this.state = {
       app: '',
-      view: null
+      view: null,
+      authorized: false
     }
 
     this.getOptions = this.getOptions.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.updateDisplay = this.updateDisplay.bind(this);
+
+    var that = this;
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        if (user.email === 'beltran.ramiro@hotmail.com') {
+          that.setState({authorized: true});
+        }
+
+      } else {
+        that.setState({authorized: false});
+      }
+
+    });
   }
 
   handleChange(e) {
@@ -58,16 +74,21 @@ class Admin extends Component {
 
   render () {
 
-    this.getOptions();
-    return (
-      <div id="admin-view">
-        <h3>Admin console</h3>
-        <select onChange={this.handleChange}>
-          {options}
-        </select>
-        {this.state.view}
-      </div>
-    );
+    if (!this.state.authorized) {
+      return <h2>Unauthorized!</h2>;
+    } else {
+      this.getOptions();
+      return (
+        <div id="admin-view">
+          <h3>Admin console</h3>
+          <select onChange={this.handleChange}>
+            {options}
+          </select>
+          {this.state.view}
+        </div>
+      );
+
+    }
   }
 }
 

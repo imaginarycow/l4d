@@ -14,35 +14,39 @@ class navbarInstance extends Component {
 
       this.state = {
         loginLink: '/Login',
-        loginLabel: 'Login',
-        loggedInUser: {}
+        loggedInUser: {displayName: 'Login'}
       }
-      this.updateState = this.updateState.bind(this);
+      this.updateUser = this.updateUser.bind(this);
     }
 
     componentDidMount() {
       var link = '/Login';
       var label = 'Login';
+      var that = this;
 
       firebase.auth().onAuthStateChanged((user) => {
-        console.log(user);
+
         if (user !== null && user.email !== null) {
-          var name = user.displayName
-          label = name !== null ? name : user.email;;
           link = '/Profile';
-          this.updateState(label, link);
-          
+          that.setState({loginLink: link, loggedInUser: user});
+          that.updateUser(user, that);
         } else {
 
-          label = 'Login';
           link =  '/Login';
-          this.updateState(label, link);
+          that.setState({loginLink: link, loggedInUser: {displayName: 'Login'}});
         }
       });
-
     }
-    updateState(label, link) {
-      this.setState({loginLabel: label, loginLink: link});
+    updateUser(user, that) {
+      var userRef = firebase.database().ref('users/'+user.uid+'/displayName');
+      userRef.on('value', function(snapshot) {
+        if (snapshot.val() !== null && snapshot.val() !== '') {
+          console.log('change to label');
+          that.setState({
+            loggedInUser: {displayName: snapshot.val()}
+          });
+        }
+      })
     }
 
     render() {
@@ -64,7 +68,7 @@ class navbarInstance extends Component {
               <NavItem eventKey={3} ><Link to="/The Worst" >The Worst</Link></NavItem>
               <NavItem eventKey={4} ><Link to="/Doodles" >Doodles</Link></NavItem>
               <NavItem eventKey={5} ><Link to="/Comment Box" >Comment Box</Link></NavItem>
-              <NavItem eventKey={6} ><Link to={this.state.loginLink} >{this.state.loginLabel}</Link></NavItem>
+              <NavItem eventKey={6} ><Link to={this.state.loginLink} >{this.state.loggedInUser.displayName}</Link></NavItem>
             </Nav>
           </Navbar.Collapse>
         </Navbar>

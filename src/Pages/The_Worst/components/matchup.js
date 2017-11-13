@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import firebase from '../../../firebase/firebase.js';
+import toastr from 'toastr';
+import '../../../toastr/build/toastr.css';
 import GetComments from '../../../redux/actions/worst_comments_get';
 // import CommentArea from '../../../components/comments/comment_area';
 import '../css/matchup.css';
@@ -15,10 +18,32 @@ class Matchup extends Component {
     this.state = {
       key: props.matchKey,
       viewComments: false,
-      commentButtonLabel: 'comments'
+      commentButtonLabel: 'comments',
+      voted: false,
+      image1votes: 0,
+      image2votes: 0
     }
 
+    toastr.options = {
+      "closeButton": true,
+      "preventDuplicates": true
+    }
+
+    this.upVote = this.upVote.bind(this);
     this.toggleComments = this.toggleComments.bind(this);
+  }
+
+  componentDidMount() {
+    var that = this;
+    const matchKey = that.props.matchKey;
+    var voteCountRef1 = firebase.database().ref('apps/worst/'+matchKey+'/img1votes');
+    voteCountRef1.on('value', function(snapshot) {
+      that.setState({image1votes: snapshot.val()});
+    });
+    var voteCountRef2 = firebase.database().ref('apps/worst/'+matchKey+'/img2votes');
+    voteCountRef2.on('value', function(snapshot) {
+      that.setState({image2votes: snapshot.val()});
+    });
   }
 
   toggleComments(e) {
@@ -41,6 +66,52 @@ class Matchup extends Component {
     }
   }
 
+  upVote(e) {
+    e.preventDefault();
+    console.log('vote for: ' + e.target.name);
+    var user = firebase.auth().currentUser;
+    var that = this;
+
+    if (user === null) {
+      toastr.error('Login to vote');
+      return;
+    }
+    //check firebase user object to see if user has already voted for this qotdKey
+    const key = this.props.commentGroupId;
+    const matchKey = that.props.matchKey;
+    console.log(matchKey);
+    var voteKey = e.target.name === "1" ? "img1votes" : "img2votes";
+    var hasVotedRef = firebase.database().ref('users/'+user.uid+'/votes/'+key);
+    hasVotedRef.once('value', function(snapshot) {
+      //user has not voted, allow them to vote
+      if (snapshot.val() === null) {
+
+        var voteCountRef = firebase.database().ref('apps/worst/'+matchKey+'/'+voteKey);
+        voteCountRef.once('value', function(snapshot) {
+          var updates = {};
+          const newCount = snapshot.val() + 1;
+          updates['apps/worst/'+matchKey+'/'+voteKey] = newCount;
+          firebase.database().ref().update(updates);
+          that.setState({voted: true});
+        }).then(() => {
+          firebase.database().ref('users/'+user.uid+'/votes/'+key+'/').set(voteKey)
+          .then((response) => {
+            console.log('successful vote');
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+        });
+
+      }
+      else {
+        that.setState({voted: true});
+        toastr.warning("Looks like you already voted on this matchup!");
+        return;
+      }
+    });
+  }
+
   render() {
 
     if (this.state.viewComments) {
@@ -48,7 +119,7 @@ class Matchup extends Component {
         <div id="matchUp">
 
           <div id="button1">
-            <h4>Votes: {this.props.image1votes}</h4>
+            <h4>Votes: {this.state.image1votes}</h4>
             <button><img src="../assets/thumbsUp.png" /></button>
           </div>
 
@@ -59,7 +130,7 @@ class Matchup extends Component {
           <h3 id="or">Vs</h3>
 
           <div id="button2">
-            <h4>Votes: {this.props.image2votes}</h4>
+            <h4>Votes: {this.state.image2votes}</h4>
             <button><img src="../assets/thumbsUp.png" /></button>
           </div>
 
@@ -79,9 +150,11 @@ class Matchup extends Component {
     return (
       <div id="matchUp">
 
-        <div id="button1">
-          <h4>Votes: {this.props.image1votes}</h4>
-          <button><img src="../assets/thumbsUp.png" /></button>
+        <div id="voteButton1">
+          <h4>Votes: {this.state.image1votes}</h4>
+          {/* <button><img src="../assets/thumbsUp.png" name='1' onClick={this.upVote}/></button> */}
+          <button name='1' onClick={this.upVote}>Me</button>
+
         </div>
 
         <div id="image1">
@@ -90,9 +163,10 @@ class Matchup extends Component {
 
         <h3 id="or">Vs</h3>
 
-        <div id="button2">
-          <h4>Votes: {this.props.image2votes}</h4>
-          <button><img src="../assets/thumbsUp.png" /></button>
+        <div id="voteButton2">
+          <h4>Votes: {this.state.image2votes}</h4>
+          {/* <button><img src="../assets/thumbsUp.png" name='2' onClick={this.upVote}/></button> */}
+          <button name='2' onClick={this.upVote}>Me</button>
         </div>
 
         <div id="image2">

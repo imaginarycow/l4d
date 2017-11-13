@@ -98,7 +98,7 @@ class CommentBox extends Component {
 
     return (
       <div id="comment-box">
-        <h3>Speak Your Mind</h3>
+        <h3>Comments / Suggestions</h3>
         <h5>(login to leave a message)</h5>
         <form onSubmit={this.handleSubmit}>
           <label id="name">Name</label>

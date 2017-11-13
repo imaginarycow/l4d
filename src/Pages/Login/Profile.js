@@ -18,6 +18,7 @@ class Profile extends Component {
     super();
 
     this.state = {
+      aliasAvailable: true,
       username: '',
       file: '',
       firebaseUser: null,
@@ -63,10 +64,22 @@ class Profile extends Component {
 
   onChange(e) {
     e.preventDefault();
+    var that = this;
+    var currText = e.target.value;
 
     if (e.target.value.length <= 20) {
-      this.setState({username: e.target.value});
+      this.setState({username: currText});
     }
+    //check alias object to see if username is available
+    var aliasRef = firebase.database().ref('aliases/'+currText);
+    aliasRef.once('value', function(snapshot) {
+      console.log(snapshot.val());
+      if (snapshot.val() !== null && that.state.firebaseUser.displayName !== currText) {
+        that.setState({aliasAvailable: false});
+      }else {
+        that.setState({aliasAvailable: true});
+      }
+    });
   }
 
   handleImageChange(e) {
@@ -89,13 +102,17 @@ class Profile extends Component {
   handleSubmit(e) {
 
     e.preventDefault();
-
-    if (this.state.username === '' || this.state.username === null) {
+    var alias = this.state.username;
+    if (alias === '' || alias === null) {
       toastr.warning('Please enter a username that will be visible to other users');
       return;
     }
+    if(!this.state.aliasAvailable) {
+      toastr.error('username ' + alias + ' is not available');
+      return;
+    }
 
-    if (!validateString(this.state.username)) {
+    if (!validateString(alias)) {
         toastr.error("Special characters (!@#$%^&*, etc.) are not allowed.");
         return;
     }
@@ -106,15 +123,19 @@ class Profile extends Component {
     if (this.state.firebaseUser !== null && this.state.firebaseUser.email !== null) {
 
       this.state.firebaseUser.updateProfile({
-        displayName: this.state.username,
+        displayName: alias,
         photoURL: this.state.imageUrl,
       }).then(function() {
         toastr.success('Successfully edited your account.');
       }).then(() => {
         var updates = {};
-
-        updates['users/'+this.state.firebaseUser.uid+'/displayName'] = this.state.username;
+        updates['users/'+this.state.firebaseUser.uid+'/displayName'] = alias;
         firebase.database().ref().update(updates);
+      }).then(() => {
+        var alias = this.state.username;
+        const newAlias = this.state.firebaseUser.uid;
+        console.log('alias '+alias+' set');
+        firebase.database().ref('aliases/'+alias).set(newAlias);
       })
       .catch(function(error) {
         return;
@@ -154,13 +175,14 @@ class Profile extends Component {
 
   logout(e) {
     e.preventDefault();
-
+    var that = this;
     firebase.auth().signOut().then(function() {
       toastr.success('You are now logged out');
+
     }, function(error) {
       console.log(error);
     });
-    this.setState({returnToLogin: true});
+    that.setState({returnToLogin: true});
   }
 
   getImageButtons() {
@@ -185,6 +207,7 @@ class Profile extends Component {
     // }
 
     const imagesToRender = this.getImageButtons();
+    var availability = this.state.aliasAvailable ? 'Available' : 'Not Available!';
 
     return (
       <div id="loginContainer">
@@ -193,9 +216,12 @@ class Profile extends Component {
         </div>
 
         <form id="form" onSubmit={this.handleSubmit}>
+          <div id="doneButton">
+            <input id="submit" type="submit" value="Done Editing" />
+          </div>
           <h3 id="loginLabel">Edit Profile</h3>
           <label id="elabel">Email: {this.state.email}</label>
-          <label>Username</label>
+          <label>Username - {availability}</label>
           <input type="text" value={this.state.username} onChange={this.onChange} name="username" maxLength="20" />
           {/* <label id="">Upload a Profile pic</label>
           <input type="file" id="profile_pic" name="profile_pic" accept="image/*" onChange={this.handleImageChange} />
@@ -208,9 +234,6 @@ class Profile extends Component {
           </div>
           <div id="userimage">
             {imagesToRender}
-          </div>
-          <div id="doneButton">
-            <input id="submit" type="submit" value="Done Editing" />
           </div>
 
         </form>

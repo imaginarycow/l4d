@@ -16,7 +16,6 @@ class NewComment extends Component {
     this.state = {
       charCount: 0,
       comment: '',
-      timestamp: Date.now(),
       email: '',
       username: '',
       uid: '',
@@ -53,12 +52,12 @@ class NewComment extends Component {
     if (this.state.charCount < 5) {
       toastr.error('Your comment is too short, must be a minimum of 5 characters!');
     } else {
-      var newKey = this.state.username + this.state.timestamp;
+      var newKey = this.state.username + Date.now();
       const newComment = {
         likes: 0,
         dislikes: 0,
         isFlagged: false,
-        timestamp: this.state.timestamp,
+        timestamp: Date.now(),
         text: this.state.comment,
         userimage: this.state.userimage,
         username: this.state.username

@@ -25,26 +25,43 @@ export default class Choice extends Component {
     e.preventDefault();
 
     var user = firebase.auth().currentUser;
+    var that = this;
 
     if (user === null) {
       toastr.error('Login to vote');
       return;
     }
-
-    if (this.state.voted === null) {
-      this.props.vote(e.target.name);
-    } else {
-      toastr.warning("You cannot vote more than once!");
-      return;
-    }
+    //check firebase user object to see if user has already voted for this qotdKey
     const qotdKey = this.props.qotdKey;
     var voteKey = e.target.name === "1" ? "votes1" : "votes2";
-    var voteCountRef = firebase.database().ref('apps/qotd/'+qotdKey+'/'+voteKey);
-    voteCountRef.once('value', function(snapshot) {
-      var updates = {};
-      const newCount = snapshot.val() + 1;
-      updates['apps/qotd/'+qotdKey+'/'+voteKey] = newCount;
-      return firebase.database().ref().update(updates);
+    var hasVotedRef = firebase.database().ref('users/'+user.uid+'/votes/QD'+qotdKey);
+    hasVotedRef.once('value', function(snapshot) {
+      //user has not voted, allow them to vote
+      if (snapshot.val() === null) {
+        console.log(snapshot.val());
+        var voteCountRef = firebase.database().ref('apps/qotd/'+qotdKey+'/'+voteKey);
+        voteCountRef.once('value', function(snapshot) {
+          var updates = {};
+          const newCount = snapshot.val() + 1;
+          updates['apps/qotd/'+qotdKey+'/'+voteKey] = newCount;
+          firebase.database().ref().update(updates);
+          that.setState({voted: true});
+        }).then(() => {
+          firebase.database().ref('users/'+user.uid+'/votes/QD'+qotdKey+'/').set(voteKey)
+          .then((response) => {
+            console.log('successful vote');
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+        });
+
+      }
+      else {
+        that.setState({voted: true});
+        toastr.warning("You cannot vote more than once!");
+        return;
+      }
     });
 
   }

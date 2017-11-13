@@ -1,25 +1,24 @@
 import firebase from '../../firebase/firebase.js';
 
 function getBlogComments(comms) {
-  console.log(comms);
+
+  var sortedComms = [];
+  for (var i in comms) {
+    sortedComms.push(comms[i]);
+  }
+  sortedComms.sort(function(a, b){return a.timestamp - b.timestamp});
 
   return {
     type: 'GET_BLOG_COMMENTS',
-    payload: comms
+    payload: sortedComms
   }
 }
 
-function sortArray(comms) {
-  comms.sort(function(a, b) {
-    return a.timestamp < b.timestamp;
-  });
-}
-
 export default function GetBlogComments(commentGroup) {
-
+  console.log('blog comments called');
   return function(dispatch) {
 
-    var blogCommentsRef = firebase.database().ref('comments/blog/'+commentGroup).orderByChild('timestamp');
+    var blogCommentsRef = firebase.database().ref('comments/blog/'+commentGroup);
     blogCommentsRef.on('value', function(snapshot) {
       dispatch(getBlogComments(snapshot.val()));
     });

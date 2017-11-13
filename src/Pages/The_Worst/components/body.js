@@ -27,7 +27,7 @@ class Body extends Component {
       MatchupsArray.push(<Matchup key={matchups[i]+i} image1={matchups[i].image1} image1text={matchups[i].img1text}
         image1votes={matchups[i].img1votes} image2={matchups[i].image2} image2text={matchups[i].img2text}
         image2votes={matchups[i].img2votes} commentGroupId={matchups[i].commentGroupId}
-        matchKey={matchups[i]+i} />);
+        matchKey={matchups[i].dateKey} />);
     }
 
     return MatchupsArray;

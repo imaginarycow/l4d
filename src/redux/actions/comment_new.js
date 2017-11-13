@@ -8,10 +8,10 @@ export default function PostNewComment(app, commentGroup, newKey, newComment) {
   return function(dispatch) {
     firebase.database().ref(postUrl).set(newComment)
     .then((response) => {
-      console.log('successful comment submission');
+      console.log('successful comment submission: ' + commentGroup + ':' + newComment);
     })
     .catch((error) => {
-      console.log(error);
+      alert('There was a problem posting your comment, please try again.');
     });
   }
 }

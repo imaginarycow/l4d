@@ -1,10 +1,16 @@
 import firebase from '../../firebase/firebase.js';
 
 function getQotdComments(comms) {
-  console.log(comms);
+
+  var sortedComms = [];
+  for (var i in comms) {
+    sortedComms.push(comms[i]);
+  }
+  sortedComms.sort(function(a, b){return a.timestamp - b.timestamp});
+
   return {
     type: 'GET_QOTD_COMMENTS',
-    payload: comms
+    payload: sortedComms
   }
 }
 
