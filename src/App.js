@@ -20,24 +20,6 @@ import Admin from './Pages/Admin/App';
 
 class App extends Component {
 
-  componentWillMount() {
-
-    // firebase.auth().onAuthStateChanged((user) => {
-    //
-    //   if (user !== null && user.email !== null) {
-    //     // User is signed in. Do nothing
-    //   } else {
-    //     // No user is signed in. Login anonymously
-    //     firebase.auth().signInAnonymously().catch(function(error) {
-    //     // Handle Errors here.
-    //     var errorCode = error.code;
-    //     var errorMessage = error.message;
-    //     // ...
-    //     });
-    //   }
-    // });
-  }
-
   render() {
 
     return (
@@ -47,7 +29,7 @@ class App extends Component {
             <Navbar />
             <Route exact path="/" component={Blog}/>
               <Route path="/Qotd" component={Qotd}/>
-              <Route path="/Blog" component={Blog}/>
+              <Route path="/Blog/:title" component={Blog}/>
               <Route path="/The Worst" component={Worst}/>
               <Route path="/Doodles" component={Doodles}/>
               <Route path="/Comment Box" component={Comments}/>

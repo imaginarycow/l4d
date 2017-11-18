@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { appsFilter, lastPage } from './apps_reducer';
 import { getQotd, newQotd, getQotdComments } from './qotd_reducer';
-import { getBlog, newBlog, getBlogComments } from './blog_reducer';
+import { getBlog, getBlogs, newBlog, getBlogComments } from './blog_reducer';
 import { loginUser } from './user_reducer';
 import { getDoodles } from './doodles_reducer';
 import { getWorstMatchups, getWorstComments, newWorstMatchup } from './worst_reducer';
@@ -17,6 +17,7 @@ const combReducer = combineReducers({
   lastPage: lastPage,
   newBlog: newBlog,
   currBlog: getBlog,
+  allBlogs: getBlogs,
   blogComments: getBlogComments,
   user: loginUser,
   worstMatchups: getWorstMatchups,

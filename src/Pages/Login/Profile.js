@@ -121,12 +121,10 @@ class Profile extends Component {
     }
 
     if (this.state.firebaseUser !== null && this.state.firebaseUser.email !== null) {
-
+      const oldAlias = this.state.firebaseUser.displayName;
       this.state.firebaseUser.updateProfile({
         displayName: alias,
         photoURL: this.state.imageUrl,
-      }).then(function() {
-        toastr.success('Successfully edited your account.');
       }).then(() => {
         var updates = {};
         updates['users/'+this.state.firebaseUser.uid+'/displayName'] = alias;
@@ -136,6 +134,12 @@ class Profile extends Component {
         const newAlias = this.state.firebaseUser.uid;
         console.log('alias '+alias+' set');
         firebase.database().ref('aliases/'+alias).set(newAlias);
+      })
+      //remove old alias
+      .then(() => {
+        if (alias !== oldAlias) {
+          firebase.database().ref('aliases/'+oldAlias).remove();
+        }
       })
       .catch(function(error) {
         return;

@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import BlogLoad from '../../redux/actions/blog_get';
 import GetComments from '../../redux/actions/blog_comments_get';
-//import CommentArea from './comments/comment_area';
 import CommentArea from '../../components/comments/comment_area';
 import './css/blog.css';
 
@@ -19,13 +19,56 @@ class Blog extends Component {
   constructor() {
     super();
 
+    this.state = {
+      redirect: null,
+      selectedBlogTitle: null
+      };
+
+    this.selectBlog = this.selectBlog.bind(this);
+    this.getBlogOptions = this.getBlogOptions.bind(this);
   }
 
   componentWillMount() {
+
     this.props.BlogLoad();
+
+    if (this.props.match.path !== '/') {
+      console.log(this.props.match.params.title);
+      this.setState({selectedBlogTitle: this.props.match.params.title});
+    } else {
+      return <Redirect to='/' />;
+    }
+  }
+  selectBlog(e) {
+    e.preventDefault();
+    var value = e.target.value;
+    if (value === 'Archive') {
+      return;
+    } else {
+      console.log('redirect');
+
+      this.setState({redirect: value});
+    }
+  }
+  getBlogOptions() {
+    //map through archived blogs
+    var options = [];
+    options.push(<option key='archive'>Archive</option>);
+    if (this.props.blogs !== null) {
+      const blogs = this.props.blogs;
+      for (var i in blogs) {
+        console.log(blogs[i]);
+        options.push(<option key={blogs[i].title} value={blogs[i].title}>{blogs[i].title}</option>);
+      }
+    }
+    return options;
   }
 
   render () {
+
+    if (this.state.redirect !== null) {
+      return <Redirect to={`/Blog/${this.state.redirect}`} />;
+    }
 
     if (typeof this.props.blog.date !== 'undefined') {
 
@@ -43,10 +86,15 @@ class Blog extends Component {
         document.getElementById("text").innerHTML = text;
       }
 
+      const archivedBlogs = this.getBlogOptions();
+
       return (
         <div id="container">
           <h1 id="title">{title}</h1>
           <h4 id="date">{date}</h4>
+          <select id="archive" onChange={this.selectBlog}>
+            {archivedBlogs}
+          </select>
           <img id="image" src={url} alt='blog'/>
           <div id="text">Loading...</div>
           <CommentArea app="blog" commentGroupId={this.props.blog.commentGroupId} comments={this.props.comments}/>
@@ -69,6 +117,7 @@ class Blog extends Component {
 function mapStateToProps(state) {
     return {
       blog: state.currBlog,
+      blogs: state.allBlogs,
       comments: state.blogComments
     };
 }
