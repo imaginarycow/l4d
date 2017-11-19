@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import BlogLoad from '../../redux/actions/blog_get';
 import GetComments from '../../redux/actions/blog_comments_get';
 import CommentArea from '../../components/comments/comment_area';
@@ -20,8 +20,9 @@ class Blog extends Component {
     super();
 
     this.state = {
-      redirect: null,
-      selectedBlogTitle: null
+      blog: null,
+      selectedBlogTitle: null,
+      redirect: null
       };
 
     this.selectBlog = this.selectBlog.bind(this);
@@ -29,27 +30,29 @@ class Blog extends Component {
   }
 
   componentWillMount() {
-
     this.props.BlogLoad();
-
+    console.log(this.props.match);
+    //check url for specific blog
     if (this.props.match.path !== '/') {
-      console.log(this.props.match.params.title);
-      this.setState({selectedBlogTitle: this.props.match.params.title});
+      console.log('blog load with params');
+      this.props.BlogLoad(this.props.match.params.title);
     } else {
-      return <Redirect to='/' />;
+      console.log('blog load without params');
+      this.props.BlogLoad();
     }
   }
+
   selectBlog(e) {
     e.preventDefault();
-    var value = e.target.value;
-    if (value === 'Archive') {
+    var title = e.target.value;
+    if (title === 'Archive') {
       return;
     } else {
-      console.log('redirect');
-
-      this.setState({redirect: value});
+      this.props.BlogLoad(title);
+      commentsFetched = false;
     }
   }
+
   getBlogOptions() {
     //map through archived blogs
     var options = [];
@@ -57,8 +60,8 @@ class Blog extends Component {
     if (this.props.blogs !== null) {
       const blogs = this.props.blogs;
       for (var i in blogs) {
-        console.log(blogs[i]);
-        options.push(<option key={blogs[i].title} value={blogs[i].title}>{blogs[i].title}</option>);
+        //options.push(<option key={blogs[i].title} value={blogs[i].title}>{blogs[i].title}</option>);
+        options.push(<option key={blogs[i].title} id={blogs[i].title} value={blogs[i].title}><Link to={`/Blog/${blogs[i].title}`} >{blogs[i].title}</Link></option>);
       }
     }
     return options;
@@ -70,15 +73,16 @@ class Blog extends Component {
       return <Redirect to={`/Blog/${this.state.redirect}`} />;
     }
 
-    if (typeof this.props.blog.date !== 'undefined') {
+    if (this.props.currBlog !== null) {
+      var blog = this.props.currBlog;
+      text = blog.blog;
+      date = 'posted '+blog.date;
+      title = blog.title;
+      url = blog.imgUrl;
 
-      text = this.props.blog.blog;
-      date = 'posted '+this.props.blog.date;
-      title = this.props.blog.title;
-      url = this.props.blog.imgUrl;
-
-      if (typeof this.props.blog.commentGroupId !== 'undefined' && commentsFetched == false) {
-        this.props.GetComments(this.props.blog.commentGroupId);
+      if (commentsFetched === false) {
+        console.log('get comments called');
+        this.props.GetComments(this.props.currBlog.commentGroupId);
         commentsFetched = true;
       }
 
@@ -97,11 +101,12 @@ class Blog extends Component {
           </select>
           <img id="image" src={url} alt='blog'/>
           <div id="text">Loading...</div>
-          <CommentArea app="blog" commentGroupId={this.props.blog.commentGroupId} comments={this.props.comments}/>
+          <CommentArea app="blog" commentGroupId={blog.commentGroupId} comments={this.props.comments}/>
         </div>
       );
     }
 
+    //return loading... if blogs not loaded from firebase
     return (
       <div id="container">
         <h1 id="title">{title}</h1>
@@ -116,16 +121,15 @@ class Blog extends Component {
 
 function mapStateToProps(state) {
     return {
-      blog: state.currBlog,
       blogs: state.allBlogs,
+      currBlog: state.currBlog,
+      latestBlog: state.latestBlog,
       comments: state.blogComments
     };
 }
 
 function mapDispatchToProps(dispatch) {
-
   return bindActionCreators({BlogLoad, GetComments}, dispatch);
-
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Blog);

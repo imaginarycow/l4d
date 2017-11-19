@@ -1,52 +1,69 @@
 import firebase from '../../firebase/firebase.js';
 import { getUnformattedDate } from '../../utils/dates';
 
-function getTodaysBlog(blogs) {
-  console.log('get todays blog called');
-  var blog = {dateKey: 1};
+function setBlog(title, blogs) {
 
-  //iterate the blogs and return the current blog
-  for (var i in blogs) {
-    const today = parseInt(getUnformattedDate());
-    console.log(today);
-    if (blogs[i].dateKey > blog.dateKey && blogs[i].dateKey <= today) {
-      blog = blogs[i];
+  if (title === null || typeof title === 'undefined') {
+    console.log('setBlog without title: ' + title);
+    var blog = {dateKey: 1};
+    //iterate the blogs and return the current blog
+    for (var i in blogs) {
+      const today = parseInt(getUnformattedDate());
+
+      if (blogs[i].dateKey > blog.dateKey && blogs[i].dateKey <= today) {
+        blog = blogs[i];
+      }
     }
-  }
 
-  return {
-    type: 'GET_BLOG',
-    payload: blog
+    return {
+      type: 'SET_BLOG',
+      payload: blog
+    }
+  } else {
+    console.log('setBlog with title: ' + title);
+    var blog = null;
+    for (var i in blogs) {
+
+      if (blogs[i].title === title) {
+        blog = blogs[i];
+      }
+    }
+
+    return {
+      type: 'SET_BLOG',
+      payload: blog
+    }
   }
 }
 function getAllBlogs(blogs) {
-  console.log('get all blogs called' + blogs);
-  var blog = {dateKey: 1};
+  var filteredBlogs = [];
 
-  //iterate the blogs and return the current blog
+  // only return blogs that have today's date or earlier
   for (var i in blogs) {
     const today = parseInt(getUnformattedDate());
-    console.log(today);
-    if (blogs[i].dateKey > blog.dateKey && blogs[i].dateKey <= today) {
-      blog = blogs[i];
+
+    if (blogs[i].dateKey <= today) {
+      filteredBlogs.push(blogs[i]);
     }
   }
 
   return {
     type: 'GET_ALL_BLOGS',
-    payload: blogs
+    payload: filteredBlogs
   }
 }
 
-export default function BlogLoad() {
+export default function BlogLoad(title) {
 
-  return function(dispatch) {
+    return function(dispatch) {
+      const blogRef = firebase.database().ref('apps/blog/');
 
-    var blogRef = firebase.database().ref('apps/blog/');
-    blogRef.once('value', function(snapshot) {
-      dispatch(getTodaysBlog(snapshot.val()));
-      dispatch(getAllBlogs(snapshot.val()));
-    });
+      blogRef.once('value', function(snapshot) {
+        const blogs = snapshot.val();
+        dispatch(getAllBlogs(blogs));
+        dispatch(setBlog(title, blogs));
+      });
 
-  }
+    }
+
 }

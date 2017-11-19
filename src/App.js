@@ -29,6 +29,7 @@ class App extends Component {
             <Navbar />
             <Route exact path="/" component={Blog}/>
               <Route path="/Qotd" component={Qotd}/>
+              <Route path="/Blog" component={Blog}/>
               <Route path="/Blog/:title" component={Blog}/>
               <Route path="/The Worst" component={Worst}/>
               <Route path="/Doodles" component={Doodles}/>

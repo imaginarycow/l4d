@@ -1,15 +1,25 @@
-const getBlog = (state = '', action) => {
+
+const getBlogs = (state = null, action) => {
   switch (action.type) {
-    case 'GET_BLOG':
+    case 'GET_ALL_BLOGS':
       return action.payload;
     default:
       return state;
   }
 }
 
-const getBlogs = (state = null, action) => {
+const setBlog = (state = null, action) => {
   switch (action.type) {
-    case 'GET_ALL_BLOGS':
+    case 'SET_BLOG':
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
+const getLatestBlog = (state = null, action) => {
+  switch (action.type) {
+    case 'GET_LATEST_BLOG':
       return action.payload;
     default:
       return state;
@@ -34,4 +44,4 @@ const getBlogComments = (state = null, action) => {
   }
 }
 
-export {getBlog, getBlogs, newBlog, getBlogComments};
+export {getBlogs, getLatestBlog, setBlog, newBlog, getBlogComments};
