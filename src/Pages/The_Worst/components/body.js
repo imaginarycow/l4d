@@ -38,18 +38,10 @@ class Body extends Component {
     const Matchups = this.getMappedMatchups();
 
     return (
-
-      <div id="body">
-        <div id="bodyContainer">
-          <div id="adSpace1">AdSpace1</div>
-          <div id="adSpace2">AdSpace2</div>
-          <div id="matchUps">
-            <h2>Which is Worse?</h2>
-            {Matchups}
-          </div>
-        </div>
+      <div id="matchUps">
+        <h2>Which is Worse?</h2>
+        {Matchups}
       </div>
-
     );
   }
 }

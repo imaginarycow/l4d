@@ -1,7 +1,7 @@
 #comment-box {
   font-family: 'Open Sans Condensed', sans-serif;
   display: grid;
-  grid-template-columns: 2fr 4fr 2fr;
+  grid-template-columns: 5px auto 5px;
   grid-template-rows: auto;
   grid-template-areas:
   "... title ..."
@@ -55,4 +55,21 @@
 }
 #comment-box #submit {
   grid-area: submit;
+}
+/*layout for larger screens*/
+@media screen and (min-width: 34em) {
+
+  #comment-box {
+    font-family: 'Open Sans Condensed', sans-serif;
+    display: grid;
+    grid-template-columns: 2fr 4fr 2fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+    "... title ..."
+    "... sub ..."
+    "... form ..."
+    ;
+    margin-top: 70px;
+  }
+
 }

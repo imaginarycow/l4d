@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import './css/doodle.css';
 
 export default class Doodle extends Component {
 
@@ -7,9 +7,9 @@ export default class Doodle extends Component {
 
     return (
       <div id="doodle">
-        <h3>{this.props.title}</h3>
-        <h5>by {this.props.author}</h5>
-        <img src={this.props.imgUrl} />
+        <h3 id="title">{this.props.title}</h3>
+        <h5 id="author">by {this.props.author}</h5>
+        <img id="image" src={this.props.imgUrl} />
       </div>
     );
   }

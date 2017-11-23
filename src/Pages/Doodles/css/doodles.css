@@ -3,6 +3,28 @@
   src: url("../../../assets/Armenia Grunge Italic.ttf");
 }
 
-#doodles h1 {
+#doodlesContainer {
+  display: grid;
+  grid-template-columns: 10px auto 10px;
+  grid-template-areas:
+  "... title ..."
+  "... doodles ...";
+}
+#doodles {
+  grid-area: doodles;
+}
+#doodlesContainer h1 {
   font-family: Armenia Grunge;
+  grid-area: title;
+}
+
+/*layout for larger screens*/
+@media screen and (min-width: 34em) {
+  #doodlesContainer {
+    display: grid;
+    grid-template-columns: 100px auto 100px;
+    grid-template-areas:
+    "... title ..."
+    "... doodles ...";
+  }
 }

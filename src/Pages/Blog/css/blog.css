@@ -1,14 +1,13 @@
-
-	#container {
+#container {
 		display: grid;
-		grid-template-columns: 10px auto auto 10px;
+		grid-template-columns: 10px auto auto auto 10px;
 		grid-template-rows: auto;
 		grid-template-areas:
-		"... title title ..."
-		"... date arch ..."
-		"... img img ..."
-		"... text text ..."
-		"... comms comms ..."
+		"... title title title ..."
+		"... date auth arch ..."
+		"... img img img ..."
+		"... text text text ..."
+		"... comms comms comms ..."
 		;
 	}
 	#title {
@@ -18,7 +17,10 @@
 	#date {
 		grid-area: date;
 	}
-	#archive {
+	#author {
+		grid-area: auth;
+	}
+	#dropdown {
 		grid-area: arch;
 		max-width: 200px;
 		margin-bottom: 5px;
@@ -42,21 +44,21 @@
 
 		#container {
 			display: grid;
-			grid-template-columns: 1fr 2fr 2fr 1fr;
+			grid-template-columns: 1fr 2fr 2fr 2fr 1fr;
 			grid-template-rows: auto;
 			grid-template-areas:
-			"... title title ..."
-			"... date arch ..."
-			"... img img ..."
-			"... text text ..."
-			"... comms comms ..."
+			"... title title title ..."
+			"... date auth arch ..."
+			"... img img img ..."
+			"... text text text ..."
+			"... comms comms comms ..."
 			;
 		}
 		#title {
 			grid-area: title;
 			font-family: Perpetua, Baskerville, "Big Caslon", "Palatino Linotype", Palatino, "URW Palladio L", "Nimbus Roman No9 L", serif;
 		}
-		#archive {
+		#dropdown {
 			grid-area: arch;
 			max-width: 200px;
 			margin-bottom: 5px;

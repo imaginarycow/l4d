@@ -15,7 +15,7 @@ function getBlogComments(comms) {
 }
 
 export default function GetBlogComments(commentGroup) {
-  console.log('blog comments called');
+
   return function(dispatch) {
 
     var blogCommentsRef = firebase.database().ref('comments/blog/'+commentGroup);

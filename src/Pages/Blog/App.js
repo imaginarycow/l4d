@@ -2,16 +2,17 @@ import React, {Component} from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
+import Dropdown from '../../components/Dropdown/dropdown';
 import BlogLoad from '../../redux/actions/blog_get';
 import GetComments from '../../redux/actions/blog_comments_get';
 import CommentArea from '../../components/comments/comment_area';
 import './css/blog.css';
 
 
-var text = '';
-var date = '';
-var title = 'Loading';
-var url = '#';
+// var text = '';
+// var date = '';
+// var title = 'Loading';
+// var url = '#';
 var commentsFetched = false;
 
 class Blog extends Component {
@@ -25,46 +26,30 @@ class Blog extends Component {
       redirect: null
       };
 
-    this.selectBlog = this.selectBlog.bind(this);
-    this.getBlogOptions = this.getBlogOptions.bind(this);
   }
 
-  componentWillMount() {
-    this.props.BlogLoad();
-    console.log(this.props.match);
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
+    if (this.props.match.params !== nextProps.match.params) {
+      console.log('update needed');
+      this.props.BlogLoad(nextProps.match.params.title);
+    }
+
+    if (this.props.currBlog !== nextProps.currBlog) {
+      console.log('update needed');
+      this.props.GetComments(nextProps.currBlog.commentGroupId);
+    }
+  }
+
+  componentDidMount() {
+
     //check url for specific blog
-    if (this.props.match.path !== '/') {
-      console.log('blog load with params');
+    console.log(this.props.match.params);
+    if (typeof this.props.match.params.title !== 'undefined') {
       this.props.BlogLoad(this.props.match.params.title);
     } else {
-      console.log('blog load without params');
       this.props.BlogLoad();
     }
-  }
-
-  selectBlog(e) {
-    e.preventDefault();
-    var title = e.target.value;
-    if (title === 'Archive') {
-      return;
-    } else {
-      this.props.BlogLoad(title);
-      commentsFetched = false;
-    }
-  }
-
-  getBlogOptions() {
-    //map through archived blogs
-    var options = [];
-    options.push(<option key='archive'>Archive</option>);
-    if (this.props.blogs !== null) {
-      const blogs = this.props.blogs;
-      for (var i in blogs) {
-        //options.push(<option key={blogs[i].title} value={blogs[i].title}>{blogs[i].title}</option>);
-        options.push(<option key={blogs[i].title} id={blogs[i].title} value={blogs[i].title}><Link to={`/Blog/${blogs[i].title}`} >{blogs[i].title}</Link></option>);
-      }
-    }
-    return options;
   }
 
   render () {
@@ -75,14 +60,15 @@ class Blog extends Component {
 
     if (this.props.currBlog !== null) {
       var blog = this.props.currBlog;
-      text = blog.blog;
-      date = 'posted '+blog.date;
-      title = blog.title;
-      url = blog.imgUrl;
+      var text = blog.blog;
+      var date = 'Posted '+blog.date;
+      var author = `By ${blog.author}`;
+      var title = blog.title;
+      var url = blog.imgUrl;
 
-      if (commentsFetched === false) {
-        console.log('get comments called');
-        this.props.GetComments(this.props.currBlog.commentGroupId);
+      if (!commentsFetched) {
+        console.log('comments being loaded');
+        this.props.GetComments(blog.commentGroupId);
         commentsFetched = true;
       }
 
@@ -90,31 +76,30 @@ class Blog extends Component {
         document.getElementById("text").innerHTML = text;
       }
 
-      const archivedBlogs = this.getBlogOptions();
-
       return (
         <div id="container">
           <h1 id="title">{title}</h1>
           <h4 id="date">{date}</h4>
-          <select id="archive" onChange={this.selectBlog}>
-            {archivedBlogs}
-          </select>
+          <h4 id="author">{author}</h4>
+          <Dropdown title='Archive' links={this.props.blogs} />
           <img id="image" src={url} alt='blog'/>
           <div id="text">Loading...</div>
           <CommentArea app="blog" commentGroupId={blog.commentGroupId} comments={this.props.comments}/>
         </div>
       );
     }
+    else {
+      //return loading... if blogs not loaded from firebase
+      return (
+        <div id="container">
+          <h1 id="title">{title}</h1>
+          <h4 id="date">{date}</h4>
+          <img id="image" src={url} alt='blog'/>
+          <div id="text">Thinking...</div>
+        </div>
+      );
+    }
 
-    //return loading... if blogs not loaded from firebase
-    return (
-      <div id="container">
-        <h1 id="title">{title}</h1>
-        <h4 id="date">{date}</h4>
-        <img id="image" src={url} alt='blog'/>
-        <div id="text">Loading...</div>
-      </div>
-    );
   }
 
 }

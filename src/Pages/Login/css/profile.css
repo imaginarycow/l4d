@@ -9,3 +9,7 @@
   width: 150px;
   height: 150px;
 }
+
+/*layout for larger screens*/
+@media screen and (min-width: 34em) {
+}

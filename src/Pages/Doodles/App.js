@@ -40,9 +40,11 @@ class Doodles extends Component {
   render() {
 
     return (
-      <div id="doodles">
-        <h1>Doodles</h1>
-        {this.getDoodles(this.props.doodles)}
+      <div id="doodlesContainer">
+        <h1>Junk Pile</h1>
+        <div id="doodles">
+          {this.getDoodles(this.props.doodles)}
+        </div>
       </div>
 
     );

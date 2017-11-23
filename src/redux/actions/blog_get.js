@@ -3,14 +3,13 @@ import { getUnformattedDate } from '../../utils/dates';
 
 function setBlog(title, blogs) {
 
-  if (title === null || typeof title === 'undefined') {
-    console.log('setBlog without title: ' + title);
-    var blog = {dateKey: 1};
-    //iterate the blogs and return the current blog
-    for (var i in blogs) {
-      const today = parseInt(getUnformattedDate());
+  if (title !== null && typeof title !== 'undefined') {
 
-      if (blogs[i].dateKey > blog.dateKey && blogs[i].dateKey <= today) {
+    console.log('setBlog with title: ' + title);
+    var blog = null;
+    for (var i in blogs) {
+
+      if (blogs[i].title === title) {
         blog = blogs[i];
       }
     }
@@ -19,12 +18,15 @@ function setBlog(title, blogs) {
       type: 'SET_BLOG',
       payload: blog
     }
-  } else {
-    console.log('setBlog with title: ' + title);
-    var blog = null;
-    for (var i in blogs) {
 
-      if (blogs[i].title === title) {
+  } else {
+    console.log('setBlog without title: ' + title);
+    var blog = {dateKey: 1};
+    //iterate the blogs and return the current blog
+    for (var i in blogs) {
+      const today = parseInt(getUnformattedDate());
+
+      if (blogs[i].dateKey > blog.dateKey && blogs[i].dateKey <= today) {
         blog = blogs[i];
       }
     }

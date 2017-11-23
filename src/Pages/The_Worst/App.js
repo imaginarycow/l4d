@@ -13,7 +13,6 @@ class Worst extends Component {
           <Body title="Container" />
         </div>
       </div>
-
     );
   }
 }

@@ -2,9 +2,10 @@
   font-family: "Armenia Grunge";
   src: url("../../../assets/Armenia Grunge Italic.ttf");
 }
+/*layout for smaller screens*/
 #QOTD-Page {
   display: grid;
-  grid-template-columns: 2fr 5fr 2fr;
+  grid-template-columns: 10px auto 10px;
   grid-template-rows: auto;
   grid-template-areas:
   "... title ..."
@@ -44,4 +45,52 @@
 }
 #QOTD-Page #comment-area {
   grid-area: comments;
+}
+
+
+/*layout for larger screens*/
+@media screen and (min-width: 34em) {
+  #QOTD-Page {
+    display: grid;
+    grid-template-columns: 2fr 5fr 2fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+    "... title ..."
+    "... subtitle ..."
+    "... selector ..."
+    "... question ..."
+    "... choices ..."
+    "... comments ..."
+    ;
+    font-family: 'Open Sans Condensed', sans-serif;
+  }
+  #QOTD-Page h1 {
+    grid-area: title;
+    font-family: Armenia Grunge;
+    margin-bottom: -15px;
+    padding-bottom: 0px;
+  }
+  #QOTD-Page h5 {
+    grid-area: subtitle;
+    margin-bottom: 20px;
+  }
+  #language-selector {
+    grid-area: selector;
+  }
+  #question {
+    grid-area: question;
+  }
+  #choice-area {
+    grid-area: choices;
+    display: grid;
+    grid-template-columns: 5fr 1fr 5fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+    "choice1 or choice2"
+    ;
+    margin-bottom: 15px;
+  }
+  #QOTD-Page #comment-area {
+    grid-area: comments;
+  }
 }
