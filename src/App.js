@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Navbar from './components/navbar';
@@ -17,6 +17,7 @@ import Logout from './Pages/Login/Logout';
 import Signup from './Pages/Login/Signup';
 import Profile from './Pages/Login/Profile';
 import Admin from './Pages/Admin/App';
+import PageNotFound from './Pages/404/App';
 
 class App extends Component {
 
@@ -27,10 +28,12 @@ class App extends Component {
         <Router>
           <div>
             <Navbar />
-            <Route exact path="/" component={Blog}/>
+            <Switch>
+              <Route exact path="/" component={Blog}/>
               <Route path="/Qotd" component={Qotd}/>
               <Route exact path="/Blog" component={Blog}/>
-              <Route path="/Blog/:title" component={Blog}/>
+              {/* <Route path="/Blog/:title" component={Blog}/> */}
+              <Route path={decodeURIComponent("/Blog/:title")} component={Blog}/>
               <Route path="/The Worst" component={Worst}/>
               <Route path="/Doodles" component={Doodles}/>
               <Route path="/Comment Box" component={Comments}/>
@@ -39,6 +42,8 @@ class App extends Component {
               <Route path="/Signup" component={Signup}/>
               <Route path="/Profile" component={Profile}/>
               <Route path="/Admin" component={Admin}/>
+              <Route component={PageNotFound}/>
+            </Switch>
           </div>
         </Router>
       </div>

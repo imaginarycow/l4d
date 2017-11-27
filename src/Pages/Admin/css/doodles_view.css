@@ -1,3 +1,6 @@
 #doodle-form {
   display: grid;
 }
+#submit {
+  margin-top: 10px;
+}

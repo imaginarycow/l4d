@@ -18,25 +18,26 @@ class Admin extends Component {
     this.state = {
       app: '',
       view: null,
-      authorized: false
+      authorized: true
     }
 
     this.getOptions = this.getOptions.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.updateDisplay = this.updateDisplay.bind(this);
+  }
 
+  componentWillMount() {
     var that = this;
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
-        if (user.email === 'beltran.ramiro@hotmail.com') {
-          that.setState({authorized: true});
-        }
-
+        // User is signed in.
+        that.setState({authorized: true});
       } else {
+        // No user is signed in.
         that.setState({authorized: false});
       }
-
     });
+
   }
 
   handleChange(e) {
@@ -75,20 +76,19 @@ class Admin extends Component {
   render () {
 
     if (!this.state.authorized) {
-      return <h2>Unauthorized!</h2>;
-    } else {
-      this.getOptions();
-      return (
-        <div id="admin-view">
-          <h3>Admin console</h3>
-          <select onChange={this.handleChange}>
-            {options}
-          </select>
-          {this.state.view}
-        </div>
-      );
-
+      return <Redirect to="404 - Page Not Found" />;
     }
+
+    this.getOptions();
+    return (
+      <div id="admin-view">
+        <h3>Admin console</h3>
+        <select onChange={this.handleChange}>
+          {options}
+        </select>
+        {this.state.view}
+      </div>
+    );
   }
 }
 

@@ -58,6 +58,10 @@ class BlogView extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    if (this.state.blog === '') {
+      alert('Missing Blog!');
+      return;
+    }
     var words = this.state.blog.match(/\S+/g).length;
     if (this.state.blog === '' || this.state.blog === initState.blog || words < 200) {
       alert('You can do better than that!');
@@ -116,7 +120,7 @@ class BlogView extends Component {
           <input type="text" name="date" value={this.state.date} onChange={this.handleChange} />
           <label>New Post - Words: {this.state.wordcount}</label>
           <textarea value={this.state.blog} name="blog" onChange={this.handleChange}></textarea>
-          <input type="submit" name="submit" value="Publish" />
+          <input id="submit" type="submit" name="submit" value="Publish" />
         </form>
         <div>
           <h2>Preview</h2>

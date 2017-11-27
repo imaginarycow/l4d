@@ -87,7 +87,7 @@ class DoodlesView extends Component {
         <label>Image url:</label>
         <input type="text" name="url" value={this.state.imgUrl} onChange={this.handleChange}/>
         <img src={this.state.imgUrl} />
-        <input type="submit" name="submit" value="Publish" />
+        <input id="submit" type="submit" name="submit" value="Publish" />
       </form>
     );
   }

@@ -103,7 +103,7 @@ class WorstView extends Component {
         <label>Situation 2 image url: </label>
         <input type="text" name="url2" value={this.state.url2} onChange={this.handleChange}/>
         <img src={this.state.url2} />
-        <input type="submit" name="submit" value="Submit" />
+        <input id="submit" type="submit" name="submit" value="Submit" />
       </form>
     );
   }

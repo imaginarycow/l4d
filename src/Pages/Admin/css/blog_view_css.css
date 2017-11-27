@@ -4,6 +4,7 @@
 #blog-form textarea {
   min-height: 300px;
   min-width: 600px;
+  margin-bottom: 10px;
 }
 #blog-form #selector {
   display: grid;

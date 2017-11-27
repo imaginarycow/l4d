@@ -5,22 +5,21 @@ function setBlog(title, blogs) {
 
   if (title !== null && typeof title !== 'undefined') {
 
-    console.log('setBlog with title: ' + title);
     var blog = null;
+    var matchFound = false;
+    //create Array from Blogs collection of objects
     for (var i in blogs) {
-
       if (blogs[i].title === title) {
         blog = blogs[i];
       }
     }
-
     return {
       type: 'SET_BLOG',
       payload: blog
     }
 
   } else {
-    console.log('setBlog without title: ' + title);
+
     var blog = {dateKey: 1};
     //iterate the blogs and return the current blog
     for (var i in blogs) {
