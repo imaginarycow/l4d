@@ -52,7 +52,7 @@
 @media screen and (min-width: 34em) {
   #QOTD-Page {
     display: grid;
-    grid-template-columns: 2fr 5fr 2fr;
+    grid-template-columns: 1fr 5fr 1fr;
     grid-template-rows: auto;
     grid-template-areas:
     "... title ..."

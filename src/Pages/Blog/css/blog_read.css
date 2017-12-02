@@ -4,7 +4,7 @@
 		grid-template-rows: auto;
 		grid-template-areas:
 		"... title title title ..."
-		"... date auth arch ..."
+		"... date date arch ..."
 		"... img img img ..."
 		"... text text text ..."
 		"... comms comms comms ..."
@@ -16,9 +16,6 @@
 	}
 	#date {
 		grid-area: date;
-	}
-	#author {
-		grid-area: auth;
 	}
 	#dropdown {
 		grid-area: arch;
@@ -44,11 +41,11 @@
 
 		#container {
 			display: grid;
-			grid-template-columns: 1fr 2fr 2fr 2fr 1fr;
+			grid-template-columns: 1fr 2fr 2fr 1fr 1fr;
 			grid-template-rows: auto;
 			grid-template-areas:
 			"... title title title ..."
-			"... date auth arch ..."
+			"... date date arch ..."
 			"... img img img ..."
 			"... text text text ..."
 			"... comms comms comms ..."

@@ -1,0 +1,30 @@
+#blogpagecontainer {
+    margin-left: 10px;
+    margin-right: 10px;
+	}
+	#pagetitle {
+		grid-area: title;
+		font-family: Perpetua, Baskerville, "Big Caslon", "Palatino Linotype", Palatino, "URW Palladio L", "Nimbus Roman No9 L", serif;
+	}
+	#dropdown {
+		grid-area: arch;
+		max-width: 200px;
+		margin-bottom: 5px;
+	}
+
+	@media screen and (min-width: 34em) {
+
+		#blogpagecontainer {
+      margin-left: 80px;
+      margin-right: 80px;
+		}
+		#pagetitle {
+			grid-area: title;
+			font-family: Perpetua, Baskerville, "Big Caslon", "Palatino Linotype", Palatino, "URW Palladio L", "Nimbus Roman No9 L", serif;
+		}
+		#dropdown {
+			grid-area: arch;
+			max-width: 200px;
+			margin-bottom: 5px;
+		}
+	}

@@ -2,7 +2,7 @@ function getFormattedDate() {
 
   let d = new Date();
   let month = d.getMonth() + 1;
-  let stringDate = month + '-' + d.getDate() + '-' + d.getFullYear();
+  let stringDate = month + '-' + ("0" + d.getDate()).slice(-2) + '-' + d.getFullYear();
 
   return stringDate
 }
@@ -12,7 +12,7 @@ function getUnformattedDate(date) {
   if (date === null || typeof date === 'undefined') {
     let d = new Date();
     let month = d.getMonth() + 1;
-    let stringDate = month + '' + d.getDate() + '' + d.getFullYear();
+    let stringDate = month + '' + ("0" + d.getDate()).slice(-2) + '' + d.getFullYear();
 
     return stringDate
   }

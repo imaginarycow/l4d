@@ -9,6 +9,7 @@ import './css/App.css';
 import Home from './Pages/Main/Main';
 import Qotd from './Pages/Qotd/App';
 import Blog from './Pages/Blog/App';
+import BlogRead from './Pages/Blog/components/blog_read';
 import Worst from './Pages/The_Worst/App';
 import Doodles from './Pages/Doodles/App';
 import Comments from './Pages/Comment/App';
@@ -33,7 +34,7 @@ class App extends Component {
               <Route path="/Qotd" component={Qotd}/>
               <Route exact path="/Blog" component={Blog}/>
               {/* <Route path="/Blog/:title" component={Blog}/> */}
-              <Route path={decodeURIComponent("/Blog/:title")} component={Blog}/>
+              <Route path={decodeURIComponent("/Blog/:title")} component={BlogRead}/>
               <Route path="/The Worst" component={Worst}/>
               <Route path="/Doodles" component={Doodles}/>
               <Route path="/Comment Box" component={Comments}/>
