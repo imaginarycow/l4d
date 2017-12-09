@@ -4,43 +4,32 @@
 }
 /*layout for smaller screens*/
 #QOTD-Page {
-  display: grid;
-  grid-template-columns: 10px auto 10px;
-  grid-template-rows: auto;
-  grid-template-areas:
-  "... title ..."
-  "... subtitle ..."
-  "... selector ..."
-  "... question ..."
-  "... choices ..."
-  "... comments ..."
-  ;
+  width: 98%;
+  position: relative;
+  left: 1%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   font-family: 'Open Sans Condensed', sans-serif;
 }
-#QOTD-Page h1 {
-  grid-area: title;
+#QOTD-Page #title {
   font-family: Armenia Grunge;
   margin-bottom: -15px;
   padding-bottom: 0px;
+  width: 100%;
 }
-#QOTD-Page h5 {
-  grid-area: subtitle;
+#QOTD-Page #subtitle {
+  width: 100%;
   margin-bottom: 20px;
 }
-#language-selector {
-  grid-area: selector;
-}
 #question {
-  grid-area: question;
+  width: 100%;
 }
 #choice-area {
-  grid-area: choices;
-  display: grid;
-  grid-template-columns: 5fr 1fr 5fr;
-  grid-template-rows: auto;
-  grid-template-areas:
-  "choice1 or choice2"
-  ;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
   margin-bottom: 15px;
 }
 #QOTD-Page #comment-area {
@@ -49,45 +38,21 @@
 
 
 /*layout for larger screens*/
-@media screen and (min-width: 34em) {
+@media screen and (min-width: 40em) {
   #QOTD-Page {
-    display: grid;
-    grid-template-columns: 1fr 5fr 1fr;
-    grid-template-rows: auto;
-    grid-template-areas:
-    "... title ..."
-    "... subtitle ..."
-    "... selector ..."
-    "... question ..."
-    "... choices ..."
-    "... comments ..."
-    ;
+    display: flex;
+    width: 80%;
+    position: relative;
+    left: 10%;
     font-family: 'Open Sans Condensed', sans-serif;
   }
-  #QOTD-Page h1 {
-    grid-area: title;
-    font-family: Armenia Grunge;
-    margin-bottom: -15px;
-    padding-bottom: 0px;
-  }
-  #QOTD-Page h5 {
-    grid-area: subtitle;
-    margin-bottom: 20px;
-  }
-  #language-selector {
-    grid-area: selector;
-  }
-  #question {
-    grid-area: question;
-  }
   #choice-area {
-    grid-area: choices;
-    display: grid;
-    grid-template-columns: 5fr 1fr 5fr;
-    grid-template-rows: auto;
-    grid-template-areas:
-    "choice1 or choice2"
-    ;
+    width: 80%;
+    position: relative;
+    left: 10%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     margin-bottom: 15px;
   }
   #QOTD-Page #comment-area {

@@ -52,7 +52,7 @@ export default class ChoiceArea extends Component {
     return (
       <div id="choice-area">
         <div id="choice1">{choice1}</div>
-        <div id="or" >or</div>
+        <div id="or" ><h4>or</h4></div>
         <div id="choice2">{choice2}</div>
       </div>
     );

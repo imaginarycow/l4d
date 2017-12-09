@@ -34,8 +34,8 @@ class QOTD extends Component {
 
       return (
         <div id="QOTD-Page">
-          <h1>QotD</h1>
-          <h5>Question of the Day</h5>
+          <h1 id="title">QotD</h1>
+          <h5 id="subtitle">Question of the Day</h5>
           <Question id="question" text={this.props.qotd.question}/>
           <ChoiceArea id="choice-area" question={this.props.qotd}/>
           <CommentArea app="qotd" commentGroupId={this.props.qotd.commentGroupId} comments={this.props.comments}/>

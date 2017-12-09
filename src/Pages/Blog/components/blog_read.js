@@ -80,7 +80,10 @@ class BlogRead extends Component {
             <h1 id="title">{title}</h1>
             <h4 id="date">{date}</h4>
             <Dropdown title='Archive' links={this.props.blogs} />
-            <img id="image" src={url} alt='blog'/>
+            <div id="image">
+              <img src={url} alt='blog'/>
+            </div>
+
             <div id="text">Loading...</div>
             <CommentArea app="blog" commentGroupId={commentGroupId} comments={this.props.comments}/>
           </div>

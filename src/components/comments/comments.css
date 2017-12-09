@@ -1,9 +1,22 @@
 #comment-area {
-  display: grid;
+  width: 100%;
+  margin-left: 2%;
+  margin-right: 2%;
+
 }
 #comment-area #newCommentArea {
 
 }
 #comment-area ul {
   list-style-type: none;
+}
+
+@media screen and (min-width: 34em) {
+
+  #comment-area {
+    width: 100%;
+    margin-left: 10%;
+    margin-right: 10%;
+
+  }
 }

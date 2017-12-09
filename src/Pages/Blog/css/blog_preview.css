@@ -1,5 +1,5 @@
 #previewcontainer {
-  margin-bottom: 50px;
+  width: 100%;
 }
 #blogtext{
   text-align: justify;
@@ -7,6 +7,38 @@
   margin-bottom: 50px;
   font-size: 16px;
 }
-#image {
+#previewcontainer #image {
   width: 100%;
+  margin: 0px;
+}
+#previewcontainer #image img {
+  margin: 0px;
+  width: 100%;
+}
+
+@media screen and (min-width: 800px) {
+
+  #previewcontainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 40%;
+  }
+  #title {
+    width: 100%;
+  }
+  #date {
+    width: 100%;
+  }
+  #blogtext{
+    width: 100%;
+    text-align: justify;
+    margin-top: 10px;
+    margin-bottom: 50px;
+    font-size: 16px;
+  }
+  #image {
+    width: 100%;
+  }
+
 }

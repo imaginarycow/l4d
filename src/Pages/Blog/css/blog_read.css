@@ -1,80 +1,80 @@
 #container {
-		display: grid;
-		grid-template-columns: 10px auto auto auto 10px;
-		grid-template-rows: auto;
-		grid-template-areas:
-		"... title title title ..."
-		"... date date arch ..."
-		"... img img img ..."
-		"... text text text ..."
-		"... comms comms comms ..."
-		;
+		width: 96%;
+		position: relative;
+		left: 2%;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: space-around;
+
 	}
 	#title {
-		grid-area: title;
+		width: 100%;
 		font-family: Perpetua, Baskerville, "Big Caslon", "Palatino Linotype", Palatino, "URW Palladio L", "Nimbus Roman No9 L", serif;
 	}
 	#date {
-		grid-area: date;
+		width: 100%;
 	}
 	#dropdown {
-		grid-area: arch;
-		max-width: 200px;
+		width: 100%;
 		margin-bottom: 5px;
 	}
 	#image {
-		grid-area: img;
-		width: 100%;
+		margin-left: 2%;
+		margin-right: 2%;
 		margin-bottom: 15px;
 	}
+	#image img{
+		width: 100%;
+	}
 	#text {
-		grid-area: text;
+		margin-left: 2%;
+		margin-right: 2%;
 		text-align: justify;
 		font-size: 18px;
 		font-family: Perpetua, Baskerville, "Big Caslon", "Palatino Linotype", Palatino, "URW Palladio L", "Nimbus Roman No9 L", serif;
 	}
-	#comment-area {
-		grid-area: comms;
-	}
+
 
 	@media screen and (min-width: 34em) {
 
 		#container {
-			display: grid;
-			grid-template-columns: 1fr 2fr 2fr 1fr 1fr;
-			grid-template-rows: auto;
-			grid-template-areas:
-			"... title title title ..."
-			"... date date arch ..."
-			"... img img img ..."
-			"... text text text ..."
-			"... comms comms comms ..."
-			;
+			width: 60%;
+			position: relative;
+			left: 20%;
+			display: flex;
+	    flex-direction: row;
+	    flex-wrap: wrap;
+	    justify-content: space-around;
 		}
 		#title {
-			grid-area: title;
+			width: 100%;
 			font-family: Perpetua, Baskerville, "Big Caslon", "Palatino Linotype", Palatino, "URW Palladio L", "Nimbus Roman No9 L", serif;
 		}
+		#date {
+			left: 10%;
+			position: relative;
+			width: auto;
+		}
 		#dropdown {
-			grid-area: arch;
-			max-width: 200px;
+			position: relative;
+			right: 10%;
 			margin-bottom: 5px;
 		}
-		#date {
-			grid-area: date;
-		}
 		#image {
-			grid-area: img;
-			width: 100%;
-			margin-bottom: 15px;
+			margin-left: 10%;
+			margin-right: 10%;
+			margin-bottom: 20px;
+		}
+		#image img{
+			width: 80%;
 		}
 		#text {
-			grid-area: text;
+			margin-left: 10%;
+			margin-right: 10%;
 			text-align: justify;
 			font-size: 18px;
 			font-family: Perpetua, Baskerville, "Big Caslon", "Palatino Linotype", Palatino, "URW Palladio L", "Nimbus Roman No9 L", serif;
 		}
-		#comment-area {
-			grid-area: comms;
-		}
+
 	}
