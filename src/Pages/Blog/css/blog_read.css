@@ -12,11 +12,12 @@
 		width: 100%;
 		font-family: Perpetua, Baskerville, "Big Caslon", "Palatino Linotype", Palatino, "URW Palladio L", "Nimbus Roman No9 L", serif;
 	}
-	#date {
+	#postedby {
 		width: 100%;
+		color: #cbd4d6;
 	}
 	#dropdown {
-		width: 100%;
+		width: auto;
 		margin-bottom: 5px;
 	}
 	#image {
@@ -36,7 +37,7 @@
 	}
 
 
-	@media screen and (min-width: 34em) {
+	@media screen and (min-width: 600px) {
 
 		#container {
 			width: 60%;
@@ -47,27 +48,13 @@
 	    flex-wrap: wrap;
 	    justify-content: space-around;
 		}
-		#title {
-			width: 100%;
-			font-family: Perpetua, Baskerville, "Big Caslon", "Palatino Linotype", Palatino, "URW Palladio L", "Nimbus Roman No9 L", serif;
-		}
-		#date {
-			left: 10%;
-			position: relative;
-			width: auto;
-		}
-		#dropdown {
-			position: relative;
-			right: 10%;
-			margin-bottom: 5px;
-		}
 		#image {
 			margin-left: 10%;
 			margin-right: 10%;
 			margin-bottom: 20px;
 		}
 		#image img{
-			width: 80%;
+			width: 100%;
 		}
 		#text {
 			margin-left: 10%;

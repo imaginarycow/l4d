@@ -1,12 +1,20 @@
 #doodle {
 
 }
-#title {
+#doodletitle {
 
 }
-#author {
+#doodleauthor {
 
 }
-#image {
+#doodleimage {
   width: 100%;
+}
+#doodleimage img{
+  width: 100%;
+}
+
+/*layout for larger screens*/
+@media screen and (min-width: 34em) {
+
 }

@@ -9,7 +9,7 @@
 
 	}
 
-	@media screen and (min-width: 800px) {
+	@media screen and (min-width: 600px) {
 
 		#blogpagecontainer {
       width: 60%;
@@ -20,13 +20,6 @@
       flex-wrap: wrap;
       justify-content: space-around;
 		}
-		#pagetitle {
-			grid-area: title;
-			font-family: Perpetua, Baskerville, "Big Caslon", "Palatino Linotype", Palatino, "URW Palladio L", "Nimbus Roman No9 L", serif;
-		}
-		#dropdown {
-			grid-area: arch;
-			max-width: 200px;
-			margin-bottom: 5px;
-		}
+
+
 	}

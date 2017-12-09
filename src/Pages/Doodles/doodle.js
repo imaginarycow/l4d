@@ -8,9 +8,11 @@ export default class Doodle extends Component {
 
     return (
       <div id="doodle">
-        <h3 id="title">{this.props.title}</h3>
-        <h5 id="author">by {this.props.author}</h5>
-        <img id="image" src={this.props.imgUrl} />
+        <h3 id="doodletitle">{this.props.title}</h3>
+        <h5 id="doodleauthor">by {this.props.author}</h5>
+        <div id="doodleimage">
+          <img src={this.props.imgUrl} />
+        </div>
         <HR text='Junk Pile' />
       </div>
     );

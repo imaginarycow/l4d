@@ -4,27 +4,27 @@
 }
 
 #doodlesContainer {
-  display: grid;
-  grid-template-columns: 10px auto 10px;
-  grid-template-areas:
-  "... title ..."
-  "... doodles ...";
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 94%;
+  position: relative;
+  left: 3%;
+}
+#doodlestitle {
+  font-family: Armenia Grunge;
 }
 #doodles {
-  grid-area: doodles;
-}
-#doodlesContainer h1 {
-  font-family: Armenia Grunge;
-  grid-area: title;
+  width: 100%;
 }
 
 /*layout for larger screens*/
 @media screen and (min-width: 34em) {
+
   #doodlesContainer {
-    display: grid;
-    grid-template-columns: 100px auto 100px;
-    grid-template-areas:
-    "... title ..."
-    "... doodles ...";
+    width: 60%;
+    position: relative;
+    left: 20%;
   }
 }

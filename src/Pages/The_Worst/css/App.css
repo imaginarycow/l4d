@@ -4,25 +4,22 @@
   }
   #site {
     font-family: 'Open Sans Condensed', sans-serif;
-    display: grid;
-    grid-template-columns: 10px auto 10px;
-    grid-template-areas:
-      "... matchups ..."
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 96%;
+    position: relative;
+    left: 2%;
   }
-  #matchUps {
-    grid-area: matchUps;
-  }
+
 
 /*layout for larger screens*/
 @media screen and (min-width: 34em) {
 
   #site {
-    display: grid;
-    grid-template-columns: 100px auto 100px;
-    grid-template-areas:
-      "... matchUps ...";
+    width: 60%;
+    position: relative;
+    left: 20%;
   }
-  #matchUps {
-    grid-area: matchUps;
-  }
+
 }

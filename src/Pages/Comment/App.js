@@ -101,13 +101,13 @@ class CommentBox extends Component {
         <h3>Comments / Suggestions</h3>
         <h5>(login to leave a message)</h5>
         <form onSubmit={this.handleSubmit}>
-          <label id="name">Name</label>
           <input id="namein" type="text" name="name" value={this.state.name} onChange={this.handleChange}/>
+          <label id="name">Name</label>
 
-          <label id="emaillabel">Email</label>
           <input id="emailin" type="text" name="email" value={this.state.email} onChange={this.handleChange}/>
+          <label id="emaillabel">Email</label>
 
-          <textarea id="comments" value={this.state.comment} name="comment" onChange={this.handleChange}></textarea>
+          <textarea id="commentbox" value={this.state.comment} name="comment" onChange={this.handleChange}></textarea>
 
           <input id="submit" type="submit" name="submit" value="Submit" />
         </form>

@@ -78,7 +78,7 @@ class BlogRead extends Component {
         return (
           <div id="container">
             <h1 id="title">{title}</h1>
-            <h4 id="date">{date}</h4>
+            <h4 id="postedby">{date}</h4>
             <Dropdown title='Archive' links={this.props.blogs} />
             <div id="image">
               <img src={url} alt='blog'/>

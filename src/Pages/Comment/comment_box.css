@@ -1,53 +1,43 @@
 #comment-box {
   font-family: 'Open Sans Condensed', sans-serif;
-  display: grid;
-  grid-template-columns: 5px auto 5px;
-  grid-template-rows: auto;
-  grid-template-areas:
-  "... title ..."
-  "... sub ..."
-  "... form ..."
-  ;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
   margin-top: 70px;
+  width: 96%;
+  position: relative;
+  left: 2%;
+}
+#comment-box form {
+  width: 100%;
 }
 #comment-box h3 {
-  grid-area: title;
+  width: 100%;
   text-align: left;
 }
 #comment-box h5 {
-  grid-area: sub;
+  width: 100%;
   text-align: left;
   margin-bottom: 15px;
 }
-#comment-box form {
-
-  grid-area: form;
-  display: grid;
-  grid-template-columns: auto 100px;
-  grid-template-rows: auto;
-  grid-template-areas:
-  "nameinput name"
-  "emailinput email"
-  "comment comment"
-  "... submit"
-  ;
-}
 #comment-box #name {
-  grid-area: name;
+  width: 15%;
 }
 #comment-box #namein {
-  grid-area: nameinput;
+  float: left;
+  width: 80%;
   margin-bottom: 10px;
 }
 #comment-box #emaillabel {
-  grid-area: email;
+  width: 15%;
 }
 #comment-box #emailin {
-  grid-area: emailinput;
+  float: left;
+  width: 80%;
   margin-bottom: 10px;
 }
-#comments {
-  grid-area: comment;
+#comment-box #commentbox {
   width: 100%;
   resize: none;
   margin-bottom: 10px;
@@ -60,16 +50,9 @@
 @media screen and (min-width: 34em) {
 
   #comment-box {
-    font-family: 'Open Sans Condensed', sans-serif;
-    display: grid;
-    grid-template-columns: 2fr 4fr 2fr;
-    grid-template-rows: auto;
-    grid-template-areas:
-    "... title ..."
-    "... sub ..."
-    "... form ..."
-    ;
-    margin-top: 70px;
+    width: 60%;
+    position: relative;
+    left: 20%;
   }
 
 }

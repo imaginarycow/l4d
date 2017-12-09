@@ -3,49 +3,46 @@
   src: url('./bungee.shade.ttf'),
 }
 #matchUp {
-  background-color: #fff;
   color: #003b49;
   font-family: 'Open Sans Condensed', sans-serif;
-  display: grid;
-  grid-template-columns: 1fr 4fr 1fr 4fr 1fr;
-  grid-template-rows: 1fr auto auto auto auto;
-  grid-template-areas:
-    "... butt1 ... butt2 ..."
-    "... image1 or image2 ..."
-    "... ... view ... ..."
-    "hr hr hr hr hr"
-    "... comms comms comms ..."
-    "... ... close ... ..."
-    "commHr commHr commHr commHr commHr";
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
   margin-bottom: 10px;
   align-content: center;
   border-radius: 20px;
 }
+#button1 {
+  width: 45%;
+}
+#button2 {
+  width: 45%;
+}
 #image1 {
-  grid-area: image1;
-  align-items: center;
+  width: 45%;
+  margin: 0px;
+  margin-bottom: 5px;
+}
+#image1 img{
+  width: 100%;
 }
 #image2 {
-  grid-area: image2;
-  align-items: center;
+  width: 45%;
+  margin: 0px;
+  margin-bottom: 5px;
+}
+#image2 img{
+  width: 100%;
 }
 #or {
-  grid-area: or;
+  width: 5%;
 }
-#matchUp img {
-  width: 80%;
-}
-#comment-area {
-  grid-area: comms;
-}
-#voteButton1 {
-  grid-area: butt1;
-  display: inline-block;
-}
+
 #button1 h4 {
   font-family: 'Open Sans Condensed', sans-serif;
 }
-#voteButton1 button{
+#button1 button{
   width: 100px;
   border: none;
   border-radius: 3px;
@@ -65,7 +62,7 @@
 #button2 h4 {
 
 }
-#voteButton2 button {
+#button2 button {
   width: 100px;
   border: none;
   border-radius: 3px;
@@ -88,7 +85,7 @@
   border: none;
 }
 #hr{
-  grid-area: hr;
+  width: 100%;
 }
 #newHR {
   grid-area: commHr;

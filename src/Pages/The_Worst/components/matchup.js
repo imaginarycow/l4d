@@ -114,47 +114,22 @@ class Matchup extends Component {
 
   render() {
 
-    if (this.state.viewComments) {
-      return (
-        <div id="matchUp">
-
-          <div id="button1">
-            <h4>Votes: {this.state.image1votes}</h4>
-            <button><img src="../assets/thumbsUp.png" /></button>
-          </div>
-
-          <div id="image1">
-            <img src={this.props.image1} alt="image1"/>
-          </div>
-
-          <h3 id="or">Vs</h3>
-
-          <div id="button2">
-            <h4>Votes: {this.state.image2votes}</h4>
-            <button><img src="../assets/thumbsUp.png" /></button>
-          </div>
-
-          <div id="image2">
-            <img src={this.props.image2} alt="image2"/>
-          </div>
-
-          {/* <button id="viewCommentsButton" onClick={this.toggleComments}>{this.state.commentButtonLabel}</button>
-          <CommentArea app="worst" commentGroupId={this.props.commentGroupId} comments={this.props.comments}/>;
-          <button id="closeCommentsButton" onClick={this.toggleComments}>{this.state.commentButtonLabel}</button> */}
-          <HR id="newHR"/>
-        </div>
-      );
-    }
-
     //comments not being viewed
     return (
       <div id="matchUp">
 
-        <div id="voteButton1">
+        <div id="button1">
           <h4>Votes: {this.state.image1votes}</h4>
           {/* <button><img src="../assets/thumbsUp.png" name='1' onClick={this.upVote}/></button> */}
           <button name='1' onClick={this.upVote}>Me</button>
+        </div>
 
+
+
+        <div id="button2">
+          <h4>Votes: {this.state.image2votes}</h4>
+          {/* <button><img src="../assets/thumbsUp.png" name='2' onClick={this.upVote}/></button> */}
+          <button name='2' onClick={this.upVote}>Me</button>
         </div>
 
         <div id="image1">
@@ -162,12 +137,6 @@ class Matchup extends Component {
         </div>
 
         <h3 id="or">Vs</h3>
-
-        <div id="voteButton2">
-          <h4>Votes: {this.state.image2votes}</h4>
-          {/* <button><img src="../assets/thumbsUp.png" name='2' onClick={this.upVote}/></button> */}
-          <button name='2' onClick={this.upVote}>Me</button>
-        </div>
 
         <div id="image2">
           <img src={this.props.image2} alt="image2"/>
