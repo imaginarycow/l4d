@@ -1,3 +1,38 @@
+#profileContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+#logoutDiv {
+  width: 100%;
+  margin-bottom: 10px;
+}
+#logoutButton {
+  background-color: #ea950b;
+  color: white;
+}
+#doneEditingButton {
+  width: 100%;
+}
+#doneEditingButton input {
+  background-color: green;
+  color: white;
+}
+#profileform {
+  width: 100%;
+}
+#editlabel {
+  margin-bottom: 20px;
+}
+#elabel {
+  width: 100%;
+}
+#usernamelabel {
+  width: 100%;
+}
+#usernameinput {
+  width: 100%;
+}
 #userButtonPreview {
   display: block;
   text-align: center;
@@ -12,4 +47,10 @@
 
 /*layout for larger screens*/
 @media screen and (min-width: 34em) {
+
+  #profileContainer {
+    width: 70%;
+    position: relative;
+    left: 15%;
+  }
 }

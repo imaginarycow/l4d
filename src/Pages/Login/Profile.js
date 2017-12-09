@@ -214,19 +214,22 @@ class Profile extends Component {
     var availability = this.state.aliasAvailable ? 'Available' : 'Not Available!';
 
     return (
-      <div id="loginContainer">
+      <div id="profileContainer">
         <div id="logoutDiv">
           <button id="logoutButton" onClick={this.logout}>Logout</button>
         </div>
 
-        <form id="form" onSubmit={this.handleSubmit}>
-          <div id="doneButton">
-            <input id="submit" type="submit" value="Done Editing" />
+        <form id="profileform" onSubmit={this.handleSubmit}>
+          <div id="doneEditingButton">
+            <input type="submit" value="Done Editing" />
           </div>
-          <h3 id="loginLabel">Edit Profile</h3>
+          <h3 id="editlabel">Edit Profile</h3>
           <label id="elabel">Email: {this.state.email}</label>
-          <label>Username - {availability}</label>
-          <input type="text" value={this.state.username} onChange={this.onChange} name="username" maxLength="20" />
+          <label id="usernamelabel">Username - {availability}</label>
+          <div id="usernameinput">
+            <input type="text" value={this.state.username} onChange={this.onChange} name="username" maxLength="20" />
+          </div>
+
           {/* <label id="">Upload a Profile pic</label>
           <input type="file" id="profile_pic" name="profile_pic" accept="image/*" onChange={this.handleImageChange} />
           <div id="preview">

@@ -17,10 +17,11 @@
 		color: #cbd4d6;
 	}
 	#dropdown {
-		width: auto;
+		width: 100%;
 		margin-bottom: 5px;
 	}
 	#image {
+		width: 100%;
 		margin-left: 2%;
 		margin-right: 2%;
 		margin-bottom: 15px;
