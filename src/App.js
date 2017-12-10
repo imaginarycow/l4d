@@ -11,7 +11,7 @@ import Qotd from './Pages/Qotd/App';
 import Blog from './Pages/Blog/App';
 import BlogRead from './Pages/Blog/components/blog_read';
 import Worst from './Pages/The_Worst/App';
-import Doodles from './Pages/Doodles/App';
+import Junk from './Pages/Doodles/App';
 import Comments from './Pages/Comment/App';
 import Login from './Pages/Login/App';
 import Logout from './Pages/Login/Logout';
@@ -36,7 +36,7 @@ class App extends Component {
               {/* <Route path="/Blog/:title" component={Blog}/> */}
               <Route path={decodeURIComponent("/Blog/:title")} component={BlogRead}/>
               <Route path="/The Worst" component={Worst}/>
-              <Route path="/Doodles" component={Doodles}/>
+              <Route path="/Junk-Pile" component={Junk}/>
               <Route path="/Comment Box" component={Comments}/>
               <Route path="/Login" component={Login}/>
               <Route path="/Logout" component={Logout}/>
