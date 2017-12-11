@@ -62,6 +62,7 @@ class BlogRead extends Component {
         var date = blog !== null ? 'Posted '+blog.date + ` | By ${blog.author}`: '';
         // var author = blog !== null ? `By ${blog.author}` : '';
         var title = blog !== null ? blog.title : '';
+        var subtitle = blog.subtitle;
         var url = blog !== null ? blog.imgUrl : '';
         var commentGroupId = blog !== null ? blog.commentGroupId: '';
 
@@ -71,20 +72,21 @@ class BlogRead extends Component {
           commentsFetched = true;
         }
 
-        if (document.getElementById("text") !== null) {
-          document.getElementById("text").innerHTML = text;
+        if (document.getElementById("blogreadtext") !== null) {
+          document.getElementById("blogreadtext").innerHTML = text;
         }
 
         return (
           <div id="container">
             <h1 id="title">{title}</h1>
+            <h4 id="subtitle">{subtitle}</h4>
             <h4 id="postedby">{date}</h4>
             <Dropdown title='Archive' links={this.props.blogs} />
             <div id="image">
               <img src={url} alt='blog'/>
             </div>
 
-            <div id="text">Loading...</div>
+            <div id="blogreadtext">Loading...</div>
             <CommentArea app="blog" commentGroupId={commentGroupId} comments={this.props.comments}/>
           </div>
         );

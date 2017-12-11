@@ -9,3 +9,9 @@
 #blog-form #selector {
   display: grid;
 }
+#blogpreviewarea {
+  width: 100%;
+}
+#blogpreviewarea img {
+  width: 100%;
+}

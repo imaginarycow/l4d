@@ -2,13 +2,23 @@
   width: 100%;
   text-align: center;
 }
-#title {
+#previewtitle {
   width: 100%;
+  font-size: 24px;
+  margin-bottom: 0px;
+  font-family: Impact, Charcoal, sans-serif
+  /*font-family: "Arial Black", Gadget, sans-serif;*/
+  /*font-family: Perpetua, Baskerville, "Big Caslon", "Palatino Linotype", Palatino, "URW Palladio L", "Nimbus Roman No9 L", serif;*/
+}
+#subtitle {
+  width: 100%;
+  font-family: Perpetua, Baskerville, "Big Caslon", "Palatino Linotype", Palatino, "URW Palladio L", "Nimbus Roman No9 L", serif;
 }
 #postedby {
   width: 100%;
 }
 #blogtext{
+  font-family: 'Open Sans Condensed', sans-serif;
   text-align: justify;
   margin-top: 10px;
   margin-bottom: 50px;

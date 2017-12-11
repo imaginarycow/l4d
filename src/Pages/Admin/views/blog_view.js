@@ -16,6 +16,8 @@ class BlogView extends Component {
       imgUrl: initState.imgUrl,
       subtitle: initState.sub,
       title: initState.title,
+      snippet: '',
+      snippetcount: 0,
       wordcount: initState.count
     };
 
@@ -50,6 +52,13 @@ class BlogView extends Component {
       this.setState({subtitle: e.target.value});
     }
 
+    if(e.target.name === 'snippet') {
+      if (e.target.value.length > 0) {
+        this.setState({snippetcount: e.target.value.length});
+      }
+      this.setState({snippet: e.target.value});
+    }
+
     if(e.target.name === 'url') {
       this.setState({imgUrl: e.target.value});
     }
@@ -60,6 +69,10 @@ class BlogView extends Component {
     event.preventDefault();
     if (this.state.blog === '') {
       alert('Missing Blog!');
+      return;
+    }
+    if (this.state.snippet === '') {
+      alert('Missing Snippet!');
       return;
     }
     var words = this.state.blog.match(/\S+/g).length;
@@ -80,6 +93,7 @@ class BlogView extends Component {
         imgUrl: this.state.imgUrl,
         subtitle: this.state.subtitle,
         title: this.state.title,
+        snippet: this.state.snippet
       });
 
       this.setState ({
@@ -89,6 +103,8 @@ class BlogView extends Component {
         imgUrl: initState.imgUrl,
         subtitle: initState.sub,
         title: initState.title,
+        snippet: '',
+        snippetcount: 0,
         wordcount: initState.count
       });
     }
@@ -120,14 +136,19 @@ class BlogView extends Component {
           <input type="text" name="date" value={this.state.date} onChange={this.handleChange} />
           <label>New Post - Words: {this.state.wordcount}</label>
           <textarea value={this.state.blog} name="blog" onChange={this.handleChange}></textarea>
+          <label>Snippet - Characters: {this.state.snippetcount} of 300</label>
+          <textarea value={this.state.snippet} name="snippet" onChange={this.handleChange}></textarea>
           <input id="submit" type="submit" name="submit" value="Publish" />
         </form>
         <div>
           <h2>Preview</h2>
-          <div><label>Title: {this.state.title}</label></div>
-          <div><label>Author: {this.state.author}</label></div>
-          <img src={this.state.imgUrl} />
-          <div id="blog-preview" style={prevStyle}></div>
+          <div id="blogpreviewarea">
+            <div><label>{this.state.title}</label></div>
+            <div><label>{this.state.subtitle}</label></div>
+            <div><label>published by: {this.state.author}</label></div>
+            <img src={this.state.imgUrl} />
+            <div id="blog-preview" style={prevStyle}></div>
+          </div>
         </div>
     </div>
     );

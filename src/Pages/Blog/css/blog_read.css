@@ -10,11 +10,18 @@
 	}
 	#title {
 		width: 100%;
+		font-size: 30px;
+		font-family: Impact, Charcoal, sans-serif
+		/*font-family: Perpetua, Baskerville, "Big Caslon", "Palatino Linotype", Palatino, "URW Palladio L", "Nimbus Roman No9 L", serif;*/
+	}
+	#subtitle {
+		width: 100%;
 		font-family: Perpetua, Baskerville, "Big Caslon", "Palatino Linotype", Palatino, "URW Palladio L", "Nimbus Roman No9 L", serif;
 	}
 	#postedby {
+		font-family: 'Open Sans Condensed', sans-serif;
 		width: 100%;
-		color: #cbd4d6;
+		color: #848484;
 	}
 	#dropdown {
 		width: 100%;
@@ -29,12 +36,20 @@
 	#image img{
 		width: 100%;
 	}
-	#text {
+	#blogreadtext {
+		width: 100%;
 		margin-left: 2%;
 		margin-right: 2%;
 		text-align: justify;
 		font-size: 18px;
-		font-family: Perpetua, Baskerville, "Big Caslon", "Palatino Linotype", Palatino, "URW Palladio L", "Nimbus Roman No9 L", serif;
+		font-family: 'Open Sans Condensed', sans-serif;
+		/*font-family: Perpetua, Baskerville, "Big Caslon", "Palatino Linotype", Palatino, "URW Palladio L", "Nimbus Roman No9 L", serif;*/
+	}
+	#blogreadtext h3, li{
+		font-family: 'Open Sans Condensed', sans-serif;
+	}
+	#blogreadtext img {
+		width: 100%;
 	}
 
 
@@ -57,7 +72,7 @@
 		#image img{
 			width: 100%;
 		}
-		#text {
+		#blogreadtext {
 			margin-left: 10%;
 			margin-right: 10%;
 			text-align: justify;
