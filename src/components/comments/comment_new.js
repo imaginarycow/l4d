@@ -79,9 +79,13 @@ class NewComment extends Component {
 
   render () {
     return (
-      <div>
-        <form id="new-comment" onSubmit={this.handleSubmit}>
-          <img src={this.state.userimage} />
+      <div id="newcommentcontainer">
+        <form onSubmit={this.handleSubmit}>
+          <div id="user">
+            <img src={this.state.userimage} />
+            <h4>{this.state.username}</h4>
+          </div>
+
           <textarea id="text" placeholder="Comment: 500 characters max" name="comment"
               value={this.state.comment} onChange={this.onChange} maxLength="500"/>
           <label id="charCount">Characters remaining: {500 - this.state.charCount}</label>

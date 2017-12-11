@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import LoginUser from '../../redux/actions/user_login';
+import LogOutUser from '../../redux/actions/user_logout';
 import firebase from '../../firebase/firebase.js';
 import toastr from 'toastr';
 import '../../toastr/build/toastr.css';
@@ -40,7 +40,11 @@ class Profile extends Component {
     toastr.options = {
       "positionClass": "toast-top-center",
       "closeButton": true,
-      "preventDuplicates": true
+      "preventDuplicates": true,
+      "showDuration": "100",
+      "hideDuration": "1000",
+      "timeOut": "1000",
+      "extendedTimeOut": "2000"
     }
   }
 
@@ -157,7 +161,6 @@ class Profile extends Component {
     e.preventDefault();
 
     this.setState({imageUrl: e.target.src});
-    toastr.success('Got it, ill use that one.');
 
     if (this.state.firebaseUser !== null) {
 
@@ -179,10 +182,9 @@ class Profile extends Component {
 
   logout(e) {
     e.preventDefault();
+    this.props.LogOutUser();
     var that = this;
     firebase.auth().signOut().then(function() {
-      toastr.success('You are now logged out');
-
     }, function(error) {
       console.log(error);
     });
@@ -239,7 +241,7 @@ class Profile extends Component {
           <div id="userButtonPreview">
             <img src={this.state.imageUrl} alt="Select one"/>
           </div>
-          <div id="userimage">
+          <div id="userimages">
             {imagesToRender}
           </div>
 
@@ -253,10 +255,10 @@ function mapStateToProps(state) {
     return {user: state.user};
 }
 
-// function mapDispatchToProps(dispatch) {
-//
-//   return bindActionCreators({LoginUser}, dispatch);
-//
-// }
+function mapDispatchToProps(dispatch) {
 
-export default connect(mapStateToProps, null)(Profile);
+  return bindActionCreators({LogOutUser}, dispatch);
+
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

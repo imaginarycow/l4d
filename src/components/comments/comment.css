@@ -1,30 +1,28 @@
 #comment {
-  display: grid;
-  grid-template-rows: auto;
-  grid-template-columns: 1fr auto auto 4fr;
-  grid-template-areas:
-  "img user date ..."
-  "img text text text"
-  "... text text text";
+  display: flex;
   margin-bottom: 15px;
 }
 #img {
-  grid-area: img;
   max-width: 40px;
   max-height: 40px;
   border-radius: 20px;
+  margin-right: 10px;
 }
-#user {
-  grid-area: user;
-  margin-right: 20px;
+#userinfo {
   color: #4897CB;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
-#date {
-  grid-area: date;
+#userinfo #name {
+  margin-right: 10px;
+}
+#userinfo #date {
   color: grey;
 }
-#text {
-  grid-area: text;
+#userinfo #text {
   text-align: left;
   color: black;
+  width: 100%;
+  font-family: Georgia;
 }

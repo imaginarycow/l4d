@@ -10,8 +10,8 @@ import '../../toastr/build/toastr.css';
 
 class Login extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       needsAccount: false,
@@ -19,6 +19,7 @@ class Login extends Component {
       pass: '',
       username: '',
       attempts: 0,
+      authenticated: false
     }
 
     this.login = this.login.bind(this);
@@ -67,20 +68,20 @@ class Login extends Component {
     firebase.auth().sendPasswordResetEmail(email)
     .then(function() {
       // Password reset email sent.
-      alert('An email to reset your password has been sent to ' + email);
+      toastr.warning('An email to reset your password has been sent to ' + email);
     })
     .catch(function(error) {
       // Error occurred. Inspect error.code.
       var errorCode = error.code;
       var errorMessage = error.message;
       if (errorCode === 'auth/invalid-email') {
-        alert('Invalid email.');
+        toastr.error('Invalid email.');
       }
       if (errorCode === 'auth/user-not-found') {
-        alert('User not found.');
+        toastr.error('User not found.');
       }
       else {
-        alert(errorMessage);
+        toastr.error(errorMessage);
       }
     });
   }
@@ -119,11 +120,11 @@ class Login extends Component {
           <h3 id="loginLabel">Login</h3>
           <label id="elabel">Email</label>
           <input id="email" type="text" value={this.state.email} onChange={this.onChange} name="email" />
-          <label id="plabel">Password</label>
+          <label id="passlabel">Password</label>
           <input id="pass" type="password" value={this.state.pass} onChange={this.onChange} name="pass" />
           <input id="submit" type="submit" value="Sign In" />
           <button id="reset" onClick={this.sendPasswordReset}>I forgot my password.</button>
-          <label id="label3">Don't have a Left4Dev acount?</label>
+          <label id="label3">Don't have a Left4Dev account?</label>
           <button id="create" onClick={this.toggleAccountView}>Create a free account</button>
         </form>
       </div>

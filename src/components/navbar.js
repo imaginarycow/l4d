@@ -63,13 +63,13 @@ class navbarInstance extends Component {
             <Navbar.Toggle />
           </Navbar.Header>
           <Navbar.Collapse>
-            <Nav>
-              <NavItem eventKey={1} ><Link to="/Blog" >Blog</Link></NavItem>
-              <NavItem eventKey={2} ><Link to="/QotD" >QotD</Link></NavItem>
-              <NavItem eventKey={3} ><Link to="/The Worst" >The Worst</Link></NavItem>
-              <NavItem eventKey={4} ><Link to="/Junk-Pile" >Junk-Pile</Link></NavItem>
-              <NavItem eventKey={5} ><Link to="/Comment Box" >Comment Box</Link></NavItem>
-              <NavItem eventKey={6} ><Link to={this.state.loginLink} >{this.state.loggedInUser.displayName}</Link></NavItem>
+            <Nav id="navlinkcontainer">
+              <Link className="navlink" to="/Blog" >Blog</Link>
+              <Link className="navlink" to="/QotD" >QotD</Link>
+              <Link className="navlink" to="/The-Worst" >The Worst</Link>
+              <Link className="navlink" to="/Junk-Pile" >Junk Pile</Link>
+              <Link className="navlink" to="/Comments" >Comments</Link>
+              <Link className="navlink" to={this.state.loginLink} >{this.state.loggedInUser.displayName}</Link>
             </Nav>
           </Navbar.Collapse>
         </Navbar>

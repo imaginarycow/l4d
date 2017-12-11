@@ -1,34 +1,53 @@
-#new-comment {
+@font-face {
+  font-family: "Bungee";
+  src: url("../../assets/bungee.ttf");
+}
+#newcommentcontainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   margin-top: 20px;
   margin-bottom: 40px;
-  display: grid;
-  grid-template-rows: 1fr 2fr 1fr;
-  grid-template-columns: 1fr 3fr 3fr 1fr 1fr;
-  grid-template-areas:
-  "pic newc newc newc ..."
-  "... newc newc newc ..."
-  "... char post ... ...";
+  text-align: left;
 }
-#new-comment img {
-  grid-area: pic;
+#newcommentcontainer form {
+  width: 100%;
+}
+#newcommentcontainer #user {
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: left;
+  margin-bottom: 5px;
+}
+#user img {
   max-width: 50px;
   max-height: 50px;
   border-radius: 25px;
 }
-#new-comment #text {
-  grid-area: newc;
+#user h4 {
+  margin-left: 15px;
+  color: #4897CB;
+  font-family: Bungee;
+  /*font-family: Impact, Charcoal, sans-serif;*/
+}
+#newcommentcontainer #text {
   resize: none;
-  min-width: 40px;
-  width: 100%;
+  min-width: 100%;
+  height: 100px;
+  font-family: Georgia;
 }
-#new-comment #charCount {
-  grid-area: char;
+#newcommentcontainer #charCount {
   color: grey;
+  margin-right: 20px;
 }
-#new-comment #post {
-  grid-area: post;
+#newcommentcontainer #post {
   background-color: #4897CB;
   color: white;
   margin-top: 7px;
   border-radius: 5px;
+}
+#newcommentcontainer #post:hover {
+  box-shadow: 0 0 2rem red;
 }

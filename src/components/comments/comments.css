@@ -4,14 +4,11 @@
   margin-right: 2%;
 
 }
-#comment-area #newCommentArea {
-
-}
 #comment-area ul {
   list-style-type: none;
 }
 
-@media screen and (min-width: 34em) {
+@media screen and (min-width: 600px) {
 
   #comment-area {
     width: 100%;

@@ -1,51 +1,26 @@
 #loginContainer {
+  width: 100%;
   font-family: 'Open Sans Condensed', sans-serif;
   text-align: left;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  grid-template-rows: auto;
-  grid-template-areas:
-  "... outB ..."
-  "... form ..."
-  "... llabel ..."
-  "... elabel ..."
-  "... email ..."
-  "... ulabel ..."
-  "... username ..."
-  "... plabel ..."
-  "... pass ..."
-  "... submit ..."
-  "... label3 ..."
-  "... create ..."
-  ;
-}
-#logoutDiv {
-  grid-area: outB;
-  text-align: center;
-}
-#logoutButton {
-
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 #form {
-  grid-area: form;
   display: flex;
   flex-direction: column;
+  position: relative;
+  width: 90%;
+  left: 5%;
 }
 #loginLabel {
   text-align: center;
-
   padding-bottom: 20px;
 }
 #elabel {
   font-weight: 300;
 }
 #email {
-  margin-bottom: 20px;
-  min-width: 300px;
-}#ulabel {
-
-}
-#username {
   margin-bottom: 20px;
 }
 #plabel {
@@ -80,4 +55,18 @@
 #create {
   background-color: #fff;
   border: none;
+  color: red;
+}
+
+@media screen and (min-width: 600px) {
+  #loginContainer {
+    width: 50%;
+    position: relative;
+    left: 25%;
+  }
+  #form {
+    position: relative;
+    width: 60%;
+    left: 20%;
+  }
 }

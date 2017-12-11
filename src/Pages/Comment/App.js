@@ -3,6 +3,7 @@ import firebase from '../../firebase/firebase.js';
 import toastr from 'toastr';
 import '../../toastr/build/toastr.css';
 import './comment_box.css';
+import Footer from '../../components/footer/footer';
 
 
 class CommentBox extends Component {

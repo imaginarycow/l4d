@@ -2,7 +2,7 @@ import firebase from '../../firebase/firebase.js';
 import { getUnformattedDate } from '../../utils/dates';
 
 function setBlog(title, blogs) {
-  console.log(blogs);
+
   if (title !== null && typeof title !== 'undefined') {
 
     var blog = null;
@@ -20,23 +20,9 @@ function setBlog(title, blogs) {
 
   } else {
 
-    var blog = {dateKey: 1};
-    //iterate the blogs and return the current blog
-
-    const today = parseInt(getUnformattedDate());
-    for (var i in blogs) {
-
-      console.log(blogs[i].dateKey);
-      console.log(today);
-      if (blogs[i].dateKey > blog.dateKey && blogs[i].dateKey <= today) {
-        blog = blogs[i];
-      }
-    }
-    console.log(blog);
-
     return {
       type: 'SET_BLOG',
-      payload: blog
+      payload: null
     }
   }
 }

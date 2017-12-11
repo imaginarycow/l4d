@@ -1,6 +1,31 @@
+@font-face {
+  font-family: "Armenia";
+  src: url("../assets/Armenia.ttf");
+}
 #navbar {
   border-radius: 0px;
 }
-#navbar a {
+#navlinkcontainer {
+  margin-top: 10px;
+}
+#logo {
   text-decoration: none;
+}
+#logo:hover {
+  text-decoration: none;
+  background-color: white;
+  box-shadow: 0 0 2rem #FE2E2E;
+}
+.navlink {
+  text-decoration: none;
+  color: #0080FF;
+  font-family: Armenia;
+  /*font-family: Impact, Charcoal, sans-serif;*/
+  font-size: 20px;
+  margin-right: 10px;
+}
+.navlink:hover {
+  text-decoration: none;
+  background-color: white;
+  box-shadow: 0 0 2rem #FE2E2E;
 }

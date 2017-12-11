@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Navbar from './components/navbar';
+import Footer from './components/footer/footer';
 import firebase from './firebase/firebase.js';
 import './css/App.css';
 
@@ -25,9 +26,9 @@ class App extends Component {
   render() {
 
     return (
-      <div className="App">
+      <div id="appcontainer">
         <Router>
-          <div>
+          <div id="appheader">
             <Navbar />
             <Switch>
               <Route exact path="/" component={Blog}/>
@@ -35,9 +36,9 @@ class App extends Component {
               <Route exact path="/Blog" component={Blog}/>
               {/* <Route path="/Blog/:title" component={Blog}/> */}
               <Route path={decodeURIComponent("/Blog/:title")} component={BlogRead}/>
-              <Route path="/The Worst" component={Worst}/>
+              <Route path="/The-Worst" component={Worst}/>
               <Route path="/Junk-Pile" component={Junk}/>
-              <Route path="/Comment Box" component={Comments}/>
+              <Route path="/Comments" component={Comments}/>
               <Route path="/Login" component={Login}/>
               <Route path="/Logout" component={Logout}/>
               <Route path="/Signup" component={Signup}/>
@@ -47,6 +48,7 @@ class App extends Component {
             </Switch>
           </div>
         </Router>
+        <Footer />
       </div>
     );
   }

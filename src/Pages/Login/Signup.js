@@ -114,7 +114,7 @@ class Signup extends Component {
           <h3 id="loginLabel">Create a new account</h3>
           <label id="elabel">Email</label>
           <input id="email" type="text" value={this.state.email} onChange={this.onChange} name="email" />
-          <label id="plabel">Password</label>
+          <label id="passlabel">Password</label>
           <input id="pass" type="password" placeholder="must be at least 8 characters" value={this.state.pass} onChange={this.onChange} name="pass" />
           <input id="submit" type="submit" value="Create Account" />
           <button id="create" onClick={this.toggleAccountView}>Back to sign in</button>

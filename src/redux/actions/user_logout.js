@@ -1,6 +1,4 @@
-import firebase from '../../firebase/firebase.js';
-
-export function logUserOut() {
+export default function LogoutUser() {
 
   const loggedOutUser = {
 
@@ -9,21 +7,11 @@ export function logUserOut() {
     image: 'undefined'
   }
 
+  console.log('loggin out user: ' + loggedOutUser);
+
   return {
     type: 'LOGOUT_USER',
     payload: loggedOutUser
-  }
-}
-
-export default function LogoutUser() {
-
-  return function(dispatch) {
-
-    firebase.auth().signOut()
-    .then(() => {
-      dispatch(logUserOut());
-    });
-
   }
 
 }

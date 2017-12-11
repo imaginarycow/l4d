@@ -16,9 +16,11 @@ export default class Comment extends Component {
       <li>
         <div id="comment">
           <img id="img" src={this.props.imgUrl} alt="user"/>
-          <p id="user">{this.props.username}</p>
-          <p id="date">{formattedDate}</p>
-          <p id="text">{this.props.text}</p>
+          <div id="userinfo">
+            <p id="name">{this.props.username}</p>
+            <p id="date">{formattedDate}</p>
+            <p id="text">{this.props.text}</p>
+          </div>
         </div>
       </li>
     );

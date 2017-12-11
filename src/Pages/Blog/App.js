@@ -7,6 +7,7 @@ import Dropdown from '../../components/Dropdown/dropdown';
 import BlogLoad from '../../redux/actions/blog_get';
 import './css/blog_page.css';
 import PageNotFound from '../404/App';
+import Footer from '../../components/footer/footer';
 
 
 class Blog extends Component {
@@ -38,6 +39,7 @@ class Blog extends Component {
         return (
           <div id="blogpagecontainer">
             {this.getBlogList()}
+            {/* <Footer /> */}
           </div>
         );
       }

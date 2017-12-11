@@ -33,6 +33,14 @@
 #usernameinput {
   width: 100%;
 }
+#userimages {
+  width: 100%;
+}
+#userimages img{
+  max-width: 80px;
+  border-radius: 40px;
+  margin: 10px;
+}
 #userButtonPreview {
   display: block;
   text-align: center;
@@ -46,11 +54,14 @@
 }
 
 /*layout for larger screens*/
-@media screen and (min-width: 34em) {
+@media screen and (min-width: 600px) {
 
   #profileContainer {
-    width: 70%;
+    width: 50%;
     position: relative;
-    left: 15%;
+    left: 25%;
+  }
+  #userimages {
+    width: 100%;
   }
 }

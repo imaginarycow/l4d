@@ -26,16 +26,11 @@ class BlogRead extends Component {
 
   componentWillReceiveProps(nextProps) {
 
-    if (nextProps.currBlog === null) {
-      this.props.BlogLoad();
-      return;
-    }
-
     if (this.props.match.params !== nextProps.match.params) {
 
       this.props.BlogLoad(nextProps.match.params.title);
     }
-
+  
     if (this.props.currBlog !== nextProps.currBlog) {
 
       this.props.GetComments(nextProps.currBlog.commentGroupId);
@@ -48,12 +43,18 @@ class BlogRead extends Component {
     //check url for specific blog
     if (typeof this.props.match.params.title !== 'undefined') {
       this.props.BlogLoad(this.props.match.params.title);
-    } else {
-      this.props.BlogLoad();
     }
   }
 
   render () {
+
+    if (this.props.currBlog === null) {
+      return (
+        <div id="container">
+            Loading...
+        </div>
+      );
+    }
 
       if (this.props.currBlog !== null) {
         var blog = this.props.currBlog;
@@ -106,7 +107,6 @@ function mapStateToProps(state) {
     return {
       blogs: state.allBlogs,
       currBlog: state.currBlog,
-      latestBlog: state.latestBlog,
       comments: state.blogComments
     };
 }

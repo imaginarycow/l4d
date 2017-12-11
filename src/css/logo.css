@@ -2,13 +2,20 @@
   font-family: "Armenia Grunge Italic";
   src: url("../assets/Armenia Grunge Italic.ttf");
 }
+#logo {
+  width: auto;
+}
+#logo:hover {
+  text-decoration: none;
+}
 #red {
   color: red;
-}
-#logo img{
-  width: 60%;
 }
 #logo h2 {
   font-family: Armenia Grunge Italic;
   margin-right: 50px;
+  color: #0080FF;
+}
+#logo h2:hover {
+  text-decoration: none;
 }

@@ -1,3 +1,7 @@
+@font-face {
+  font-family: "Bungee";
+  src: url("../../../assets/bungee.ttf");
+}
 #previewcontainer {
   width: 100%;
   text-align: center;
@@ -6,9 +10,9 @@
   width: 100%;
   font-size: 24px;
   margin-bottom: 0px;
-  font-family: Impact, Charcoal, sans-serif
-  /*font-family: "Arial Black", Gadget, sans-serif;*/
-  /*font-family: Perpetua, Baskerville, "Big Caslon", "Palatino Linotype", Palatino, "URW Palladio L", "Nimbus Roman No9 L", serif;*/
+  font-family: Impact, Charcoal, sans-serif;
+  font-family: Bungee;
+  color: #0080FF;
 }
 #subtitle {
   width: 100%;
@@ -27,6 +31,9 @@
 #previewcontainer #image {
   width: 100%;
   margin: 0px;
+}
+#previewcontainer #image:hover {
+    box-shadow: 0 0 2rem #FE2E2E;
 }
 #previewcontainer #image img {
   margin: 0px;

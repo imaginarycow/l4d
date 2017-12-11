@@ -29,14 +29,7 @@
 #ulabel {
 
 }
-#userimage {
-  max-width: 600px;
-}
-#userimage img{
-  max-width: 80px;
-  border-radius: 40px;
-  margin: 10px;
-}
+
 #logoutButton button {
   margin-top: 30px;
 }

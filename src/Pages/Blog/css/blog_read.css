@@ -1,3 +1,7 @@
+@font-face {
+  font-family: "Bungee";
+  src: url("../../../assets/bungee.ttf");
+}
 #container {
 		width: 96%;
 		position: relative;
@@ -6,13 +10,14 @@
 		flex-direction: row;
 		flex-wrap: wrap;
 		justify-content: space-around;
-
+		margin-top: 50px;
 	}
 	#title {
 		width: 100%;
 		font-size: 30px;
-		font-family: Impact, Charcoal, sans-serif
-		/*font-family: Perpetua, Baskerville, "Big Caslon", "Palatino Linotype", Palatino, "URW Palladio L", "Nimbus Roman No9 L", serif;*/
+		font-family: Impact, Charcoal, sans-serif;
+		font-family: Bungee;
+		color: #0080FF;
 	}
 	#subtitle {
 		width: 100%;
