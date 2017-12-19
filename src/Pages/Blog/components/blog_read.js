@@ -8,9 +8,11 @@ import GetComments from '../../../redux/actions/blog_comments_get';
 import CommentArea from '../../../components/comments/comment_area';
 import '../css/blog_read.css';
 import PageNotFound from '../../404/App';
+import ShareButtons from '../../../components/share_button/buttons';
 
 
 var commentsFetched = false;
+const shareables = [{text: "Facebook"},{text: "Twitter"},{text: "LinkedIn"}];
 
 class BlogRead extends Component {
 
@@ -30,7 +32,7 @@ class BlogRead extends Component {
 
       this.props.BlogLoad(nextProps.match.params.title);
     }
-  
+
     if (this.props.currBlog !== nextProps.currBlog) {
 
       this.props.GetComments(nextProps.currBlog.commentGroupId);
@@ -82,7 +84,11 @@ class BlogRead extends Component {
             <h1 id="title">{title}</h1>
             <h4 id="subtitle">{subtitle}</h4>
             <h4 id="postedby">{date}</h4>
-            <Dropdown title='Archive' links={this.props.blogs} />
+            <div id="share-archive-container">
+              <ShareButtons links={shareables}/>
+              <Dropdown title='Archive' links={this.props.blogs} />
+            </div>
+
             <div id="image">
               <img src={url} alt='blog'/>
             </div>

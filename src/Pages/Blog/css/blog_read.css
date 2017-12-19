@@ -28,8 +28,19 @@
 		width: 100%;
 		color: #848484;
 	}
+  #share-archive-container {
+    /* background-color: yellow; */
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 5px;
+  }
+  #share-button {
+    margin-right: 10px;
+  }
 	#dropdown {
-		width: 100%;
+    margin-top: 5px;
 		margin-bottom: 5px;
 	}
 	#image {

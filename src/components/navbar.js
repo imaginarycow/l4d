@@ -64,12 +64,14 @@ class navbarInstance extends Component {
           </Navbar.Header>
           <Navbar.Collapse>
             <Nav id="navlinkcontainer">
-              <Link className="navlink" to="/Blog" >Blog</Link>
-              <Link className="navlink" to="/QotD" >QotD</Link>
-              <Link className="navlink" to="/The-Worst" >The Worst</Link>
-              <Link className="navlink" to="/Junk-Pile" >Junk Pile</Link>
-              <Link className="navlink" to="/Comments" >Comments</Link>
-              <Link className="navlink" to={this.state.loginLink} >{this.state.loggedInUser.displayName}</Link>
+                <Link className="navlink" to="/Blog" >Blog</Link>
+                <Link className="navlink" to="/QotD" >QotD</Link>
+                <Link className="navlink" to="/The-Worst" >The Worst</Link>
+                <Link className="navlink" to="/Junk-Pile" >Junk Pile</Link>
+                <Link className="navlink" to="/Comments" >Comments</Link>
+                <Link className="navlink" to={this.state.loginLink} >{this.state.loggedInUser.displayName}</Link>
+
+
             </Nav>
           </Navbar.Collapse>
         </Navbar>

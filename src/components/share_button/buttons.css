@@ -1,0 +1,13 @@
+#share-buttons {
+  /* background-color: yellow; */
+}
+#share-buttons img {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+#share-buttons button {
+  background-color: Orange;
+  color: white;
+  margin-right: 10px;
+}

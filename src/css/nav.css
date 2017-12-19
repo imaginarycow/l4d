@@ -11,6 +11,9 @@
 #logo {
   text-decoration: none;
 }
+#logo h2:hover {
+  text-decoration: none;
+}
 #logo:hover {
   text-decoration: none;
   background-color: white;
