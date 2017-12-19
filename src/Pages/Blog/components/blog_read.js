@@ -21,7 +21,8 @@ class BlogRead extends Component {
 
     this.state = {
       blog: null,
-      selectedBlogTitle: null
+      selectedBlogTitle: null,
+      url: 'http://www.Left4Dev.com'
       };
 
   }
@@ -31,9 +32,11 @@ class BlogRead extends Component {
     if (this.props.match.params !== nextProps.match.params) {
 
       this.props.BlogLoad(nextProps.match.params.title);
+      const linkUrl = 'http://www.Left4Dev.com' + nextProps.match.url;
+      this.setState({url: linkUrl});
     }
 
-    if (this.props.currBlog !== nextProps.currBlog) {
+    if (this.props.currBlog !== nextProps.currBlog && nextProps.currBlog !== null) {
 
       this.props.GetComments(nextProps.currBlog.commentGroupId);
 
@@ -48,15 +51,13 @@ class BlogRead extends Component {
     }
   }
 
-  render () {
+  componentDidMount() {
+    const linkUrl = 'http://www.Left4Dev.com' + this.props.match.url;
+    this.setState({url: linkUrl});
+    console.log(linkUrl);
+  }
 
-    if (this.props.currBlog === null) {
-      return (
-        <div id="container">
-            Loading...
-        </div>
-      );
-    }
+  render () {
 
       if (this.props.currBlog !== null) {
         var blog = this.props.currBlog;
@@ -85,7 +86,7 @@ class BlogRead extends Component {
             <h4 id="subtitle">{subtitle}</h4>
             <h4 id="postedby">{date}</h4>
             <div id="share-archive-container">
-              <ShareButtons links={shareables}/>
+              <ShareButtons pagelink={this.state.url}/>
               <Dropdown title='Archive' links={this.props.blogs} />
             </div>
 
@@ -97,10 +98,12 @@ class BlogRead extends Component {
             <CommentArea app="blog" commentGroupId={commentGroupId} comments={this.props.comments}/>
           </div>
         );
-      } else {
-        this.props.BlogLoad();
+      }
+      else {
+
         return (
           <div id="container">
+              Loading...
           </div>
         );
       }
