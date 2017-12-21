@@ -23,8 +23,8 @@ export default class Dropdown extends Component {
     if (this.props.links !== null) {
       const links = this.props.links;
       for (var i in links) {
-        linkList.push(<Link to={`/Blog/${links[i].title}`}
-          key={links[i].title} value={links[i].title}>{links[i].title}</Link>);
+        linkList.push(<Link to={`/Blog/${links[i].urltitle}`}
+          key={links[i].title} value={links[i].urltitle}>{links[i].title}</Link>);
       }
 
     }
@@ -33,7 +33,7 @@ export default class Dropdown extends Component {
   }
 
   render() {
-    
+
 
     // Close the dropdown menu if the user clicks outside of it
     window.onclick = function(event) {

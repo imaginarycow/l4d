@@ -17,6 +17,7 @@ export class BlogPreview extends Component {
       var text = StringShortener(blog.snippet, 300);
       var date = 'Posted '+blog.date + ` | By ${blog.author}`;
       var title = blog.title;
+      var urltitle = blog.urltitle;
       var subtitle = blog.subtitle;
       var url = blog.imgUrl;
       var commentGroupId = blog.commentGroupId;
@@ -29,7 +30,7 @@ export class BlogPreview extends Component {
           {/* <h4 id="subtitle">{subtitle}</h4> */}
           <h4 id="postedby">{date}</h4>
           <div id="image">
-            <Link to={`/Blog/${title}`} ><img src={url} alt='blog'/></Link>
+            <Link to={`/Blog/${urltitle}`} ><img src={url} alt='blog'/></Link>
           </div>
           <div id="blogtext" >{text}</div>
           <HR text="Blog"/>

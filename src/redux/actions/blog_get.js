@@ -9,7 +9,7 @@ function setBlog(title, blogs) {
     var matchFound = false;
     //create Array from Blogs collection of objects
     for (var i in blogs) {
-      if (blogs[i].title === title) {
+      if (blogs[i].urltitle === title) {
         blog = blogs[i];
       }
     }

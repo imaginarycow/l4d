@@ -11,6 +11,7 @@ export default class ShareButtons extends Component {
       url: props.pagelink
     }
 
+    this.stringBuilder = this.stringBuilder.bind(this);
   }
 
   componentDidMount() {
@@ -43,7 +44,9 @@ export default class ShareButtons extends Component {
     );
 
     {/* Twitter */}
-    var twitterurl = `https://twitter.com/intent/tweet?text=Hello%20Peeps&text=Nice Article&hashtags=Left4Dev&url=https://www.google.com`;
+    var someLink = encodeURI(this.state.url);
+
+    var twitterurl = `https://twitter.com/intent/tweet?text=Hello%20Peeps&text=Nice Article&hashtags=Left4Dev&url=${someLink}`;
     links.push(
       <a class="twitter-share-button" href={twitterurl} target="_blank">
        <img src="https://simplesharebuttons.com/images/somacro/twitter.png" alt="Twitter" />
@@ -51,6 +54,16 @@ export default class ShareButtons extends Component {
     );
 
     this.setState({links: links});;
+  }
+
+  stringBuilder(inArray) {
+
+    var output = '';
+    for (var i = 0; i < inArray.length; i++) {
+      output += inArray[i];
+    }
+
+    return (output);
   }
 
   render() {
