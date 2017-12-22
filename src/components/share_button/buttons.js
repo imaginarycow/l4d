@@ -8,73 +8,70 @@ export default class ShareButtons extends Component {
     super(props);
     console.log(props);
     this.state = {
+      comment: props.comment,
+      hashtags: props.hashtags,
       url: props.pagelink
     }
-
-    this.stringBuilder = this.stringBuilder.bind(this);
+    this.getLinks = this.getLinks.bind(this);
   }
 
-  componentDidMount() {
-
-    console.log(this.state.url);
+  getLinks() {
 
     var links = [];
     var pageurl = this.state.url;
+    var comment = this.state.comment;
 
 
     {/* Email */}
+    var emaillink = `mailto:?subject=Left4Dev.com&body=I%20saw%20this%20and%20thought%20of%20you!%20${pageurl}`;
     links.push(
-      <a href='mailto:?Subject=Left4Dev.com&amp;Body=I%20saw%20this%20and%20thought%20of%20you!%20'>
+      <a href={emaillink} key="email">
         <img src="https://simplesharebuttons.com/images/somacro/email.png" alt="Email" />
       </a>
     );
 
     {/* Facebook */}
+    var facebookurl = `http://www.facebook.com/sharer.php?u=${pageurl}`;
     links.push(
-      <a href="http://www.facebook.com/sharer.php?u=https://Left4Dev.com" target="_blank">
+      <a href={facebookurl} target="_blank" key="facebook">
         <img src="https://simplesharebuttons.com/images/somacro/facebook.png" alt="Facebook" />
       </a>
     );
 
     {/* LinkedIn */}
+    var linkedinurl = `http://www.linkedin.com/shareArticle?mini=true&url=${pageurl}`;
     links.push(
-      <a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=https://Left4Dev.com" target="_blank">
+      <a href={linkedinurl} target="_blank" key="linkedin">
         <img src="https://simplesharebuttons.com/images/somacro/linkedin.png" alt="LinkedIn" />
       </a>
     );
 
     {/* Twitter */}
-    var someLink = encodeURI(this.state.url);
-
-    var twitterurl = `https://twitter.com/intent/tweet?text=Hello%20Peeps&text=Nice Article&hashtags=Left4Dev&url=${someLink}`;
+    var twitterurl = `https://twitter.com/intent/tweet?text=${comment}&hashtags=Left4Dev,${this.state.hashtags}&url=${pageurl}`;
     links.push(
-      <a class="twitter-share-button" href={twitterurl} target="_blank">
+      <a className="twitter-share-button" href={twitterurl} target="_blank" key="twitter">
        <img src="https://simplesharebuttons.com/images/somacro/twitter.png" alt="Twitter" />
       </a>
     );
 
-    this.setState({links: links});;
+    return links;
   }
 
-  stringBuilder(inArray) {
+  componentWillReceiveProps(nextProps) {
 
-    var output = '';
-    for (var i = 0; i < inArray.length; i++) {
-      output += inArray[i];
+    if (this.props.hashtags !== nextProps.hashtags) {
+      console.log('hashtags changed' + nextProps.hashtags);
+      this.setState({comment: nextProps.comment, hashtags: nextProps.hashtags,url: nextProps.pagelink});
+      this.getLinks();
     }
-
-    return (output);
   }
 
   render() {
 
-    const link = "https://Left4Dev.com";
-    const link2 = 'mailto:?Subject=Left4Dev.com&amp;Body=I%20saw%20this%20and%20thought%20of%20you!%20';
-
     return(
 
         <div id="share-buttons" >
-          {this.state.links}
+          {this.getLinks()}
         </div>
     );
   }

@@ -98,6 +98,7 @@ class BlogView extends Component {
         imgUrl: this.state.imgUrl,
         subtitle: this.state.subtitle,
         title: this.state.title,
+        urltitle: this.state.urltitle,
         snippet: this.state.snippet
       });
 
@@ -108,6 +109,7 @@ class BlogView extends Component {
         imgUrl: initState.imgUrl,
         subtitle: initState.sub,
         title: initState.title,
+        urltitle: '',
         snippet: '',
         snippetcount: 0,
         wordcount: initState.count

@@ -7,6 +7,7 @@ import Question from './components/question';
 import ChoiceArea from './components/choice_area';
 import CommentArea from '../../components/comments/comment_area';
 import GetComments from '../../redux/actions/qotd_comments_get';
+import ShareButtons from '../../components/share_button/buttons';
 
 var commentsReceived = false;
 
@@ -15,7 +16,7 @@ class QOTD extends Component {
   constructor() {
     super();
 
-    this.state = {user: null};
+    this.state = {url: 'http://www.Left4Dev.com/QOTD', user: null};
   }
 
   componentWillMount() {
@@ -31,11 +32,16 @@ class QOTD extends Component {
           this.props.GetComments(this.props.qotd.commentGroupId);
           commentsReceived = true;
       }
+      var qotd = this.props.qotd;
+      var comment = qotd.question + ' ' + qotd.option1 + ' or ' + qotd.option2;
 
       return (
         <div id="QOTD-Page">
           <h1 id="title">QotD</h1>
           <h5 id="subtitle">Question of the Day</h5>
+          <div id="share-archive-container">
+            <ShareButtons pagelink={this.state.url} hashtags="QotD" comment={comment}/>
+          </div>
           <Question id="question" text={this.props.qotd.question}/>
           <ChoiceArea id="choice-area" question={this.props.qotd}/>
           <CommentArea app="qotd" commentGroupId={this.props.qotd.commentGroupId} comments={this.props.comments}/>

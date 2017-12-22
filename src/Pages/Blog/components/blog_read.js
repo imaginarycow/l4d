@@ -21,6 +21,7 @@ class BlogRead extends Component {
 
     this.state = {
       blog: null,
+      hashtags: '',
       selectedBlogTitle: null,
       url: 'http://www.Left4Dev.com'
       };
@@ -37,9 +38,9 @@ class BlogRead extends Component {
     }
 
     if (this.props.currBlog !== nextProps.currBlog && nextProps.currBlog !== null) {
-
+      console.log('props changed' + nextProps.currBlog.hashtags);
       this.props.GetComments(nextProps.currBlog.commentGroupId);
-
+      this.setState({hashtags: nextProps.currBlog.hashtags});
     }
   }
 
@@ -54,17 +55,15 @@ class BlogRead extends Component {
   componentDidMount() {
     const linkUrl = 'http://www.Left4Dev.com' + this.props.match.url;
     this.setState({url: linkUrl});
-    console.log(linkUrl);
   }
 
   render () {
 
       if (this.props.currBlog !== null) {
         var blog = this.props.currBlog;
-        console.log(blog);
         var text = blog !== null ? blog.blog : '';
         var date = blog !== null ? 'Posted '+blog.date + ` | By ${blog.author}`: '';
-        // var author = blog !== null ? `By ${blog.author}` : '';
+        var hashes = blog.hashtags;
         var title = blog !== null ? blog.title : '';
         var subtitle = blog.subtitle;
         var url = blog !== null ? blog.imgUrl : '';
@@ -86,7 +85,7 @@ class BlogRead extends Component {
             <h4 id="subtitle">{subtitle}</h4>
             <h4 id="postedby">{date}</h4>
             <div id="share-archive-container">
-              <ShareButtons pagelink={this.state.url}/>
+              <ShareButtons pagelink={this.state.url} hashtags={hashes} comment="Check this Article: "/>
               <Dropdown title='Archive' links={this.props.blogs} />
             </div>
 

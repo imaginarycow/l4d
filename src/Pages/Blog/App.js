@@ -22,13 +22,19 @@ class Blog extends Component {
     this.props.BlogLoad();
   }
 
-  getBlogList() {
+  getBlogList(sortby, filterby) {
+
     const blogs = this.props.blogs;
+    blogs.sort((a, b) => a.dateKey < b.dateKey);
     var blogList = [];
 
     for (var i in blogs) {
-      blogList.push(<BlogPreview key={blogs[i].commentGroupId} blog={blogs[i]} text={blogs[i].blog}/>);
+      blogList.push(<BlogPreview key={blogs[i].commentGroupId} blog={blogs[i]} text={blogs[i].blog} date={blogs[i].dateKey}/>);
     }
+
+
+    // blogList.sort((a, b) => a.date > b.date);
+
     return blogList;
   }
 
@@ -39,7 +45,6 @@ class Blog extends Component {
         return (
           <div id="blogpagecontainer">
             {this.getBlogList()}
-            {/* <Footer /> */}
           </div>
         );
       }
