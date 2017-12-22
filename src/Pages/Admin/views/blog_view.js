@@ -16,6 +16,7 @@ class BlogView extends Component {
       imgUrl: initState.imgUrl,
       subtitle: initState.sub,
       title: initState.title,
+      urltitle: '',
       snippet: '',
       snippetcount: 0,
       wordcount: initState.count
@@ -46,6 +47,10 @@ class BlogView extends Component {
 
     if(e.target.name === 'title') {
       this.setState({title: e.target.value});
+    }
+
+    if(e.target.name === 'urltitle') {
+      this.setState({urltitle: e.target.value});
     }
 
     if(e.target.name === 'subtitle') {
@@ -130,6 +135,8 @@ class BlogView extends Component {
           <input type="text" name="author" value={this.state.author} onChange={this.handleChange}/>
           <label>Title: {this.state.title}</label>
           <input type="text" name="title" value={this.state.title} onChange={this.handleChange}/>
+          <label>UrlTitle: Should be in the format "some-blog-title "{this.state.urltitle}</label>
+          <input type="text" name="urltitle" value={this.state.urltitle} onChange={this.handleChange}/>
           <label>Subtitle: {this.state.subtitle}</label>
           <input type="text" name="subtitle" value={this.state.subtitle} onChange={this.handleChange}/>
           <label>Date Active: {this.state.date}</label>
