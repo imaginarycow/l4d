@@ -1,10 +1,18 @@
 #blog-form {
-  display: grid;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 #blog-form textarea {
   min-height: 300px;
-  min-width: 600px;
+  width: 100%;
   margin-bottom: 10px;
+}
+#blog-form label {
+  width: 100%;
+}
+#blog-form input {
+  width: 100%;
 }
 #blog-form #selector {
   display: grid;

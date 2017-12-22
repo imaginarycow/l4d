@@ -3,7 +3,6 @@ import firebase from '../../firebase/firebase.js';
 import toastr from 'toastr';
 import '../../toastr/build/toastr.css';
 import './comment_box.css';
-import Footer from '../../components/footer/footer';
 
 
 class CommentBox extends Component {
@@ -82,7 +81,7 @@ class CommentBox extends Component {
       email: this.state.email,
       comment: this.state.comment
     }
-    const postUrl = 'feedback/'+'/'+newKey+'/';
+    const postUrl = 'feedback/'+newKey+'/';
     firebase.database().ref(postUrl).set(newComment)
     .then((response) => {
       toastr.success('Your feedback is appreciated.  Thanks!');

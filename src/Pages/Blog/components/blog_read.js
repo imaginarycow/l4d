@@ -1,18 +1,15 @@
 import React, {Component} from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
 import Dropdown from '../../../components/Dropdown/dropdown';
 import BlogLoad from '../../../redux/actions/blog_get';
 import GetComments from '../../../redux/actions/blog_comments_get';
 import CommentArea from '../../../components/comments/comment_area';
 import '../css/blog_read.css';
-import PageNotFound from '../../404/App';
 import ShareButtons from '../../../components/share_button/buttons';
 
-
 var commentsFetched = false;
-const shareables = [{text: "Facebook"},{text: "Twitter"},{text: "LinkedIn"}];
+
 
 class BlogRead extends Component {
 
@@ -25,7 +22,7 @@ class BlogRead extends Component {
       selectedBlogTitle: null,
       url: 'http://www.Left4Dev.com'
       };
-
+      this.updateText = this.updateText.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -41,6 +38,7 @@ class BlogRead extends Component {
       console.log('props changed' + nextProps.currBlog.hashtags);
       this.props.GetComments(nextProps.currBlog.commentGroupId);
       this.setState({hashtags: nextProps.currBlog.hashtags});
+      this.updateText(nextProps.currBlog.blog);
     }
   }
 
@@ -55,6 +53,15 @@ class BlogRead extends Component {
   componentDidMount() {
     const linkUrl = 'http://www.Left4Dev.com' + this.props.match.url;
     this.setState({url: linkUrl});
+
+    if (document.getElementById("blogreadtext") !== null && this.props.currBlog !== null) {
+      console.log('blogreadtext is not null');
+      document.getElementById("blogreadtext").innerHTML = this.props.currBlog.blog;
+    }
+  }
+
+  updateText(text) {
+    document.getElementById("blogreadtext").innerHTML = text;
   }
 
   render () {
@@ -74,8 +81,7 @@ class BlogRead extends Component {
           this.props.GetComments(blog.commentGroupId);
           commentsFetched = true;
         }
-
-        if (document.getElementById("blogreadtext") !== null) {
+        if (document.getElementById("blogreadtext").innerHTML === 'Loading...') {
           document.getElementById("blogreadtext").innerHTML = text;
         }
 
@@ -102,7 +108,7 @@ class BlogRead extends Component {
 
         return (
           <div id="container">
-              Loading...
+              <div id="blogreadtext">Loading...</div>
           </div>
         );
       }

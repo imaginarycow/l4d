@@ -1,13 +1,9 @@
 import React, {Component} from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
 import { BlogPreview } from './components/blog_preview';
-import Dropdown from '../../components/Dropdown/dropdown';
 import BlogLoad from '../../redux/actions/blog_get';
 import './css/blog_page.css';
-import PageNotFound from '../404/App';
-import Footer from '../../components/footer/footer';
 
 
 class Blog extends Component {
@@ -22,20 +18,17 @@ class Blog extends Component {
     this.props.BlogLoad();
   }
 
-  getBlogList(sortby, filterby) {
+  getBlogList() {
 
     const blogs = this.props.blogs;
-    blogs.sort((a, b) => a.dateKey < b.dateKey);
+    // blogs.sort((a, b) => a.dateKey < b.dateKey);
     var blogList = [];
 
     for (var i in blogs) {
       blogList.push(<BlogPreview key={blogs[i].commentGroupId} blog={blogs[i]} text={blogs[i].blog} date={blogs[i].dateKey}/>);
     }
+    return blogList.sort((a, b) => a.date < b.date);
 
-
-    // blogList.sort((a, b) => a.date > b.date);
-
-    return blogList;
   }
 
   render () {

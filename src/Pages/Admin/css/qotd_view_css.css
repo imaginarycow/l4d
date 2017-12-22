@@ -1,7 +1,17 @@
 #qotd-form {
-  display: grid;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
-
+#qotd-form label {
+  width: 100%;
+}
+#qotd-form input {
+  width: 100%;
+}
+#qotd-form textarea {
+  width: 100%;
+}
 #qotd-form img {
   max-width: 200px;
 }

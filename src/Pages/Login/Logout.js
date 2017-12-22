@@ -3,7 +3,6 @@ import { Redirect } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import LogoutUser from '../../redux/actions/user_logout';
-import firebase from '../../firebase/firebase.js';
 import './css/logout.css';
 
 

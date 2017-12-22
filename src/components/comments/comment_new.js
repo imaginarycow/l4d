@@ -17,7 +17,7 @@ class NewComment extends Component {
       charCount: 0,
       comment: '',
       email: '',
-      username: '',
+      username: 'Login to comment',
       uid: '',
       userimage: '',
       defaultimage: '../../assets/profile_images/userImage1.png'

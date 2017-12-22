@@ -5,7 +5,6 @@ import Doodle from './doodle';
 import DoodlesLoad from '../../redux/actions/doodles_get';
 import './css/doodles.css';
 
-var loaded = false;
 
 class Doodles extends Component {
 

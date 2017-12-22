@@ -51,8 +51,8 @@ class QOTD extends Component {
     else {
       return (
         <div id="QOTD-Page">
-          <h1>QotD</h1>
-          <h5>Well, that's embarrasing. Please check back soon, we are working on the problem.</h5>
+          <h1 id="title">QotD</h1>
+          <h5 id="subtitle">Well, that's embarrasing. Please check back soon, we are working on the problem.</h5>
         </div>
       );
     }
