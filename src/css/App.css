@@ -1,6 +1,17 @@
-/*#app {
-  background-color: yellow;
-  position: relative;
-  padding:10px;
-  min-height: 100%;
-}*/
+body {
+  background: linear-gradient(#003B46, rgba(0, 60, 70, 0.425));
+  margin: 0;
+  padding: 0;
+}
+#appcontainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-bottom: 65px;
+}
+#navigationContainer {
+  width: 100%;
+}
+#routedAppContainer {
+  width: 100%;
+}

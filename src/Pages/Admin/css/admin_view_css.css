@@ -5,7 +5,7 @@
   grid-template-areas:
   "... title ..."
   "... selector ..."
-  "... view ..."
+  "... view list"
   ;
 }
 #admin-view h3 {
@@ -18,4 +18,9 @@
 }
 #selected-view {
   grid-area: view;
+}
+#list {
+  grid-area: list;
+  background-color: blueviolet;
+  width: auto;
 }

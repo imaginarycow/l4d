@@ -86,6 +86,7 @@ class Admin extends Component {
         <select onChange={this.handleChange}>
           {options}
         </select>
+        <div id="list">List</div>
         {this.state.view}
       </div>
     );

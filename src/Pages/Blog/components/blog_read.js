@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import Dropdown from '../../../components/Dropdown/dropdown';
+import Dropdown from '../../../components/dropdown/dropdown';
 import BlogLoad from '../../../redux/actions/blog_get';
 import GetComments from '../../../redux/actions/blog_comments_get';
 import CommentArea from '../../../components/comments/comment_area';

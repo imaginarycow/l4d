@@ -37,8 +37,8 @@ class QOTD extends Component {
 
       return (
         <div id="QOTD-Page">
-          <h1 id="title">QotD</h1>
-          <h5 id="subtitle">Question of the Day</h5>
+          <h1 id="title">QotW</h1>
+          <h5 id="subtitle">Question of the Week</h5>
           <div id="share-archive-container">
             <ShareButtons pagelink={this.state.url} hashtags="QotD" comment={comment}/>
           </div>
@@ -51,7 +51,7 @@ class QOTD extends Component {
     else {
       return (
         <div id="QOTD-Page">
-          <h1 id="title">QotD</h1>
+          <h1 id="title">QotW</h1>
           <h5 id="subtitle">Well, that's embarrasing. Please check back soon, we are working on the problem.</h5>
         </div>
       );

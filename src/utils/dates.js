@@ -11,8 +11,9 @@ function getUnformattedDate(date) {
 
   if (date === null || typeof date === 'undefined') {
     let d = new Date();
-    let month = d.getMonth() + 1;
-    let stringDate = month + '' + ("0" + d.getDate()).slice(-2) + '' + d.getFullYear();
+    let month = (d.getMonth() + 1) < 10 ? "0" + (d.getMonth() + 1) : (d.getMonth() + 1);
+    let day = d.getDate() < 10 ? ("0" + d.getDate()) : d.getDate();
+    let stringDate = month + '' + day + '' + d.getFullYear();
 
     return stringDate
   }

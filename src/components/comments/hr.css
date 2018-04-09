@@ -1,11 +1,10 @@
 #hrContainer {
   margin-top: 25px;
   margin-bottom: 25px;
-  display: grid;
-  grid-template-columns: 4fr 1fr 4fr;
-  grid-template-rows: 10px;
-  grid-template-areas:
-  "div1 text div2";
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
   align-items: center;
 }
 #div1 {
@@ -17,7 +16,7 @@
 #hrContainer #text {
   grid-area: text;
   align-content: center;
-  font-size: 12px;
+  font-size: 10px;
   text-align: center;
 }
 #div2 {

@@ -1,0 +1,18 @@
+@font-face {
+    font-family: "Armenia Grunge";
+    src: url("../../assets/Armenia Grunge Italic.ttf");
+  }
+#logo {
+    color: rgb(154, 155, 154);
+    color: #C4DFE6;
+    font-family: 'Armenia Grunge';
+    text-align: left;
+    margin: 10px 0px 0px 20px;
+}
+#four {
+    color: red;
+}
+#logo:hover {
+    color: red;
+    cursor: pointer;
+}

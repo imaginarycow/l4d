@@ -1,0 +1,23 @@
+@font-face {
+    font-family: "Armenia Grunge";
+    src: url("../../assets/Armenia Grunge Italic.ttf");
+}
+#homeContainer {
+    color: rgba(211, 126, 29, 0.89);
+    position: absolute;
+    width: 100%;
+    margin-top: 20px;
+    font-family: 'Armenia Grunge';
+}
+#homeContainer img {
+    width: 100%;
+}
+
+@media (min-width: 600px) {
+
+    #homeContainer {
+        width: 60%;
+        position: relative;
+        left: 20%; 
+    }
+}

@@ -27,14 +27,14 @@ function setBlog(title, blogs) {
   }
 }
 function getAllBlogs(blogs) {
+  console.log(blogs);
   var filteredBlogs = [];
 
   // only return blogs that have today's date or earlier
   for (var i in blogs) {
-    const today = parseInt(getUnformattedDate());
-
-    if (blogs[i].dateKey <= today) {
+    if (blogs[i].publish == true) {
       filteredBlogs.push(blogs[i]);
+      console.log(blogs[i]);
     }
   }
 

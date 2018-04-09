@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
-import Logo from '../logo';
+import Logo from '../logo/logo';
 import './footer.css';
 
 export default class Footer extends Component {
   render() {
     return (
-      <div className="footer">
-        <div id="footercontainer">
+      <div id="footer">
           <Logo />
           Copyright 2018.
-        </div>
       </div>
     );
   }

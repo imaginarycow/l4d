@@ -1,25 +1,24 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, NavLink, Switch } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import Navbar from './components/navbar';
+import Navbar from './components/navbar/navbar';
 import Footer from './components/footer/footer';
-import firebase from './firebase/firebase.js';
 import './css/App.css';
 
-import Home from './Pages/Main/Main';
-import Qotd from './Pages/Qotd/App';
-import Blog from './Pages/Blog/App';
-import BlogRead from './Pages/Blog/components/blog_read';
-import Worst from './Pages/The_Worst/App';
-import Junk from './Pages/Doodles/App';
-import Comments from './Pages/Comment/App';
-import Login from './Pages/Login/App';
-import Logout from './Pages/Login/Logout';
-import Signup from './Pages/Login/Signup';
-import Profile from './Pages/Login/Profile';
-import Admin from './Pages/Admin/App';
-import PageNotFound from './Pages/404/App';
+// Pages
+import Home from './pages/Main/Main';
+import QotW from './pages/QotW/App';
+import Blog from './pages/Blog/App';
+import BlogRead from './pages/Blog/components/blog_read';
+import Comments from './pages/Comment/App';
+import Login from './pages/Login/App';
+import Logout from './pages/Login/Logout';
+import Signup from './pages/Login/Signup';
+import Profile from './pages/Login/Profile';
+import Admin from './pages/Admin/App';
+import PageNotFound from './pages/404/App';
+
 
 class App extends Component {
 
@@ -27,28 +26,23 @@ class App extends Component {
 
     return (
       <div id="appcontainer">
-        <Router>
-          <div id="appheader">
-            <Navbar />
-            <Switch>
-              <Route exact path="/" component={Blog}/>
-              <Route path="/Qotd" component={Qotd}/>
-              <Route exact path="/Blog" component={Blog}/>
-              {/* <Route path="/Blog/:title" component={Blog}/> */}
-              <Route path={decodeURIComponent("/Blog/:title")} component={BlogRead}/>
-              <Route path="/The-Worst" component={Worst}/>
-              <Route path="/Junk-Pile" component={Junk}/>
-              <Route path="/Comments" component={Comments}/>
-              <Route path="/Login" component={Login}/>
-              <Route path="/Logout" component={Logout}/>
-              <Route path="/Signup" component={Signup}/>
-              <Route path="/Profile" component={Profile}/>
-              <Route path="/Admin" component={Admin}/>
-              <Route component={PageNotFound}/>
-            </Switch>
-          </div>
-        </Router>
-        <Footer />
+        {/* <div id="navigationContainer"> */}
+        
+        {/* </div>   */}
+
+        <div id="routedAppContainer">  
+          <Router>
+            <div>
+            <Navbar that={this}/>
+              <Route exact path="/" component={Home} />
+              <Route path="/Blog" component={Blog} />
+              <Route path="/Comments" component={Comments} />
+              <Route path="/QotW" component={QotW} />
+              <Route path="/Profile" component={Profile} />
+            </div>
+          </Router>
+        </div>    
+        <Footer /> 
       </div>
     );
   }

@@ -13,10 +13,10 @@
   height: 2px;
   align-items: center;
 }
-#hrContainer #text {
+#hrtext {
   grid-area: text;
   align-content: center;
-  font-size: 12px;
+  font-size: 10px;
   text-align: center;
 }
 #div2 {

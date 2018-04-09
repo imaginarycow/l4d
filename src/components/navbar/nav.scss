@@ -1,0 +1,117 @@
+@font-face {
+    font-family: "Armenia Grunge";
+    src: url("../../assets/Armenia Grunge Italic.ttf");
+}
+$ff: 'Armenia Grunge';
+// $barColor: #66A5AD;
+$barColor: rgba(0, 0, 0, 0.418);
+// $barColor: #07575B;
+$textColor: #66A5AD;
+$textColor: #C4DFE6;
+// $textColor: #763626;
+// $textColor: rgb(18, 159, 194);
+
+    
+/* small screens */
+#menu-button{
+background: rgb(148, 35, 35);
+width: 50px;
+border-radius: 5px;
+position: relative;
+cursor: pointer;
+transition: all linear .3s;
+padding: 4px;
+z-index: 11;
+}
+
+#menu-button.active{
+background: #dfd3d3;
+}
+#line-1,#line-2,#line-3{
+width: 90%;
+background: #fff;
+height: 8px;
+margin: 4px auto;
+border-radius: 2px;
+transition: all linear .3s;
+}
+
+#line-1.active{
+-webkit-transform: translate(0px,12px) rotate(45deg);
+transform: translate(0px,12px) rotate(45deg);
+}
+
+#line-2.active{
+opacity: 0;
+}
+
+#line-3.active{
+-webkit-transform: translate(0px, -12px) rotate(-45deg);
+transform: translate(0px, -12px) rotate(-45deg);
+}
+
+#navigationMenu {
+/* background: #0f7542; */
+/* background-color: skyblue; */
+width: 150px;
+padding: 10px;
+padding-top: 30px;
+color: #fff;
+font-family: 'Armenia Grunge';
+font-size: 1.5rem;
+display: none;
+top: 8px;
+border-radius: 5px;
+z-index: 10;
+margin-bottom: 10px;
+}
+
+#navigationMenu ul{
+list-style: none;
+}
+
+#navigationMenu ul li{
+margin: 8px 0;
+/* color: green; */
+}
+
+/* larger screens */
+@media (min-width: 600px) {
+
+    #menu-button {
+        display: none;
+    }
+    #navigationMenu {
+        padding: 0px;
+        margin: 0px;
+        display: flex;
+        border-radius: 0;
+        background: $barColor;
+        width: 100%;
+        z-index: 10;
+    }
+    #navListContainer {
+        // background: chartreuse;
+        flex-grow: 1;
+        justify-content: center
+    }
+    .navList {
+        display: flex;
+        flex-direction: row;
+        // background: blue;
+        justify-content: center;
+    }
+    .navList li {
+        margin-right: 10px;
+        padding-right: 10px;
+        font-family: $ff;
+    }
+    .navLink {
+        color: $textColor;
+    }
+    .navLink:hover {
+        text-decoration: none;
+        color: red;
+    }
+
+}

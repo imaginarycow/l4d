@@ -6,7 +6,7 @@ const HR = props => {
   return (
     <div id="hrContainer">
       <div id="div1"></div>
-      <div id="text"><em>{props.text}</em></div>
+      <div id="hrtext"><em>{props.text}</em></div>
       <div id="div2"></div>
     </div>
   );

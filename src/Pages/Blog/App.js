@@ -21,14 +21,14 @@ class Blog extends Component {
   getBlogList() {
 
     const blogs = this.props.blogs;
-    // blogs.sort((a, b) => a.dateKey < b.dateKey);
+    blogs.sort((a, b) => a.dateKey < b.dateKey);
     var blogList = [];
 
     for (var i in blogs) {
       blogList.push(<BlogPreview key={blogs[i].commentGroupId} blog={blogs[i]} text={blogs[i].blog} date={blogs[i].dateKey}/>);
     }
-    return blogList.sort((a, b) => a.date < b.date);
 
+    return blogList;
   }
 
   render () {
