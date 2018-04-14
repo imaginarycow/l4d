@@ -1,105 +1,102 @@
 @font-face {
   font-family: "Bungee";
-  src: url("../../../assets/bungee.ttf");
-}
+  src: url("../../../assets/bungee.ttf"); }
+@font-face {
+  font-family: "Armenia";
+  src: url("../../../assets/Armenia Gradient.ttf"); }
 #container {
-		width: 96%;
-		position: relative;
-		left: 2%;
-		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
-		justify-content: space-around;
-		margin-top: 50px;
-	}
-	#title {
-		width: 100%;
-		font-size: 30px;
-		font-family: Impact, Charcoal, sans-serif;
-		font-family: Bungee;
-		color: #0080FF;
-		color: #C4DFE6;
-	}
-	#subtitle {
-		width: 100%;
-		font-family: Perpetua, Baskerville, "Big Caslon", "Palatino Linotype", Palatino, "URW Palladio L", "Nimbus Roman No9 L", serif;
-	}
-	#postedby {
-		font-family: 'Open Sans Condensed', sans-serif;
-		width: 100%;
-		color: #848484;
-		color: #C4DFE6;
-	}
-  #share-archive-container {
-    /* background-color: yellow; */
-    width: 100%;
-    justify-content: center;
+  width: 96%;
+  position: relative;
+  left: 2%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 50px; }
+
+#title {
+  width: 100%;
+  font-size: 40px;
+  font-family: Impact, Charcoal, sans-serif;
+  font-family: "Armenia";
+  color: #C4DFE6; }
+
+#subtitle {
+  width: 100%;
+  font-family: Perpetua, Baskerville, "Big Caslon", "Palatino Linotype", Palatino, "URW Palladio L", "Nimbus Roman No9 L", serif; }
+
+#postedby {
+  font-family: "Open Sans Condensed", sans-serif;
+  width: 100%;
+  color: #848484; }
+
+#share-archive-container {
+  /* background-color: yellow; */
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 5px; }
+
+#share-button {
+  margin-right: 10px; }
+
+#dropdown {
+  margin-top: 5px;
+  margin-bottom: 5px; }
+
+#image {
+  width: 100%;
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-bottom: 15px; }
+
+#image img {
+  width: 100%; }
+
+#blogreadtext {
+  width: 100%;
+  margin-left: 2%;
+  margin-right: 2%;
+  text-align: justify;
+  font-size: 18px;
+  font-family: "Open Sans Condensed", sans-serif;
+  color: #C4DFE6;
+  /*font-family: Perpetua, Baskerville, "Big Caslon", "Palatino Linotype", Palatino, "URW Palladio L", "Nimbus Roman No9 L", serif;*/ }
+
+#blogreadtext h3, li {
+  font-family: "Open Sans Condensed", sans-serif; }
+
+#blogreadtext img {
+  width: 100%; }
+
+#blogreadtext a:hover {
+  text-decoration: none;
+  color: red; }
+
+@media screen and (min-width: 600px) {
+  #container {
+    width: 60%;
+    position: relative;
+    left: 20%;
     display: flex;
     flex-direction: row;
-    margin-bottom: 5px;
-  }
-  #share-button {
-    margin-right: 10px;
-  }
-	#dropdown {
-    margin-top: 5px;
-		margin-bottom: 5px;
-	}
-	#image {
-		width: 100%;
-		margin-left: 2%;
-		margin-right: 2%;
-		margin-bottom: 15px;
-	}
-	#image img{
-		width: 100%;
-	}
-	#blogreadtext {
-		width: 100%;
-		margin-left: 2%;
-		margin-right: 2%;
-		text-align: justify;
-		font-size: 18px;
-		font-family: 'Open Sans Condensed', sans-serif;
-		/*font-family: Perpetua, Baskerville, "Big Caslon", "Palatino Linotype", Palatino, "URW Palladio L", "Nimbus Roman No9 L", serif;*/
-	}
-	#blogreadtext h3, li{
-		font-family: 'Open Sans Condensed', sans-serif;
-	}
-	#blogreadtext img {
-		width: 100%;
-	}
-  #blogreadtext a:hover {
-		text-decoration: none;
-    color: red;
-	}
+    flex-wrap: wrap;
+    justify-content: space-around; }
 
+  #image {
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 20px; }
 
-	@media screen and (min-width: 600px) {
+  #image img {
+    width: 100%; }
 
-		#container {
-			width: 60%;
-			position: relative;
-			left: 20%;
-			display: flex;
-	    flex-direction: row;
-	    flex-wrap: wrap;
-	    justify-content: space-around;
-		}
-		#image {
-			margin-left: 10%;
-			margin-right: 10%;
-			margin-bottom: 20px;
-		}
-		#image img{
-			width: 100%;
-		}
-		#blogreadtext {
-			margin-left: 10%;
-			margin-right: 10%;
-			text-align: justify;
-			font-size: 18px;
-			font-family: Perpetua, Baskerville, "Big Caslon", "Palatino Linotype", Palatino, "URW Palladio L", "Nimbus Roman No9 L", serif;
-		}
+  #blogreadtext {
+    margin-left: 10%;
+    margin-right: 10%;
+    text-align: justify;
+    font-size: 18px;
+    font-family: "Open Sans Condensed", sans-serif; } }
 
-	}
+/*# sourceMappingURL=blog_read.css.map */

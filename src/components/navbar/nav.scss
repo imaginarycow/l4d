@@ -1,8 +1,9 @@
 @font-face {
-    font-family: "Armenia Grunge";
-    src: url("../../assets/Armenia Grunge Italic.ttf");
+    font-family: "Armenia Gradient";
+    src: url("../../assets/Armenia Gradient.ttf");
 }
-$ff: 'Armenia Grunge';
+$ff: 'Armenia Gradient';
+$ff2: 'Open Sans Condensed', sans-serif;
 // $barColor: #66A5AD;
 $barColor: rgba(0, 0, 0, 0.418);
 // $barColor: #07575B;
@@ -13,70 +14,127 @@ $textColor: #C4DFE6;
 
     
 /* small screens */
-#menu-button{
-background: rgb(148, 35, 35);
-width: 50px;
-border-radius: 5px;
-position: relative;
-cursor: pointer;
-transition: all linear .3s;
-padding: 4px;
-z-index: 11;
+#menu-button {
+    background: rgb(148, 35, 35);
+    width: 50px;
+    border-radius: 5px;
+    position: relative;
+    cursor: pointer;
+    transition: all linear .3s;
+    padding: 4px;
+    z-index: 11;
 }
 
-#menu-button.active{
-background: #dfd3d3;
+#menu-button.active {
+    background: #dfd3d3;
 }
 #line-1,#line-2,#line-3{
-width: 90%;
-background: #fff;
-height: 8px;
-margin: 4px auto;
-border-radius: 2px;
-transition: all linear .3s;
+    width: 90%;
+    background: #fff;
+    height: 8px;
+    margin: 4px auto;
+    border-radius: 2px;
+    transition: all linear .3s;
 }
 
 #line-1.active{
--webkit-transform: translate(0px,12px) rotate(45deg);
-transform: translate(0px,12px) rotate(45deg);
+    -webkit-transform: translate(0px,12px) rotate(45deg);
+    transform: translate(0px,12px) rotate(45deg);
 }
 
 #line-2.active{
-opacity: 0;
+    opacity: 0;
 }
 
 #line-3.active{
--webkit-transform: translate(0px, -12px) rotate(-45deg);
-transform: translate(0px, -12px) rotate(-45deg);
+    -webkit-transform: translate(0px, -12px) rotate(-45deg);
+    transform: translate(0px, -12px) rotate(-45deg);
 }
 
 #navigationMenu {
 /* background: #0f7542; */
-/* background-color: skyblue; */
-width: 150px;
-padding: 10px;
-padding-top: 30px;
-color: #fff;
-font-family: 'Armenia Grunge';
-font-size: 1.5rem;
-display: none;
-top: 8px;
-border-radius: 5px;
-z-index: 10;
-margin-bottom: 10px;
+    // background-color: rgb(20, 121, 107);
+    // background-color: rgb(117, 34, 48); 
+    width: 150px;
+    padding: 10px;
+    padding-top: 30px;
+    font-family: $ff;
+    font-size: 1.5rem;
+    display: none;
+    top: 8px;
+    border-radius: 5px;
+    z-index: 10;
+    margin-bottom: 10px;
 }
 
-#navigationMenu ul{
-list-style: none;
+#navContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
-#navigationMenu ul li{
-margin: 8px 0;
-/* color: green; */
+.topnav {
+    margin-right: 15px;
 }
+
+.navList {
+    display: none;
+    list-style: none;
+}
+
+.navList li {
+    margin: 5px 10px;
+}
+
+.navList.responsive {
+    border-radius: 10px;
+    background: rgb(73, 172, 185);
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    padding-left: 0;
+    list-style: none;
+}
+
+#icon {
+    font-size: 50px;
+    text-decoration: none;
+    color:  #C4DFE6;
+}
+
+#icon:hover {
+    color: red;
+}
+
+.navLink {
+    color: $textColor;
+    font-family: $ff;
+    font-size: 20px;
+}
+.navLink:hover {
+    text-decoration: none;
+    color: red;
+}
+hr {
+    border:  rgb(168, 166, 166);
+}
+
+
 
 /* larger screens */
-@media (min-width: 600px) {
+@media (min-width: 705px) {
+
+    #icon {
+        display: none;
+    }
+
+    #navContainer {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
 
     #menu-button {
         display: none;
@@ -86,32 +144,26 @@ margin: 8px 0;
         margin: 0px;
         display: flex;
         border-radius: 0;
-        background: $barColor;
         width: 100%;
         z-index: 10;
+        // background: #000;
     }
     #navListContainer {
-        // background: chartreuse;
         flex-grow: 1;
         justify-content: center
     }
     .navList {
         display: flex;
         flex-direction: row;
-        // background: blue;
+        flex-wrap: wrap;
         justify-content: center;
     }
     .navList li {
         margin-right: 10px;
         padding-right: 10px;
-        font-family: $ff;
     }
     .navLink {
-        color: $textColor;
-    }
-    .navLink:hover {
-        text-decoration: none;
-        color: red;
+        font-size: 30px;
     }
 
 }

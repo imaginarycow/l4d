@@ -28,7 +28,7 @@ export class BlogPreview extends Component {
         <div id="previewcontainer">
           <h1 id="previewtitle">{title}</h1>
           {/* <h4 id="subtitle">{subtitle}</h4> */}
-          <h4 id="postedby">{date}</h4>
+          <h4 id="postedBy">{date}</h4>
           <div id="image">
             <Link to={`/Blog/${urltitle}`} ><img src={url} alt='blog'/></Link>
           </div>

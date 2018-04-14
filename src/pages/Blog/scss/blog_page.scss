@@ -1,0 +1,24 @@
+#blogpagecontainer {
+    margin-top: 50px;
+    width: 96%;
+    position: relative;
+    left: 2%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  
+}
+  
+@media screen and (min-width: 600px) {
+
+    #blogpagecontainer {
+        width: 60%;
+        position: relative;
+        left: 20%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+}
+  

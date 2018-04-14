@@ -15,7 +15,7 @@ class BlogRead extends Component {
 
   constructor() {
     super();
-
+    console.log(this.props);
     this.state = {
       blog: null,
       hashtags: '',

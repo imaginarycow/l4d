@@ -19,6 +19,7 @@ class NavigationBar extends Component {
       }
       this.toggleMenu = this.toggleMenu.bind(this);
       this.updateUser = this.updateUser.bind(this);
+      this.handleResize =this.closeDropDownMenu.bind(this);
     }
 
     componentDidMount() {
@@ -38,7 +39,13 @@ class NavigationBar extends Component {
           that.setState({loginLink: link, loggedInUser: {displayName: 'Login'}});
         }
       });
+      window.addEventListener("resize", this.closeDropDownMenu);
     }
+
+    componentWillUnmount () {
+      window.removeEventListener("resize", this.closeDropDownMenu);
+    }
+
     updateUser(user, that) {
       var userRef = firebase.database().ref('users/'+user.uid+'/displayName');
       userRef.on('value', function(snapshot) {
@@ -51,46 +58,38 @@ class NavigationBar extends Component {
       })
     }
 
+    closeDropDownMenu () {
+      const el = document.getElementById('myNavList');
+      if (el.classList.contains('responsive')) {
+        el.className = "navList";
+      }
+    }
+
     toggleMenu() {
-
-      const menuButton = findDOMNode(this.refs.menuButton);
-      $(menuButton).toggleClass("active");
-
-      const line1 = findDOMNode(this.refs.line1);
-      $(line1).toggleClass("active");
-      const line2 = findDOMNode(this.refs.line2);
-      $(line2).toggleClass("active");
-      const line3 = findDOMNode(this.refs.line3);
-      $(line3).toggleClass("active");
-
-      const menu = findDOMNode(this.refs.navigationMenu);
-      $(menu).slideToggle("slow");
+       
+      const el = document.getElementById('myNavList');
+      if (el.className === "navList") {
+        el.className += " responsive";
+      } else {
+        el.className = "navList";
+      }
       
     }
 
     render() {
 
   		return (
-        <div>
-
-          <div id="menu-button"  ref="menuButton" onClick={this.toggleMenu}>
-            <div id="line-1" ref="line1" ></div>
-            <div id="line-2" ref="line2" ></div>
-            <div id="line-3" ref="line3" ></div>
+        <div id="navContainer">
+          <Logo subtitle='Because Life is too short' />
+          <div className="topnav" id="myTopnav" >
+            <a id="icon" href="#" onClick={this.toggleMenu}>&#9776;</a>
+            <ul className="navList" id="myNavList">
+              <li onClick={this.closeDropDownMenu}><NavLink to="/Blog" className="navLink active">Blog</NavLink></li>
+              <li onClick={this.closeDropDownMenu}><NavLink to="/QotW" className="navLink">QotW</NavLink></li>
+              <li onClick={this.closeDropDownMenu}><NavLink to="/Comments" className="navLink">Comments</NavLink></li>
+              <li onClick={this.closeDropDownMenu}><NavLink to={this.state.loginLink} className="navLink">{this.state.loggedInUser.displayName}</NavLink></li>
+            </ul>
           </div>
-
-          <div id="navigationMenu" ref="navigationMenu">
-            <Logo subtitle='Because Life is too short' />
-            <div id="navListContainer">
-              <ul className="navList">
-                <li><NavLink to="/Blog" className="navLink">Blog</NavLink></li>
-                <li><NavLink to="/QotW" className="navLink">QotW</NavLink></li>
-                <li><NavLink to="/Comments" className="navLink">Comments</NavLink></li>
-                <li><NavLink to={this.state.loginLink} className="navLink">{this.state.loggedInUser.displayName}</NavLink></li>
-              </ul>
-            </div>
-          </div>
-
         </div>
   		);
 	}

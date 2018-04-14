@@ -6,8 +6,7 @@ export default class Footer extends Component {
   render() {
     return (
       <div id="footer">
-          <Logo />
-          Copyright 2018.
+        <Logo subtitle={this.props.subtitle}/>  
       </div>
     );
   }

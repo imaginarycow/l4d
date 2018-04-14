@@ -24,9 +24,9 @@ class QOTD extends Component {
   }
 
   render() {
-
+   
     if (this.props.qotd !== null) {
-
+      
       if (this.props.comments === null && commentsReceived === false) {
         console.log('get comments called');
           this.props.GetComments(this.props.qotd.commentGroupId);

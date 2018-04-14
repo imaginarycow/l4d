@@ -1,6 +1,6 @@
 @font-face {
-  font-family: "Armenia Grunge";
-  src: url("../../assets/Armenia Grunge Italic.ttf"); }
+  font-family: "Armenia Gradient";
+  src: url("../../assets/Armenia Gradient.ttf"); }
 /* small screens */
 #menu-button {
   background: #942323;
@@ -36,12 +36,10 @@
 
 #navigationMenu {
   /* background: #0f7542; */
-  /* background-color: skyblue; */
   width: 150px;
   padding: 10px;
   padding-top: 30px;
-  color: #fff;
-  font-family: 'Armenia Grunge';
+  font-family: "Armenia Gradient";
   font-size: 1.5rem;
   display: none;
   top: 8px;
@@ -49,15 +47,62 @@
   z-index: 10;
   margin-bottom: 10px; }
 
-#navigationMenu ul {
+#navContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between; }
+
+.topnav {
+  margin-right: 15px; }
+
+.navList {
+  display: none;
   list-style: none; }
 
-#navigationMenu ul li {
-  margin: 8px 0;
-  /* color: green; */ }
+.navList li {
+  margin: 5px 10px; }
+
+.navList.responsive {
+  border-radius: 10px;
+  background: #49acb9;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  padding-left: 0;
+  list-style: none; }
+
+#icon {
+  font-size: 50px;
+  text-decoration: none;
+  color: #C4DFE6; }
+
+#icon:hover {
+  color: red; }
+
+.navLink {
+  color: #C4DFE6;
+  font-family: "Armenia Gradient";
+  font-size: 20px; }
+
+.navLink:hover {
+  text-decoration: none;
+  color: red; }
+
+hr {
+  border: #a8a6a6; }
 
 /* larger screens */
-@media (min-width: 600px) {
+@media (min-width: 705px) {
+  #icon {
+    display: none; }
+
+  #navContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between; }
+
   #menu-button {
     display: none; }
 
@@ -66,7 +111,6 @@
     margin: 0px;
     display: flex;
     border-radius: 0;
-    background: rgba(0, 0, 0, 0.418);
     width: 100%;
     z-index: 10; }
 
@@ -77,18 +121,14 @@
   .navList {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center; }
 
   .navList li {
     margin-right: 10px;
-    padding-right: 10px;
-    font-family: "Armenia Grunge"; }
+    padding-right: 10px; }
 
   .navLink {
-    color: #C4DFE6; }
-
-  .navLink:hover {
-    text-decoration: none;
-    color: red; } }
+    font-size: 30px; } }
 
 /*# sourceMappingURL=nav.css.map */

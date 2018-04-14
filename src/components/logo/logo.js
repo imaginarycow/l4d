@@ -23,8 +23,8 @@ export default class Logo extends Component {
 
     return (
       <div id="logo" onClick={this.handleClick}>
-        <h2>Left<span id="four">4</span>Dev</h2>
-        <h5>{this.props.subtitle}</h5>
+        <h1 id="logoText">Left<span id="four">4</span>Dev</h1>
+        <span>{this.props.subtitle}</span>
       </div>
     );
   }

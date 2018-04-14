@@ -1,0 +1,39 @@
+@font-face {
+    font-family: "Armenia";
+    src: url("../../assets/Armenia Gradient.ttf");
+}
+$ff: 'Open Sans Condensed', sans-serif;
+$ff: 'Armenia';
+$textColor: #C4DFE6;
+
+#homeContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    position: relative;
+    width: 94%;
+    left: 3%;
+    margin-top: 20px;
+    font-family: $ff;
+    color: rgba(131, 175, 180, 0.89);
+    color: $textColor;
+
+    div {
+        width: 100%;
+    }
+
+    img {
+        // width: 100%;
+    }
+}
+
+
+@media(min-width: 600px) {
+    #homeContainer {
+        position: relative;
+        width: 80%;
+        left: 10%;
+        display: flex;
+        justify-content: space-between;
+    }
+}

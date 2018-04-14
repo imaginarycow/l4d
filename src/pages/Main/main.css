@@ -1,23 +1,26 @@
 @font-face {
-    font-family: "Armenia Grunge";
-    src: url("../../assets/Armenia Grunge Italic.ttf");
-}
+  font-family: "Armenia";
+  src: url("../../assets/Armenia Gradient.ttf"); }
 #homeContainer {
-    color: rgba(211, 126, 29, 0.89);
-    position: absolute;
-    width: 100%;
-    margin-top: 20px;
-    font-family: 'Armenia Grunge';
-}
-#homeContainer img {
-    width: 100%;
-}
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  position: relative;
+  width: 94%;
+  left: 3%;
+  margin-top: 20px;
+  font-family: "Armenia";
+  color: rgba(131, 175, 180, 0.89);
+  color: #C4DFE6; }
+  #homeContainer div {
+    width: 100%; }
 
 @media (min-width: 600px) {
+  #homeContainer {
+    position: relative;
+    width: 80%;
+    left: 10%;
+    display: flex;
+    justify-content: space-between; } }
 
-    #homeContainer {
-        width: 60%;
-        position: relative;
-        left: 20%; 
-    }
-}
+/*# sourceMappingURL=main.css.map */

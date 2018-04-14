@@ -1,9 +1,21 @@
+@font-face {
+  font-family: "Armenia";
+  src: url("../../assets/Armenia Gradient.ttf");
+}
+
 #notFound {
   width: 90%;
   position: relative;
   left: 5%;
   margin-top: 60px;
+  margin-bottom: 30px;
 }
+
+#notFound h3 {
+  color: rgb(218, 197, 197);
+  font-family: 'Armenia';
+}
+
 #notFound img{
   width: 100%;
 }

@@ -1,0 +1,66 @@
+@font-face {
+    font-family: "Bungee";
+    src: url("../../../assets/bungee.ttf");
+  }
+  @font-face {
+    font-family: "Armenia";
+    src: url("../../../assets/Armenia Gradient.ttf");
+  }
+  // font-family: Impact, Charcoal, sans-serif;
+    // font-family: Bungee;
+    // font-family: Perpetua, Baskerville, "Big Caslon", "Palatino Linotype", Palatino, "URW Palladio L", "Nimbus Roman No9 L", serif;
+  $ff1: 'Armenia';
+  $ff2: 'Open Sans Condensed', sans-serif;
+  $color1: #C4DFE6;
+
+  #previewcontainer {
+    width: 100%;
+    text-align: center;
+    color: $color1;
+  }
+  #previewtitle {
+    width: 100%;
+    font-size: 24px;
+    margin-bottom: 0px;
+    font-family: $ff1;
+    color: $color1;
+  }
+  #subtitle {
+    width: 100%;
+  }
+  #postedBy {
+    width: 100%;
+    font-size: 16px;
+    font-family: $ff2;
+    color: $color1;
+  }
+  #blogtext{
+    font-family: $ff2;
+    text-align: justify;
+    margin-top: 10px;
+    margin-bottom: 50px;
+    font-size: 16px;
+  }
+  #previewcontainer #image {
+    width: 100%;
+    margin: 0px;
+  }
+  #previewcontainer #image:hover {
+      box-shadow: 0 0 2rem #FE2E2E;
+  }
+  #previewcontainer #image img {
+    margin: 0px;
+    width: 100%;
+  }
+  
+  @media screen and (min-width: 800px) {
+  
+    #previewcontainer {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      width: 40%;
+    }
+  
+  }
+  

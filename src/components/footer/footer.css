@@ -1,23 +1,23 @@
 #footer {
   position:absolute;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
   text-align: center;
   bottom:0;
   width:100%;
-  height: 60px;
-  padding: 1rem;
-  background: rgba(0, 0, 0, 0.418);
+  background: rgb(0, 0, 0, 0.3);
   color: #C4DFE6;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
 }
-#footer #logo {
-  width: 150px;
+#footer div {
+  width: 100%;
+  text-align: center;
 }
-#footer #logo h2 {
+#footer #logo #logoText {
   margin: 0px;
+  font-size: 25px;
 }

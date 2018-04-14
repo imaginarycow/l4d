@@ -22,27 +22,36 @@ import PageNotFound from './pages/404/App';
 
 class App extends Component {
 
+  componentDidMount () {
+
+    
+  }
+
   render() {
 
     return (
       <div id="appcontainer">
-        {/* <div id="navigationContainer"> */}
-        
-        {/* </div>   */}
-
         <div id="routedAppContainer">  
           <Router>
             <div>
             <Navbar that={this}/>
+            <Switch>
               <Route exact path="/" component={Home} />
-              <Route path="/Blog" component={Blog} />
+              <Route path="/Admin" component={Admin} />
+              <Route exact path="/Blog" component={Blog} />
+              <Route path='/Blog/:title'component={BlogRead} />
               <Route path="/Comments" component={Comments} />
+              <Route path="/Login" component={Login} />
+              <Route path="/Logout" component={Logout} />
               <Route path="/QotW" component={QotW} />
               <Route path="/Profile" component={Profile} />
+              <Route path="/Signup" component={Signup} />
+              <Route component={PageNotFound} />
+            </Switch>  
             </div>
           </Router>
         </div>    
-        <Footer /> 
+        <Footer subtitle="Copyright 2018."/> 
       </div>
     );
   }
