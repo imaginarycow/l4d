@@ -2,18 +2,33 @@ import firebase from '../../firebase/firebase.js';
 import toastr from 'toastr';
 import '../../toastr/build/toastr.css';
 
-export function logUserIn(user) {
+export function updateLoggedInUser(user) {
+  console.log('user updated');
+  console.log(user.email);
+  // const loggedInUser = {
 
-  const loggedInUser = {
-
-    email: user.email,
-    username: user.displayName,
-    image: user.photoURL
-  }
+  //   email: user.email,
+  //   username: user.displayName,
+  //   image: user.photoURL
+  // }
 
   return {
     type: 'LOGIN_USER',
-    payload: loggedInUser
+    payload: user
+  }
+}
+
+export function updateLocalUserObject(user) {
+  console.log('user type');
+  console.log(typeof user);
+  if (user !== null) {
+
+    return function(dispatch) {
+      let userRef = firebase.database().ref('users/'+user.uid);
+            userRef.on('value', function(snapshot) {
+              dispatch(updateLoggedInUser(snapshot.val()));
+            });
+    }
   }
 }
 
@@ -29,9 +44,11 @@ export default function LoginUser(email, pass) {
     .then(function() {
 
       firebase.auth().signInWithEmailAndPassword(email, pass)
-      .then((response) => {
-        dispatch(logUserIn(response));
-      })
+      // .then((user) => {
+      //   //successful login to firebase, then get custom user object
+      //   console.log('user successfully logged in');
+      //   dispatch(updateLocalUserObject(user));
+      // })
       .catch((error) => {
         var errorCode = error.code;
         var errorMessage = error.message;

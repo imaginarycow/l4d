@@ -104,7 +104,7 @@ class Login extends Component {
 
   render() {
 
-    if (this.props.user.email !== 'undefined') {
+    if (this.props.user.email !== 'undefined' && this.props.user.email !== null) {
       return <Redirect to='/'/>;
       // console.log(this.props.lastPage.link);
       // return <Redirect to={this.props.lastPage.link}/>;
@@ -137,9 +137,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-
   return bindActionCreators({LoginUser}, dispatch);
-
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

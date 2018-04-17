@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import Dropdown from '../../../components/dropdown/dropdown';
 import BlogLoad from '../../../redux/actions/blog_get';
 import GetComments from '../../../redux/actions/blog_comments_get';
@@ -65,6 +66,10 @@ class BlogRead extends Component {
   }
 
   render () {
+
+      if (this.props.currBlog === 'undefined') {
+        return <Redirect to="/Blog" />
+      }
 
       if (this.props.currBlog !== null) {
         var blog = this.props.currBlog;

@@ -7,8 +7,6 @@ export default function LogoutUser() {
     image: 'undefined'
   }
 
-  console.log('loggin out user: ' + loggedOutUser);
-
   return {
     type: 'LOGOUT_USER',
     payload: loggedOutUser

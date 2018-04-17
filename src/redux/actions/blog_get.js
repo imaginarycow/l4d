@@ -13,6 +13,12 @@ function setBlog(title, blogs) {
         blog = blogs[i];
       }
     }
+    if (blog === null) { 
+      return {
+        type:'SET_BLOG',
+        payload: 'undefined' };
+    }
+    
     return {
       type: 'SET_BLOG',
       payload: blog
@@ -27,14 +33,13 @@ function setBlog(title, blogs) {
   }
 }
 function getAllBlogs(blogs) {
-  console.log(blogs);
-  var filteredBlogs = [];
+
+  let filteredBlogs = [];
 
   // only return blogs that have today's date or earlier
   for (var i in blogs) {
     if (blogs[i].publish == true) {
       filteredBlogs.push(blogs[i]);
-      console.log(blogs[i]);
     }
   }
 

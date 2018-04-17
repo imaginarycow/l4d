@@ -77,7 +77,7 @@ class Profile extends Component {
     //check alias object to see if username is available
     var aliasRef = firebase.database().ref('aliases/'+currText);
     aliasRef.once('value', function(snapshot) {
-      console.log(snapshot.val());
+
       if (snapshot.val() !== null && that.state.firebaseUser.displayName !== currText) {
         that.setState({aliasAvailable: false});
       }else {

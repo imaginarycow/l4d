@@ -63,6 +63,7 @@ class Signup extends Component {
           uid: user.uid,
           isSuspended: false,
           isBanned: false,
+          permissions: ["READ"],
           votes: []
         };
         firebase.database().ref('users/'+user.uid).set(newUser);

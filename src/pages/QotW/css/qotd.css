@@ -29,6 +29,7 @@
 }
 #question {
   width: 100%;
+  color: #C4DFE6;
 }
 #choice-area {
   display: flex;

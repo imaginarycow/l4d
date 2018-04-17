@@ -1,11 +1,15 @@
 #choice1 {
   width: 40%;
+  color: #fff;
+  font-family: 'Open Sans Condensed', sans-serif;
 }
 #choice1 img{
   width: 100%;
 }
 #choice2 {
   width: 40%;
+  color: #fff;
+  font-family: 'Open Sans Condensed', sans-serif;
 }
 #choice2 img{
   width: 100%;
@@ -13,6 +17,7 @@
 #or {
   width: 2%;
   text-align: center;
+  color: #fff;
 }
 #or h4 {
   margin-top: 30px;

@@ -4,6 +4,7 @@ import DoodlesView from './views/doodles_view';
 import QotdView from './views/qotd_view';
 import WorstView from './views/worst_view';
 import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 import firebase from '../../firebase/firebase.js';
 import './css/admin_view_css.css';
 
@@ -26,18 +27,8 @@ class Admin extends Component {
     this.updateDisplay = this.updateDisplay.bind(this);
   }
 
-  componentWillMount() {
-    var that = this;
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        // User is signed in.
-        that.setState({authorized: true});
-      } else {
-        // No user is signed in.
-        that.setState({authorized: false});
-      }
-    });
-
+  componentDidMount() {
+    console.log(this.props);
   }
 
   handleChange(e) {
@@ -75,9 +66,12 @@ class Admin extends Component {
 
   render () {
 
-    if (!this.state.authorized) {
+    // check if user logged out
+    if (!this.props.user.email || this.props.user.email === 'undefined') {
       return <Redirect to="404 - Page Not Found" />;
     }
+    // validate user has correct permissions to access admin page
+
 
     this.getOptions();
     return (
@@ -93,4 +87,8 @@ class Admin extends Component {
   }
 }
 
-export default Admin;
+function mapStateToProps(state) {
+  return {user: state.user};
+}
+
+export default connect(mapStateToProps)(Admin);

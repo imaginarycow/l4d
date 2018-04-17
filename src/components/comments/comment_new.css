@@ -2,6 +2,10 @@
   font-family: "Bungee";
   src: url("../../assets/bungee.ttf");
 }
+@font-face {
+  font-family: "Armenia";
+  src: url("../../assets/Armenia Gradient.ttf");
+}
 #newcommentcontainer {
   display: flex;
   flex-direction: row;
@@ -29,7 +33,7 @@
 #user h4 {
   margin-left: 15px;
   color: #4897CB;
-  font-family: Bungee;
+  font-family: Armenia;
   /*font-family: Impact, Charcoal, sans-serif;*/
 }
 #newcommentcontainer #text {
