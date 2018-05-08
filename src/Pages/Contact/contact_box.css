@@ -23,8 +23,12 @@
   text-align: left;
   margin-bottom: 15px;
 }
+.white {
+  color: white;
+}
 #comment-box #name {
   width: 15%;
+  color: white;
 }
 #comment-box #namein {
   float: left;
@@ -33,6 +37,7 @@
 }
 #comment-box #emaillabel {
   width: 15%;
+  color: white;
 }
 #comment-box #emailin {
   float: left;

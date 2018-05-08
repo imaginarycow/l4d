@@ -84,7 +84,8 @@ class NavigationBar extends Component {
       let tabs = [];
       tabs.push(<li key="Blog" onClick={this.closeDropDownMenu}><NavLink to="/Blog" className="navLink active">Blog</NavLink></li>);
       tabs.push(<li key="Qotw" onClick={this.closeDropDownMenu}><NavLink to="/QotW" className="navLink">QotW</NavLink></li>);
-      tabs.push(<li key="Comments" onClick={this.closeDropDownMenu}><NavLink to="/Comments" className="navLink">Comments</NavLink></li>);
+      tabs.push(<li key="About" onClick={this.closeDropDownMenu}><NavLink to="/About" className="navLink">About</NavLink></li>);
+      tabs.push(<li key="Contact" onClick={this.closeDropDownMenu}><NavLink to="/Contact" className="navLink">Contact</NavLink></li>);
       tabs.push(<li key="Login" onClick={this.closeDropDownMenu}><NavLink to={this.state.loginLink} className="navLink">{this.state.loggedInUser.displayName}</NavLink></li>);
 
       if (this.props.user.permissions){

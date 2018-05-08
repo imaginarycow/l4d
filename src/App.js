@@ -9,9 +9,10 @@ import './css/App.css';
 // Pages
 import Home from './pages/Main/Main';
 import QotW from './pages/QotW/App';
+import About from './pages/About/about';
 import Blog from './pages/Blog/App';
 import BlogRead from './pages/Blog/components/blog_read';
-import Comments from './pages/Comment/App';
+import Contact from './pages/Contact/App';
 import Login from './pages/Login/App';
 import Logout from './pages/Login/Logout';
 import Signup from './pages/Login/Signup';
@@ -38,9 +39,10 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/Admin" component={Admin} />
+              <Route path="/About" component={About} />
               <Route exact path="/Blog" component={Blog} />
               <Route path='/Blog/:title'component={BlogRead} />
-              <Route path="/Comments" component={Comments} />
+              <Route path="/Contact" component={Contact} />
               <Route path="/Login" component={Login} />
               <Route path="/Logout" component={Logout} />
               <Route path="/QotW" component={QotW} />

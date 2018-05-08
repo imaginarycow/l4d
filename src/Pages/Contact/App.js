@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import firebase from '../../firebase/firebase.js';
 import toastr from 'toastr';
 import '../../toastr/build/toastr.css';
-import './comment_box.css';
+import './contact_box.css';
 
 
 class CommentBox extends Component {
@@ -98,8 +98,8 @@ class CommentBox extends Component {
 
     return (
       <div id="comment-box">
-        <h3>Comments / Suggestions</h3>
-        <h5>(login to leave a message)</h5>
+        <h3 className="white">Comments / Suggestions</h3>
+        <h5 className="white">(login to leave a message)</h5>
         <form onSubmit={this.handleSubmit}>
           <input id="namein" type="text" name="name" value={this.state.name} onChange={this.handleChange}/>
           <label id="name">Name</label>
