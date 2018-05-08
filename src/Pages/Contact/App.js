@@ -98,7 +98,7 @@ class CommentBox extends Component {
 
     return (
       <div id="comment-box">
-        <h3 className="white">Comments / Suggestions</h3>
+        <h3 className="white">Comments / Suggestions / Just Bored and want to chat?</h3>
         <h5 className="white">(login to leave a message)</h5>
         <form onSubmit={this.handleSubmit}>
           <input id="namein" type="text" name="name" value={this.state.name} onChange={this.handleChange}/>

@@ -28,7 +28,7 @@ class Login extends Component {
     this.toggleAccountView = this.toggleAccountView.bind(this);
 
     toastr.options = {
-      "positionClass": "toast-top-full-width",
+      "positionClass": "toast-top-center",
       "closeButton": true,
       "preventDuplicates": true
     }
@@ -115,19 +115,21 @@ class Login extends Component {
     }
 
     return (
-      <div id="loginContainer">
-        <form id="form" onSubmit={this.login}>
-          <h3 id="loginLabel">Login</h3>
-          <label id="elabel">Email</label>
-          <input id="email" type="text" value={this.state.email} onChange={this.onChange} name="email" />
-          <label id="passlabel">Password</label>
-          <input id="pass" type="password" value={this.state.pass} onChange={this.onChange} name="pass" />
-          <input id="submit" type="submit" value="Sign In" />
-          <button id="reset" onClick={this.sendPasswordReset}>I forgot my password.</button>
-          <label id="label3">Don't have a Left4Dev account?</label>
-          <button id="create" onClick={this.toggleAccountView}>Create a free account</button>
-        </form>
-      </div>
+      <div id="outerContainer">
+        <div id="loginContainer">
+          <form id="form" onSubmit={this.login}>
+            <h3 id="loginLabel">Sign In</h3>
+            <label id="elabel">Email</label>
+            <input id="email" type="text" value={this.state.email} onChange={this.onChange} name="email" />
+            <label id="passlabel">Password</label>
+            <input id="pass" type="password" value={this.state.pass} onChange={this.onChange} name="pass" />
+            <input id="submit" type="submit" value="Sign In" />
+            <button id="reset" onClick={this.sendPasswordReset}>I forgot my password ;(</button>
+            <label id="label3"></label>
+            <button id="create" onClick={this.toggleAccountView}>I don't have a Left4Dev account</button>
+          </form>
+        </div>
+      </div>  
     );
   }
 }

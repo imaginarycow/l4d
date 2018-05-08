@@ -20,7 +20,7 @@ class Signup extends Component {
       stepTwo: false
     }
     toastr.options = {
-      "positionClass": "toast-top-full-width",
+      "positionClass": "toast-top-center",
       "closeButton": true,
       "preventDuplicates": true
     }
@@ -109,17 +109,18 @@ class Signup extends Component {
     }
 
     return (
-      <div id="loginContainer">
-
-        <form id="form" onSubmit={this.signUp}>
-          <h3 id="loginLabel">Create a new account</h3>
-          <label id="elabel">Email</label>
-          <input id="email" type="text" value={this.state.email} onChange={this.onChange} name="email" />
-          <label id="passlabel">Password</label>
-          <input id="pass" type="password" placeholder="must be at least 8 characters" value={this.state.pass} onChange={this.onChange} name="pass" />
-          <input id="submit" type="submit" value="Create Account" />
-          <button id="create" onClick={this.toggleAccountView}>Back to sign in</button>
-        </form>
+      <div id="outerContainer">
+        <div id="loginContainer">
+          <form id="form" onSubmit={this.signUp}>
+            <h3 id="loginLabel">Create a new account</h3>
+            <label id="elabel">Email</label>
+            <input id="email" type="text" value={this.state.email} onChange={this.onChange} name="email" />
+            <label id="passlabel">Password</label>
+            <input id="pass" type="password" placeholder="must be at least 8 characters" value={this.state.pass} onChange={this.onChange} name="pass" />
+            <input id="submit" type="submit" value="Create Account" />
+            <button id="create" onClick={this.toggleAccountView}>Back to sign in</button>
+          </form>
+        </div>
       </div>
     );
   }
