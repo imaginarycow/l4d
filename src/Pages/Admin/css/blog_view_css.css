@@ -1,4 +1,17 @@
-
+#blogAdminContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+#formContainer {
+  width: 45%;
+}
+#previewContainer {
+  width: 45%;
+  color: white;
+}
 #blog-form {
   display: flex;
   flex-direction: row;

@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import BlogLoad from '../../../redux/actions/blog_get';
 import { getFormattedDate, getUnformattedDate } from '../../../utils/dates';
 import firebase from 'firebase';
 import '../css/blog_view_css.css';
@@ -7,8 +10,9 @@ const initState = {author: '', blog: '', date: '', imgUrl: '', sub: '', title: '
 
 class BlogView extends Component {
 
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
+
     this.state = {
       author: initState.author,
       blog: initState.blog,
@@ -19,11 +23,33 @@ class BlogView extends Component {
       urltitle: '',
       snippet: '',
       snippetcount: 0,
-      wordcount: initState.count
+      wordcount: initState.count,
+      pastBlog: {}
     };
-
+    this.resetState = this.resetState.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.getPastBlogs = this.getPastBlogs.bind(this);
+    this.handleBlogSelect = this.handleBlogSelect.bind(this);
+  }
+
+  componentWillMount() {
+    this.props.BlogLoad();
+  }
+
+  resetState() {
+    this.setState ({
+      author: initState.author,
+      blog: initState.blog,
+      date: getFormattedDate(),
+      imgUrl: initState.imgUrl,
+      subtitle: initState.sub,
+      title: initState.title,
+      urltitle: '',
+      snippet: '',
+      snippetcount: 0,
+      wordcount: initState.count
+    });
   }
 
   handleChange(e) {
@@ -98,24 +124,47 @@ class BlogView extends Component {
         imgUrl: this.state.imgUrl,
         subtitle: this.state.subtitle,
         title: this.state.title,
+        publish: true,
         urltitle: this.state.urltitle,
         snippet: this.state.snippet
       });
-
-      this.setState ({
-        author: initState.author,
-        blog: initState.blog,
-        date: getFormattedDate(),
-        imgUrl: initState.imgUrl,
-        subtitle: initState.sub,
-        title: initState.title,
-        urltitle: '',
-        snippet: '',
-        snippetcount: 0,
-        wordcount: initState.count
-      });
+      this.resetState();
     }
 
+  }
+
+  handleBlogSelect(e) {
+    let val = e.target.value;
+    if (val === 'New') {
+      //reset to default state
+      this.resetState();
+    } 
+    else {
+      this.props.pastBlogs.map((blog) => {
+        if (blog.title === val) {
+          this.setState ({
+            author: blog.author,
+            blog: blog.blog,
+            date: blog.date,
+            imgUrl: blog.imgUrl,
+            subtitle: blog.sub,
+            title: blog.title,
+            urltitle: blog.urltitle,
+            snippet: blog.snippet,
+            snippetcount: 0,
+            wordcount: initState.count
+          });
+        }
+      })
+    }
+  }
+
+  getPastBlogs(pastBlogs) {
+    let blogs = [<option key="new">New</option>];
+    pastBlogs.map((blog) => {
+      blogs.push(<option key={blog.commentGroupId}>{blog.title}</option>);
+    });
+    return blogs;
   }
 
   render() {
@@ -128,41 +177,55 @@ class BlogView extends Component {
       textAlign: 'left'
     }
 
+    const blogs = this.props.pastBlogs !== null ? this.getPastBlogs(this.props.pastBlogs) 
+                                                : [<option>New</option>];
+
     return (
-      <div>
-        <form id="blog-form" onSubmit={this.handleSubmit}>
-          <label>Image url:</label>
-          <input type="text" name="url" value={this.state.imgUrl} onChange={this.handleChange}/>
-          <label>Author: {this.state.author}</label>
-          <input type="text" name="author" value={this.state.author} onChange={this.handleChange}/>
-          <label>Title: {this.state.title}</label>
-          <input type="text" name="title" value={this.state.title} onChange={this.handleChange}/>
-          <label>UrlTitle: Should be in the format "some-blog-title "{this.state.urltitle}</label>
-          <input type="text" name="urltitle" value={this.state.urltitle} onChange={this.handleChange}/>
-          <label>Subtitle: {this.state.subtitle}</label>
-          <input type="text" name="subtitle" value={this.state.subtitle} onChange={this.handleChange}/>
-          <label>Date Active: {this.state.date}</label>
-          <input type="text" name="date" value={this.state.date} onChange={this.handleChange} />
-          <label>New Post - Words: {this.state.wordcount}</label>
-          <textarea value={this.state.blog} name="blog" onChange={this.handleChange}></textarea>
-          <label>Snippet - Characters: {this.state.snippetcount} of 300</label>
-          <textarea value={this.state.snippet} name="snippet" onChange={this.handleChange}></textarea>
-          <input id="submit" type="submit" name="submit" value="Publish" />
-        </form>
-        <div>
-          <h2>Preview</h2>
-          <div id="blogpreviewarea">
-            <div><label>{this.state.title}</label></div>
-            <div><label>{this.state.subtitle}</label></div>
-            <div><label>published by: {this.state.author}</label></div>
-            <img src={this.state.imgUrl} />
-            <div id="blog-preview" style={prevStyle}></div>
-          </div>
+      <div id="blogAdminContainer">
+        <div id="formContainer">
+          <select onChange={this.handleBlogSelect}>{blogs}</select>
+          <form id="blog-form" onSubmit={this.handleSubmit}>
+            <label>Main Image url:</label>
+            <input type="text" name="url" value={this.state.imgUrl} onChange={this.handleChange}/>
+            <label>Author: {this.state.author}</label>
+            <input type="text" name="author" value={this.state.author} onChange={this.handleChange}/>
+            <label>Title: {this.state.title}</label>
+            <input type="text" name="title" value={this.state.title} onChange={this.handleChange}/>
+            <label>UrlTitle: Should be in the format "some-blog-title "{this.state.urltitle}</label>
+            <input type="text" name="urltitle" value={this.state.urltitle} onChange={this.handleChange}/>
+            <label>Subtitle: {this.state.subtitle}</label>
+            <input type="text" name="subtitle" value={this.state.subtitle} onChange={this.handleChange}/>
+            <label>Date Active: {this.state.date}</label>
+            <input type="text" name="date" value={this.state.date} onChange={this.handleChange} />
+            <label>New Post - Words: {this.state.wordcount}</label>
+            <textarea value={this.state.blog} name="blog" onChange={this.handleChange}></textarea>
+            <label>Snippet - Characters: {this.state.snippetcount} of 300</label>
+            <textarea value={this.state.snippet} name="snippet" onChange={this.handleChange}></textarea>
+            <input id="submit" type="submit" name="submit" value="Publish" />
+          </form>
         </div>
-    </div>
+        <div id="previewContainer">
+            <h2>Preview</h2>
+            <div id="blogpreviewarea">
+              <div><label>{this.state.title}</label></div>
+              <div><label>{this.state.subtitle}</label></div>
+              <div><label>published by: {this.state.author}</label></div>
+              <img src={this.state.imgUrl} />
+              <div id="blog-preview" style={prevStyle}></div>
+            </div>
+        </div>
+      </div>  
     );
   }
 
 }
 
-export default BlogView;
+const mapStateToProps = (state) => {
+  return { pastBlogs: state.allBlogs }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({BlogLoad}, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BlogView);

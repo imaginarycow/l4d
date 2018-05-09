@@ -54,7 +54,7 @@ class Admin extends Component {
       case 'QOTD':
         return <div id="selected-view"><QotdView /></div>;
       default:
-        return <div id="selected-view">Select an App</div>;
+        return <div id="selected-view"></div>;
     }
   }
 
@@ -76,11 +76,12 @@ class Admin extends Component {
     this.getOptions();
     return (
       <div id="admin-view">
-        <h3>Admin console</h3>
-        <select onChange={this.handleChange}>
-          {options}
-        </select>
-        <div id="list">List</div>
+        <div id="adminHeader">
+          <h3>Admin console</h3>
+          <select onChange={this.handleChange}>
+            {options}
+          </select>
+        </div>  
         {this.state.view}
       </div>
     );

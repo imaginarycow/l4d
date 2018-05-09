@@ -1,26 +1,27 @@
 #admin-view {
-  display: grid;
-  grid-template-columns: 2fr 4fr 2fr;
-  grid-template-rows: auto;
-  grid-template-areas:
-  "... title ..."
-  "... selector ..."
-  "... view list"
-  ;
-}
-#admin-view h3 {
-  grid-area: title;
-}
-#admin-view select {
-  grid-area: selector;
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+#adminHeader {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+#adminHeader h3 {
+  width: 100%;
+}
+#adminHeader select {
+
   margin-bottom: 15px;
 }
 #selected-view {
-  grid-area: view;
+  
 }
 #list {
-  grid-area: list;
+  
   background-color: blueviolet;
   width: auto;
 }
