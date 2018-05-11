@@ -114,6 +114,7 @@ class BlogView extends Component {
       alert('New Blog Post submitted: ' + this.state.blog);
       let blogKey = getUnformattedDate(this.state.date);
       let commentGroupId = 'BL' + blogKey;
+      console.log(blogKey);
       var database = firebase.database();
       firebase.database().ref('apps/blog/' + blogKey).set({
         author: this.state.author,
@@ -147,7 +148,7 @@ class BlogView extends Component {
             blog: blog.blog,
             date: blog.date,
             imgUrl: blog.imgUrl,
-            subtitle: blog.sub,
+            subtitle: blog.subtitle,
             title: blog.title,
             urltitle: blog.urltitle,
             snippet: blog.snippet,

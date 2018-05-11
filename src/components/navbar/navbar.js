@@ -53,8 +53,9 @@ class NavigationBar extends Component {
       var userRef = firebase.database().ref('users/'+user.uid);
       userRef.on('value', function(snapshot) {
         if (snapshot.val() !== null && snapshot.val() !== '') {
+          const userName = snapshot.val().displayName !== "" ? snapshot.val().displayName : snapshot.val().email;
           that.setState({
-            loggedInUser: {displayName: snapshot.val().displayName}
+            loggedInUser: {displayName: userName}
           });
           that.props.updateLoggedInUser(snapshot.val());
         }
@@ -104,7 +105,7 @@ class NavigationBar extends Component {
 
     render() {
       let tabs = this.getAvailableTabs();
-
+      console.log(this.props.user);
   		return (
         <div id="navContainer">
           <Logo subtitle='Because Life is too short' />

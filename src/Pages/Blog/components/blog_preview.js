@@ -12,7 +12,7 @@ export class BlogPreview extends Component {
   }
 
   render () {
-
+      
       var blog = this.props.blog;
       var text = StringShortener(blog.snippet, 300);
       var date = 'Posted '+blog.date + ` | By ${blog.author}`;
@@ -21,7 +21,9 @@ export class BlogPreview extends Component {
       var subtitle = blog.subtitle;
       var url = blog.imgUrl;
       var commentGroupId = blog.commentGroupId;
-
+      // if (document.getElementById("blogtext") !== null) {
+      //   document.getElementById("blogtext").innerHTML = StringShortener(blog.snippet, 300);
+      // }
 
       return (
 

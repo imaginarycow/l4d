@@ -2,5 +2,26 @@
     width: 50%;
     position: relative;
     left: 25%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     color: white;
+}
+#aboutDiv h3 {
+    width: 100%;
+    margin-bottom: 40px;
+}
+#aboutStory {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.gifDiv {
+    width: 45%;
+}
+.gifDiv img {
+    width: 100%;
 }
