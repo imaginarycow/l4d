@@ -205,11 +205,10 @@ class BlogView extends Component {
           </form>
         </div>
         <div id="previewContainer">
-            <h2>Preview</h2>
             <div id="blogpreviewarea">
-              <div><label>{this.state.title}</label></div>
+              <div><h1>{this.state.title}</h1></div>
               <div><label>{this.state.subtitle}</label></div>
-              <div><label>published by: {this.state.author}</label></div>
+              <div id="posted-by"><h4>Posted by: {this.state.author}</h4></div>
               <img src={this.state.imgUrl} />
               <div id="blog-preview" style={prevStyle}></div>
             </div>

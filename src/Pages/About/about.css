@@ -1,6 +1,13 @@
+@font-face {
+    font-family: "Armenia";
+    src: url("../../assets/Armenia Gradient.ttf"); }
 #aboutDiv {
     width: 50%;
     position: relative;
     left: 25%;
     color: white;
+    font-family: "Open Sans Condensed", sans-serif;
+}
+#aboutDiv h3 { 
+    //font-family: Armenia;
 }

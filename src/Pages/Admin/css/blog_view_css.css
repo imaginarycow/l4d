@@ -1,3 +1,6 @@
+@font-face {
+  font-family: "Armenia";
+  src: url("../../../assets/Armenia Gradient.ttf"); }
 #blogAdminContainer {
   width: 100%;
   display: flex;
@@ -11,6 +14,7 @@
 #previewContainer {
   width: 45%;
   color: white;
+  font-family: Armenia;
 }
 #blog-form {
   display: flex;
@@ -36,4 +40,11 @@
 }
 #blogpreviewarea img {
   width: 100%;
+}
+#blog-preview {
+  font-family: "Open Sans Condensed", sans-serif;
+}
+#posted-by {
+  font-family: "Open Sans Condensed", sans-serif;
+  color: #848484; 
 }
