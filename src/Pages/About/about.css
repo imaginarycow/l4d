@@ -2,14 +2,15 @@
     font-family: "Armenia";
     src: url("../../assets/Armenia Gradient.ttf"); }
 #aboutDiv {
-    width: 50%;
+    width: 96%;
     position: relative;
-    left: 25%;
-    margin-top: 20px;
+    left: 2%;
+    margin-top: 30px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     color: white;
+    font-family: "Open Sans Condensed", sans-serif;
 }
 #aboutDiv h3 {
     width: 100%;
@@ -23,8 +24,20 @@
     justify-content: space-between;
 }
 .gifDiv {
-    width: 45%;
+    width: 100%;
+    margin-bottom: 15px;
 }
 .gifDiv img {
     width: 100%;
+}
+
+@media(min-width: 600px) {
+    #aboutDiv {
+        width: 70%;
+        position: relative;
+        left: 15%;
+    }
+    .gifDiv {
+        width: 45%;
+    }
 }

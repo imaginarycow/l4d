@@ -6,11 +6,11 @@ const App = () => {
 
     const aboutInfo = [
         <div className="gifDiv">
-            <p>Because Enterprise dev feels like this...</p>
+            <p>Because Enterprise development feels like this...</p>
             <img src='https://media.giphy.com/media/ZKZiW6GSx8eSA/giphy.gif' />
         </div>,
         <div className="gifDiv">
-            <p>And Indie dev feels like this</p>
+            <p>And <em>This</em> feels like this</p>
         <img src='https://media.giphy.com/media/QHE5gWI0QjqF2/giphy.gif' />
     </div>
         

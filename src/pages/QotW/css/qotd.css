@@ -5,13 +5,14 @@
 /*layout for smaller screens*/
 #QOTD-Page {
   width: 98%;
-  margin-top: 20px;
+  margin-top: 40px;
   position: relative;
   left: 1%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   font-family: 'Open Sans Condensed', sans-serif;
+  
 }
 #QOTD-Page #title {
   font-family: Armenia Grunge;
@@ -36,12 +37,8 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
-  margin-bottom: 15px;
+  margin-bottom: 30px;
 }
-#QOTD-Page #comment-area {
-  grid-area: comments;
-}
-
 
 /*layout for larger screens*/
 @media screen and (min-width: 600px) {
@@ -58,9 +55,5 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    margin-bottom: 15px;
-  }
-  #QOTD-Page #comment-area {
-    grid-area: comments;
   }
 }

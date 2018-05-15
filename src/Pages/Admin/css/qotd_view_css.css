@@ -1,3 +1,18 @@
+#qotwViewContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  color: #fff;
+}
+#qotwFormContainer {
+  width: 45%;
+  margin-left: 5px;
+}
+#qotwPreviewContainer {
+  width: 45%;
+  margin-right: 5px;
+}
 #qotd-form {
   display: flex;
   flex-direction: row;

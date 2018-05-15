@@ -1,26 +1,28 @@
 #hrContainer {
-  margin-top: 25px;
-  margin-bottom: 25px;
+  margin-top: 5px;
+  margin-bottom: 50px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
-  align-items: center;
+  justify-content: space-between;
 }
 #div1 {
-  background-color: #4897CB;
+  background-color: #ffffff88;
   grid-area: div1;
   height: 2px;
-  align-items: center;
+  width: 33%;
 }
 #hrtext {
   grid-area: text;
   align-content: center;
   font-size: 10px;
-  text-align: center;
+  color: #ffffff88;
+  width: 33%;
 }
 #div2 {
-  background-color: #4897CB;
+  background-color: #ffffff88;
   grid-area: div2;
   height: 2px;
+  width: 33%;
 }

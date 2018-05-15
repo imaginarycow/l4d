@@ -217,19 +217,23 @@ class Profile extends Component {
 
     return (
       <div id="profileContainer">
+        <div id="userButtonPreview">
+          <img src={this.state.imageUrl} alt="Select one"/>
+        </div>
+        <label id="elabel">Email: {this.state.email}</label>
+        <div id="aliasDiv">
+          <label id="aliaslabel">Alias</label>
+          <input id="aliasInput" type="text" value={this.state.username} onChange={this.onChange} name="username" maxLength="20" />
+          <label id="availLabel">{availability}</label>
+        </div>
+        
         <div id="logoutDiv">
           <button id="logoutButton" onClick={this.logout}>Logout</button>
         </div>
 
         <form id="profileform" onSubmit={this.handleSubmit}>
           <div id="doneEditingButton">
-            <input type="submit" value="Done Editing" />
-          </div>
-          <h3 id="editlabel">Edit Profile</h3>
-          <label id="elabel">Email: {this.state.email}</label>
-          <label id="usernamelabel">Username - {availability}</label>
-          <div id="usernameinput">
-            <input type="text" value={this.state.username} onChange={this.onChange} name="username" maxLength="20" />
+            <input type="submit" value="Done" />
           </div>
 
           {/* <label id="">Upload a Profile pic</label>
@@ -238,9 +242,7 @@ class Profile extends Component {
             <img src={this.state.imagePreviewUrl} alt=''/>
           </div> */}
           <label id="yourButtonLabel">Select a button</label>
-          <div id="userButtonPreview">
-            <img src={this.state.imageUrl} alt="Select one"/>
-          </div>
+          
           <div id="userimages">
             {imagesToRender}
           </div>

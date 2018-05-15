@@ -2,6 +2,9 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+  color: white;
 }
 #logoutDiv {
   width: 100%;
@@ -9,13 +12,17 @@
 }
 #logoutButton {
   background-color: #ea950b;
+  border: none;
   color: white;
 }
 #doneEditingButton {
+  border: none;
   width: 100%;
+  
 }
 #doneEditingButton input {
   background-color: green;
+  border: none;
   color: white;
 }
 #profileform {
@@ -27,11 +34,21 @@
 #elabel {
   width: 100%;
 }
-#usernamelabel {
-  width: 100%;
+#aliasDiv {
+  display: inline-block;
 }
-#usernameinput {
-  width: 100%;
+#aliaslabel {
+  margin-right: 5px;
+}
+#availLabel {
+  margin-left: 5px;
+}
+#aliasInput {
+  color: rgb(202, 200, 200);
+  background: none;
+  border: none;
+  border-bottom: 2px solid red;
+  text-align: center;
 }
 #userimages {
   width: 100%;
@@ -46,6 +63,7 @@
   text-align: center;
   margin-top: 10px;
   margin-bottom: 10px;
+  width: 100%;
 }
 #userButtonPreview img{
   border-radius: 75px;

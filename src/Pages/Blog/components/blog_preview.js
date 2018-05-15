@@ -35,7 +35,7 @@ export class BlogPreview extends Component {
             <Link to={`/Blog/${urltitle}`} ><img src={url} alt='blog'/></Link>
           </div>
           <div id="blogtext" >{text}</div>
-          <HR text="Blog"/>
+          <HR text="ʘ‿ʘ"/>
         </div>
 
       );

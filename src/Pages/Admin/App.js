@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import BlogView from './views/blog_view';
 import DoodlesView from './views/doodles_view';
-import QotdView from './views/qotd_view';
+import QotwView from './views/qotd_view';
 import WorstView from './views/worst_view';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import firebase from '../../firebase/firebase.js';
 import './css/admin_view_css.css';
 
-let apps = ['Pick App','Blog','Doodles','The Worst','QOTD'];
+let apps = ['Pick App','Blog','QOTW'];
 var options = [];
 
 class Admin extends Component {
@@ -51,8 +51,8 @@ class Admin extends Component {
         return <div id="selected-view"><BlogView /></div>;
       case 'The Worst':
         return <div id="selected-view"><WorstView /></div>;
-      case 'QOTD':
-        return <div id="selected-view"><QotdView /></div>;
+      case 'QOTW':
+        return <div id="selected-view"><QotwView /></div>;
       default:
         return <div id="selected-view"></div>;
     }

@@ -1,26 +1,21 @@
 #hrContainer {
-  margin-top: 25px;
+  margin-top: 150px;
   margin-bottom: 25px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
-  align-items: center;
 }
 #div1 {
   background-color: #4897CB;
-  grid-area: div1;
   height: 2px;
-  align-items: center;
 }
 #hrContainer #text {
-  grid-area: text;
-  align-content: center;
   font-size: 10px;
   text-align: center;
+  color: rgba(255, 255, 255, 0.623);
 }
 #div2 {
   background-color: #4897CB;
-  grid-area: div2;
   height: 2px;
 }
