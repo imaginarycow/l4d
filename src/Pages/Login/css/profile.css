@@ -13,6 +13,7 @@
 #logoutButton {
   background-color: #ea950b;
   border: none;
+  border-radius: 7px;
   color: white;
 }
 #doneEditingButton {
@@ -23,6 +24,7 @@
 #doneEditingButton input {
   background-color: green;
   border: none;
+  border-radius: 7px;
   color: white;
 }
 #profileform {

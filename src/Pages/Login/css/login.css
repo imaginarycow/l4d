@@ -14,6 +14,7 @@
   background-color: #086A87;
   box-shadow: 5px 5px 50px 15px rgb(212, 57, 57);
   border-radius: 10px;
+  margin-bottom: 20px;
 }
 #form {
   display: flex;
