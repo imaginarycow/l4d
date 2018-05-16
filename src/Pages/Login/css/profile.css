@@ -1,3 +1,9 @@
+@font-face {
+  font-family: "Victorious";
+  src: url("../../../assets/Victorious.ttf"); }
+@font-face {
+  font-family: "Armenia";
+  src: url("../../../assets/Armenia Gradient.ttf"); }
 #profileContainer {
   display: flex;
   flex-direction: row;
@@ -35,6 +41,7 @@
 }
 #elabel {
   width: 100%;
+  margin-top: 10px;
 }
 #aliasDiv {
   display: inline-block;
@@ -61,16 +68,41 @@
   margin: 10px;
 }
 #userButtonPreview {
-  display: block;
-  text-align: center;
+  display: flex;
+  justify-content: center;
   margin-top: 10px;
   margin-bottom: 10px;
-  width: 100%;
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+}
+#userButtonPreview h4 {
+  font-size: 80px;
+  font-family: Victorious;
+  margin-top: 5px;
 }
 #userButtonPreview img{
   border-radius: 75px;
   width: 150px;
   height: 150px;
+}
+#colorsContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.colors {
+  width: 50px;
+  height: 30px;
+  border-radius: 8px;
+  margin: 0px 5px 10px 5px;
+}
+.active-color {
+  -moz-box-shadow: 2px 2px 4px rgba(202, 29, 29, 0.808);
+  -webkit-box-shadow: 2px 2px 4px rgba(202, 29, 29, 0.808);
+  box-shadow: 2px 2px 4px rgba(202, 29, 29, 0.808);
 }
 
 /*layout for larger screens*/

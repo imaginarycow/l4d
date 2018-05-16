@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import ColorPicker from '../../components/color_picker/index';
 import LogOutUser from '../../redux/actions/user_logout';
 import firebase from '../../firebase/firebase.js';
 import toastr from 'toastr';
@@ -27,7 +28,11 @@ class Profile extends Component {
       defaultImage: defImage,
       editing: true,
       usernameError: false,
-      returnToLogin: false
+      returnToLogin: false,
+      activeColor: 'color1',
+      color1: '#123456',
+      color2: '#fff',
+      colorPicker: false
     }
 
     this.onChange = this.onChange.bind(this);
@@ -36,6 +41,8 @@ class Profile extends Component {
     this.selectButton = this.selectButton.bind(this);
     this.handleImageChange = this.handleImageChange.bind(this);
     this.getImageButtons = this.getImageButtons.bind(this);
+    this.setActiveColor = this.setActiveColor.bind(this);
+    this.handleColorChange = this.handleColorChange.bind(this);
 
     toastr.options = {
       "positionClass": "toast-top-center",
@@ -64,6 +71,8 @@ class Profile extends Component {
       }
     });
 
+    document.getElementById('color1').classList.add('active-color');
+
   }
 
   onChange(e) {
@@ -86,6 +95,16 @@ class Profile extends Component {
     });
   }
 
+  handleColorChange(color) {
+
+    if (this.state.activeColor === 'color1') {
+      this.setState({ color1: color.hex });
+    } else {
+      this.setState({ color2: color.hex });
+    }
+    
+  }
+
   handleImageChange(e) {
     e.preventDefault();
 
@@ -101,7 +120,6 @@ class Profile extends Component {
 
     reader.readAsDataURL(file)
   }
-
 
   handleSubmit(e) {
 
@@ -200,6 +218,24 @@ class Profile extends Component {
     return newArray;
   }
 
+  setActiveColor(e) {
+
+    if (typeof e.target !== 'undefined'){
+      const id = e.target.id;
+      this.setState({activeColor: id});
+
+      if (id === 'color1') {
+        document.getElementById('color1').classList.add('active-color');
+        document.getElementById('color2').className = 'colors';
+      } else {
+        document.getElementById('color2').classList.add('active-color');
+        document.getElementById('color1').className = 'colors';
+      }
+    
+    }
+    
+  }
+
   render() {
 
     if (!this.state.editing) {
@@ -212,13 +248,28 @@ class Profile extends Component {
     //   console.log(this.state.file);
     // }
 
+    const pickerStyle = {
+      display: 'none'
+    }
+
     const imagesToRender = this.getImageButtons();
     var availability = this.state.aliasAvailable ? 'Available' : 'Not Available!';
 
     return (
       <div id="profileContainer">
-        <div id="userButtonPreview">
-          <img src={this.state.imageUrl} alt="Select one"/>
+        <div id="userButtonPreview" style={{backgroundColor: this.state.color1}}>
+          <h4 style={{color: this.state.color2}}>4</h4>
+        </div>
+        <div id="colorsContainer">
+          <div id="color1" className="colors" style={{backgroundColor: this.state.color1}} onClick={this.setActiveColor}></div>
+          <div id="color2" className="colors" style={{backgroundColor: this.state.color2}} onClick={this.setActiveColor}></div>
+        </div>
+        <div>
+          <ColorPicker
+            color={ this.state.color1 }
+            onChange={ this.handleColorChange }
+            onChangeComplete={ this.handleColorChange }
+          />
         </div>
         <label id="elabel">Email: {this.state.email}</label>
         <div id="aliasDiv">
@@ -241,11 +292,10 @@ class Profile extends Component {
           <div id="preview">
             <img src={this.state.imagePreviewUrl} alt=''/>
           </div> */}
-          <label id="yourButtonLabel">Select a button</label>
           
-          <div id="userimages">
+          {/* <div id="userimages">
             {imagesToRender}
-          </div>
+          </div> */}
 
         </form>
       </div>
