@@ -50,6 +50,7 @@ class NavigationBar extends Component {
     }
 
     updateUser(user, that) {
+      //get custom firebase user object
       var userRef = firebase.database().ref('users/'+user.uid);
       userRef.on('value', function(snapshot) {
         if (snapshot.val() !== null && snapshot.val() !== '') {

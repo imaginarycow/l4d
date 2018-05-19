@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import firebase from '../../firebase/firebase.js';
 import toastr from 'toastr';
+import { updateLoggedInUser } from '../../redux/actions/user_login';
 import '../../toastr/build/toastr.css';
 import './css/login.css';
 
@@ -22,7 +23,17 @@ class Signup extends Component {
     toastr.options = {
       "positionClass": "toast-top-center",
       "closeButton": true,
-      "preventDuplicates": true
+      "preventDuplicates": true,
+      "preventDuplicates": false,
+      "onclick": null,
+      "showDuration": "300",
+      "hideDuration": "1000",
+      "timeOut": "5000",
+      "extendedTimeOut": "1000",
+      "showEasing": "swing",
+      "hideEasing": "linear",
+      "showMethod": "fadeIn",
+      "hideMethod": "fadeOut"
     }
 
     this.signUp = this.signUp.bind(this);
@@ -44,6 +55,7 @@ class Signup extends Component {
     e.preventDefault();
     //attempt create user with state.email & state.pass
     //validate email address, verify unique user done by firebase
+    
     var errorThrown = false;
     firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.pass)
       .then((user) => {
@@ -58,8 +70,10 @@ class Signup extends Component {
         //create user in realtime database
         const newUser = {
           email: user.email,
+          color1: '#063852',
+          color2: '#f0810f',
           photoURL: user.photoURL,
-          displayName: user.displayName,
+          displayName: '',
           uid: user.uid,
           isSuspended: false,
           isBanned: false,
@@ -67,6 +81,7 @@ class Signup extends Component {
           votes: []
         };
         firebase.database().ref('users/'+user.uid).set(newUser);
+        this.props.updateLoggedInUser(newUser);
       })
       .catch((error) => {
         var errorCode = error.code;
@@ -130,10 +145,8 @@ function mapStateToProps(state) {
     return {user: state.user};
 }
 
-// function mapDispatchToProps(dispatch) {
-//
-//   return bindActionCreators({logUserIn}, dispatch);
-//
-// }
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({updateLoggedInUser}, dispatch);
+}
 
-export default connect(mapStateToProps, null)(Signup);
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);

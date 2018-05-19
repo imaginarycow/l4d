@@ -1,4 +1,4 @@
-const loginUser = (state = {email: 'undefined'}, action) => {
+const loginUser = (state = {uid: 'undefined'}, action) => {
   switch (action.type) {
     case 'LOGIN_USER':
       return action.payload;

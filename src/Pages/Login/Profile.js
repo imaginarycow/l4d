@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import ColorPicker from '../../components/color_picker/index';
+import {CompactPicker as Picker} from 'react-color';
 import LogOutUser from '../../redux/actions/user_logout';
 import firebase from '../../firebase/firebase.js';
 import toastr from 'toastr';
@@ -18,30 +19,15 @@ class Profile extends Component {
   constructor() {
     super();
 
-    this.state = {
-      aliasAvailable: true,
-      username: '',
-      file: '',
-      firebaseUser: null,
-      imageUrl: null,
-      imagePreviewUrl: '',
-      defaultImage: defImage,
-      editing: true,
-      usernameError: false,
-      returnToLogin: false,
-      activeColor: 'color1',
-      color1: '#123456',
-      color2: '#fff',
-      colorPicker: false
-    }
+    this.state = defaultState;
 
     this.onChange = this.onChange.bind(this);
     this.logout = this.logout.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.selectButton = this.selectButton.bind(this);
     this.handleImageChange = this.handleImageChange.bind(this);
-    this.getImageButtons = this.getImageButtons.bind(this);
     this.setActiveColor = this.setActiveColor.bind(this);
+    this.getColorPicker = this.getColorPicker.bind(this);
     this.handleColorChange = this.handleColorChange.bind(this);
 
     toastr.options = {
@@ -61,15 +47,18 @@ class Profile extends Component {
 
       if (user !== null && user.email !== null) {
 
-        var photo = user.photoURL !== null ? user.photoURL : this.state.defaultImage;
-        this.setState({email: user.email,
-          firebaseUser: user,
-          username: user.displayName === null ? '' : user.displayName,
-          imageUrl: photo});
-      } else {
-        this.setState({imageUrl: this.state.defaultImage});
-      }
+        this.setState({ firebaseUser: user });
+      } 
+
     });
+
+    if (this.props.user.uid !== 'undefined') {
+      this.setState({ user: this.props.user, alias: this.props.user.displayName });
+    } 
+    else {
+      this.setState({ returnToLogin: true });
+    }
+    
 
     document.getElementById('color1').classList.add('active-color');
 
@@ -81,13 +70,13 @@ class Profile extends Component {
     var currText = e.target.value;
 
     if (e.target.value.length <= 20) {
-      this.setState({username: currText});
+      this.setState({alias: currText});
     }
     //check alias object to see if username is available
     var aliasRef = firebase.database().ref('aliases/'+currText);
     aliasRef.once('value', function(snapshot) {
 
-      if (snapshot.val() !== null && that.state.firebaseUser.displayName !== currText) {
+      if (snapshot.val() !== null && that.state.user.displayName !== currText) {
         that.setState({aliasAvailable: false});
       }else {
         that.setState({aliasAvailable: true});
@@ -95,11 +84,36 @@ class Profile extends Component {
     });
   }
 
-  handleColorChange(color) {
+  getColorPicker(activeColor) {
 
+    if (activeColor === 'color1') {
+      const color = this.state.color1;
+      return (
+        <Picker
+          color={ color }
+          onChange={ this.handleColorChange }
+        />
+      )
+    }
+    else {
+      const color = this.state.color2;
+      return (
+        <Picker
+          color={ color }
+          onChange={ this.handleColorChange }
+          
+        />
+      )
+    }
+    
+  }
+
+  handleColorChange(color) {
+    
     if (this.state.activeColor === 'color1') {
       this.setState({ color1: color.hex });
-    } else {
+    } 
+    if (this.state.activeColor === 'color2') {
       this.setState({ color2: color.hex });
     }
     
@@ -124,13 +138,15 @@ class Profile extends Component {
   handleSubmit(e) {
 
     e.preventDefault();
-    var alias = this.state.username;
+    const alias = this.state.alias;
+    const user = this.state.user;
+
     if (alias === '' || alias === null) {
       toastr.warning('Please enter a username that will be visible to other users');
       return;
     }
     if(!this.state.aliasAvailable) {
-      toastr.error('username ' + alias + ' is not available');
+      toastr.error('alias ' + alias + ' is not available');
       return;
     }
 
@@ -138,23 +154,19 @@ class Profile extends Component {
         toastr.error("Special characters (!@#$%^&*, etc.) are not allowed.");
         return;
     }
-    if (this.state.imageUrl === null) {
-      this.setState({imageUrl: this.state.defaultImage});
-    }
 
-    if (this.state.firebaseUser !== null && this.state.firebaseUser.email !== null) {
-      const oldAlias = this.state.firebaseUser.displayName;
+    if (user!== null) {
+      const oldAlias = user.displayName;
       this.state.firebaseUser.updateProfile({
-        displayName: alias,
-        photoURL: this.state.imageUrl,
+        displayName: alias
       }).then(() => {
         var updates = {};
-        updates['users/'+this.state.firebaseUser.uid+'/displayName'] = alias;
+        updates['users/'+user.uid+'/displayName'] = alias;
+        updates['users/'+user.uid+'/color1'] = this.state.color1;
+        updates['users/'+user.uid+'/color2'] = this.state.color2;
         firebase.database().ref().update(updates);
       }).then(() => {
-        var alias = this.state.username;
-        const newAlias = this.state.firebaseUser.uid;
-        console.log('alias '+alias+' set');
+        const newAlias = user.uid;
         firebase.database().ref('aliases/'+alias).set(newAlias);
       })
       //remove old alias
@@ -169,7 +181,6 @@ class Profile extends Component {
       this.setState({editing: false});
 
     } else {
-      toastr.error('Looks like you are not logged in.  Please login to edit your profile.');
       this.setState({returnToLogin: true});
     }
 
@@ -209,21 +220,13 @@ class Profile extends Component {
     that.setState({returnToLogin: true});
   }
 
-  getImageButtons() {
-    var newArray = [];
-    for (var i in imageArray) {
-      newArray.push(<img onClick={this.selectButton} key={imageArray[i].src}
-        name={imageArray[i].name} src={imageArray[i].src} alt={imageArray[i].alt}/>);
-    }
-    return newArray;
-  }
-
   setActiveColor(e) {
 
     if (typeof e.target !== 'undefined'){
+
       const id = e.target.id;
       this.setState({activeColor: id});
-
+      
       if (id === 'color1') {
         document.getElementById('color1').classList.add('active-color');
         document.getElementById('color2').className = 'colors';
@@ -248,12 +251,8 @@ class Profile extends Component {
     //   console.log(this.state.file);
     // }
 
-    const pickerStyle = {
-      display: 'none'
-    }
-
-    const imagesToRender = this.getImageButtons();
     var availability = this.state.aliasAvailable ? 'Available' : 'Not Available!';
+    const user = this.state.user;
 
     return (
       <div id="profileContainer">
@@ -265,16 +264,12 @@ class Profile extends Component {
           <div id="color2" className="colors" style={{backgroundColor: this.state.color2}} onClick={this.setActiveColor}></div>
         </div>
         <div>
-          <ColorPicker
-            color={ this.state.color1 }
-            onChange={ this.handleColorChange }
-            onChangeComplete={ this.handleColorChange }
-          />
+          {this.getColorPicker(this.state.activeColor)}
         </div>
-        <label id="elabel">Email: {this.state.email}</label>
+        <label id="elabel">Email: {user.email}</label>
         <div id="aliasDiv">
           <label id="aliaslabel">Alias</label>
-          <input id="aliasInput" type="text" value={this.state.username} onChange={this.onChange} name="username" maxLength="20" />
+          <input id="aliasInput" type="text" value={this.state.alias} onChange={this.onChange} name="username" maxLength="20" />
           <label id="availLabel">{availability}</label>
         </div>
         
@@ -301,6 +296,20 @@ class Profile extends Component {
       </div>
     );
   }
+}
+
+const defaultState = {
+  aliasAvailable: true,
+  alias: '',
+  file: '',
+  firebaseUser: null,
+  user: {},
+  editing: true,
+  usernameError: false,
+  returnToLogin: false,
+  activeColor: 'color1',
+  color1: '#063852',
+  color2: '#f0810f'
 }
 
 function mapStateToProps(state) {

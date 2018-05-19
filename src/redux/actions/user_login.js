@@ -5,12 +5,6 @@ import '../../toastr/build/toastr.css';
 export function updateLoggedInUser(user) {
   console.log('user updated');
   console.log(user.email);
-  // const loggedInUser = {
-
-  //   email: user.email,
-  //   username: user.displayName,
-  //   image: user.photoURL
-  // }
 
   return {
     type: 'LOGIN_USER',
