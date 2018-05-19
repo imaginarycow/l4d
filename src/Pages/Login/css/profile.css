@@ -12,19 +12,26 @@
   margin-top: 20px;
   color: white;
 }
-#logoutDiv {
+#buttonsContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
   width: 100%;
-  margin-bottom: 10px;
+  margin: 20px 0px;
 }
 #logoutButton {
   background-color: #ea950b;
   border: none;
   border-radius: 7px;
   color: white;
+  margin-right: 20px;
 }
 #doneEditingButton {
+  background-color: #1c9444;
   border: none;
-  width: 100%;
+  border-radius: 7px;
+  color: white;
   
 }
 #doneEditingButton input {
@@ -34,7 +41,7 @@
   color: white;
 }
 #profileform {
-  width: 100%;
+  width: 45%;
   margin-bottom: 20px;
 }
 #editlabel {

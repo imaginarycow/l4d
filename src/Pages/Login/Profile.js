@@ -277,27 +277,10 @@ class Profile extends Component {
           <input id="aliasInput" type="text" value={this.state.alias} onChange={this.onChange} name="username" maxLength="20" />
           <label id="availLabel">{availability}</label>
         </div>
-        
-        <div id="logoutDiv">
+        <div id="buttonsContainer">
           <button id="logoutButton" onClick={this.logout}>Logout</button>
-        </div>
-
-        <form id="profileform" onSubmit={this.handleSubmit}>
-          <div id="doneEditingButton">
-            <input type="submit" value="Done" />
-          </div>
-
-          {/* <label id="">Upload a Profile pic</label>
-          <input type="file" id="profile_pic" name="profile_pic" accept="image/*" onChange={this.handleImageChange} />
-          <div id="preview">
-            <img src={this.state.imagePreviewUrl} alt=''/>
-          </div> */}
-          
-          {/* <div id="userimages">
-            {imagesToRender}
-          </div> */}
-
-        </form>
+          <button id="doneEditingButton" onClick={this.handleSubmit}>Done</button>
+        </div>  
       </div>
     );
   }
