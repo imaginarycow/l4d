@@ -17,7 +17,8 @@ export default class Choice extends Component {
 
     toastr.options = {
       "closeButton": true,
-      "preventDuplicates": true
+      "preventDuplicates": true,
+      "positionClass": "toast-top-center",
     }
   }
 
@@ -32,22 +33,22 @@ export default class Choice extends Component {
       return;
     }
     //check firebase user object to see if user has already voted for this qotdKey
-    const qotdKey = this.props.qotdKey;
+    const qotwKey = this.props.qotdKey;
     var voteKey = e.target.name === "1" ? "votes1" : "votes2";
-    var hasVotedRef = firebase.database().ref('users/'+user.uid+'/votes/QD'+qotdKey);
+    var hasVotedRef = firebase.database().ref('users/'+user.uid+'/votes/QW'+qotwKey);
     hasVotedRef.once('value', function(snapshot) {
       //user has not voted, allow them to vote
       if (snapshot.val() === null) {
         console.log(snapshot.val());
-        var voteCountRef = firebase.database().ref('apps/qotd/'+qotdKey+'/'+voteKey);
+        var voteCountRef = firebase.database().ref('apps/qotw/'+qotwKey+'/'+voteKey);
         voteCountRef.once('value', function(snapshot) {
           var updates = {};
           const newCount = snapshot.val() + 1;
-          updates['apps/qotd/'+qotdKey+'/'+voteKey] = newCount;
+          updates['apps/qotw/'+qotwKey+'/'+voteKey] = newCount;
           firebase.database().ref().update(updates);
           that.setState({voted: true});
         }).then(() => {
-          firebase.database().ref('users/'+user.uid+'/votes/QD'+qotdKey+'/').set(voteKey)
+          firebase.database().ref('users/'+user.uid+'/votes/QW'+qotwKey+'/').set(voteKey)
           .then((response) => {
             console.log('successful vote');
           })

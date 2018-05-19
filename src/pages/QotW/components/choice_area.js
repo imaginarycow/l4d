@@ -41,7 +41,7 @@ export default class ChoiceArea extends Component {
   }
 
   setVote(option) {
-    console.log('set vote called ' + option);
+    
     this.setState({optionVoted: option});
     this.forceUpdate();
   }

@@ -33,7 +33,7 @@ class QOTW extends Component {
       }
       const qotw = this.props.qotw;
       var comment = qotw.question + ' ' + qotw.option1 + ' or ' + qotw.option2;
-      console.log(qotw);
+      
       return (
         <div id="QOTD-Page">
           <h1 id="title">QotW</h1>
