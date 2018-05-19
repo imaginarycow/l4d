@@ -53,7 +53,12 @@ class Profile extends Component {
     });
 
     if (this.props.user.uid !== 'undefined') {
-      this.setState({ user: this.props.user, alias: this.props.user.displayName });
+      const user = this.props.user;
+      this.setState({ user: user, 
+        alias: this.props.user.displayName,
+        color1: user.color1,
+        color2: user.color2  
+      });
     } 
     else {
       this.setState({ returnToLogin: true });
@@ -242,7 +247,7 @@ class Profile extends Component {
   render() {
 
     if (!this.state.editing) {
-      return <Redirect to='/' />;
+      return <Redirect to='/Blog' />;
     }
     if (this.state.returnToLogin) {
       return <Redirect to='/Login' />;

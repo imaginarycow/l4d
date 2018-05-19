@@ -39,11 +39,11 @@ class QOTW extends Component {
           <h1 id="title">QotW</h1>
           <h5 id="subtitle">Question of the Week</h5>
           <div id="share-archive-container">
-            <ShareButtons pagelink={this.state.url} hashtags="QotD" comment={comment}/>
+            <ShareButtons pagelink={this.state.url} hashtags="QotW" comment={comment}/>
           </div>
           <Question id="question" text={qotw.question}/>
           <ChoiceArea id="choice-area" question={qotw}/>
-          <CommentArea app="qotd" commentGroupId={qotw.commentGroupId} comments={this.props.comments}/>
+          <CommentArea app="qotw" commentGroupId={qotw.commentGroupId} comments={this.props.comments}/>
         </div>
       );
     }

@@ -15,7 +15,11 @@ export default class Comment extends Component {
     return (
       <li>
         <div id="comment">
-          <img id="img" src={this.props.imgUrl} alt="user"/>
+          <div id="userCommentButton" 
+              style={{ backgroundColor: this.props.color1,
+                       color: this.props.color2}}
+              >4</div>
+          {/* <img id="img" src={this.props.imgUrl} alt="user"/> */}
           <div id="userinfo">
             <p id="name">{this.props.username}</p>
             <p id="date">{formattedDate}</p>

@@ -1,6 +1,6 @@
 import firebase from '../../firebase/firebase.js';
 
-function getQotdComments(comms) {
+function getQotwComments(comms) {
 
   var sortedComms = [];
   for (var i in comms) {
@@ -14,13 +14,13 @@ function getQotdComments(comms) {
   }
 }
 
-export default function GetQotdComments(commentGroup) {
+export default function GetQotwComments(commentGroup) {
   console.log('commentGroupId' + commentGroup);
   return function(dispatch) {
 
-    var qotdCommentsRef = firebase.database().ref('comments/qotd/'+commentGroup);
+    var qotdCommentsRef = firebase.database().ref('comments/qotw/'+commentGroup);
     qotdCommentsRef.on('value', function(snapshot) {
-      dispatch(getQotdComments(snapshot.val()));
+      dispatch(getQotwComments(snapshot.val()));
     });
 
   }

@@ -54,12 +54,13 @@ class NewComment extends Component {
     } else {
       var newKey = this.state.username + Date.now();
       const newComment = {
+        color1: this.props.user.color1,
+        color2: this.props.user.color2,
         likes: 0,
         dislikes: 0,
         isFlagged: false,
         timestamp: Date.now(),
         text: this.state.comment,
-        userimage: this.state.userimage,
         username: this.state.username
       };
       this.props.PostComment(this.props.app, this.props.commentGroupId, newKey, newComment);
@@ -82,7 +83,10 @@ class NewComment extends Component {
       <div id="newcommentcontainer">
         <form onSubmit={this.handleSubmit}>
           <div id="user">
-            <img src={this.state.userimage} />
+            <div id="userButton" 
+              style={{ backgroundColor: this.props.user.color1,
+                       color: this.props.user.color2}}
+              >4</div>
             <h4>{this.state.username}</h4>
           </div>
 

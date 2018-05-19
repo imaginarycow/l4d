@@ -21,7 +21,9 @@ export default class CommentList extends Component {
     for (var i in comments) {
       CommentsArray.push(<Comment key={comments[i].timestamp+i} text={comments[i].text}
                       username={comments[i].username} imgUrl={comments[i].userimage}
-                      timestamp={comments[i].timestamp} />);
+                      timestamp={comments[i].timestamp} 
+                      color1={comments[i].color1}
+                      color2={comments[i].color2}/>);
     }
     return CommentsArray;
   }

@@ -1,12 +1,20 @@
+@font-face {
+  font-family: "Victorious";
+  src: url("../../assets/Victorious.ttf");
+}
 #comment {
   display: flex;
   margin-bottom: 15px;
 }
-#img {
-  max-width: 40px;
-  max-height: 40px;
+#userCommentButton {
+  width: 40px;
+  height: 40px;
   border-radius: 20px;
   margin-right: 10px;
+  display: flex;
+  justify-content: center;
+  font-family: Victorious;
+  font-size: 30px;
 }
 #userinfo {
   color: #4897CB;

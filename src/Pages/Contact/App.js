@@ -96,10 +96,11 @@ class CommentBox extends Component {
 
   render() {
 
+    const loginMessage = (this.state.user === null) ? '(login to leave a message)': '';
     return (
       <div id="comment-box">
         <h3 className="white">Comments / Suggestions / Just Bored and want to chat?</h3>
-        <h5 className="white">(login to leave a message)</h5>
+        <h5 className="white">{loginMessage}</h5>
         <form onSubmit={this.handleSubmit}>
           <input id="namein" type="text" name="name" value={this.state.name} onChange={this.handleChange}/>
           <label id="name">Name</label>

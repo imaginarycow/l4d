@@ -105,9 +105,7 @@ class Login extends Component {
   render() {
 
     if (this.props.user.email !== 'undefined' && this.props.user.email !== null) {
-      return <Redirect to='/'/>;
-      // console.log(this.props.lastPage.link);
-      // return <Redirect to={this.props.lastPage.link}/>;
+      return <Redirect to='/Blog'/>;
     }
 
     if (this.state.needsAccount) {

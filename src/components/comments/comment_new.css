@@ -1,6 +1,6 @@
 @font-face {
-  font-family: "Bungee";
-  src: url("../../assets/bungee.ttf");
+  font-family: "Victorious";
+  src: url("../../assets/Victorious.ttf");
 }
 @font-face {
   font-family: "Armenia";
@@ -25,10 +25,20 @@
   justify-content: left;
   margin-bottom: 5px;
 }
-#user img {
-  max-width: 50px;
-  max-height: 50px;
+#user {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+#userButton {
+  width: 50px;
+  height: 50px;
   border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  font-family: Victorious;
+  font-size: 40px;
 }
 #user h4 {
   margin-left: 15px;
