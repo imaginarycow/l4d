@@ -21,7 +21,7 @@ class BlogRead extends Component {
       blog: null,
       hashtags: '',
       selectedBlogTitle: null,
-      url: 'http://www.Left4Dev.com'
+      url: 'https://www.Left4Dev.com'
       };
       this.updateText = this.updateText.bind(this);
   }
@@ -31,12 +31,11 @@ class BlogRead extends Component {
     if (this.props.match.params !== nextProps.match.params) {
 
       this.props.BlogLoad(nextProps.match.params.title);
-      const linkUrl = 'http://www.Left4Dev.com' + nextProps.match.url;
+      const linkUrl = 'https://www.Left4Dev.com' + nextProps.match.url;
       this.setState({url: linkUrl});
     }
 
     if (this.props.currBlog !== nextProps.currBlog && nextProps.currBlog !== null) {
-      console.log('props changed' + nextProps.currBlog.hashtags);
       this.props.GetComments(nextProps.currBlog.commentGroupId);
       this.setState({hashtags: nextProps.currBlog.hashtags});
       this.updateText(nextProps.currBlog.blog);
@@ -47,6 +46,7 @@ class BlogRead extends Component {
 
     //check url for specific blog
     if (typeof this.props.match.params.title !== 'undefined') {
+      this.setState({selectedBlogTitle: this.props.match.params.title});
       this.props.BlogLoad(this.props.match.params.title);
     }
   }
@@ -54,6 +54,10 @@ class BlogRead extends Component {
   componentDidMount() {
     const linkUrl = 'http://www.Left4Dev.com' + this.props.match.url;
     this.setState({url: linkUrl});
+
+    if (this.props.currBlog === null) {
+      this.props.BlogLoad(this.state.selectedBlogTitle);
+    }
 
     if (document.getElementById("blogreadtext") !== null && this.props.currBlog !== null) {
       console.log('blogreadtext is not null');
@@ -113,7 +117,7 @@ class BlogRead extends Component {
 
         return (
           <div id="container">
-              <div id="blogreadtext">Loading...</div>
+            <div id="blogreadtext">Loading...</div>
           </div>
         );
       }

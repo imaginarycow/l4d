@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import PostComment from '../../redux/actions/comment_new';
 import toastr from 'toastr';
 import '../../toastr/build/toastr.css';
@@ -20,11 +21,12 @@ class NewComment extends Component {
       username: 'Login to comment',
       uid: '',
       userimage: '',
-      defaultimage: '../../assets/profile_images/userImage1.png'
+      redirectToLogin: false
     }
 
     this.onChange = this.onChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleRedirectToLogin = this.handleRedirectToLogin.bind(this);
   }
 
   componentDidMount() {
@@ -39,6 +41,12 @@ class NewComment extends Component {
       }
 
     });
+  }
+
+  handleRedirectToLogin(e) {
+    e.preventDefault();
+
+    this.setState({redirectToLogin: true});
   }
 
   handleSubmit(e) {
@@ -79,6 +87,11 @@ class NewComment extends Component {
   }
 
   render () {
+
+    if (this.state.redirectToLogin) {
+      return <Redirect to='/Login' />
+    }
+
     return (
       <div id="newcommentcontainer">
         <form onSubmit={this.handleSubmit}>
@@ -87,7 +100,7 @@ class NewComment extends Component {
               style={{ backgroundColor: this.props.user.color1,
                        color: this.props.user.color2}}
               >4</div>
-            <h4>{this.state.username}</h4>
+            <h4 onClick={this.handleRedirectToLogin}>{this.state.username}</h4>
           </div>
 
           <textarea id="text" placeholder="Comment: 500 characters max" name="comment"

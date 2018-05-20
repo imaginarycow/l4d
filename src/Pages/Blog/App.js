@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { BlogPreview } from './components/blog_preview';
+import BlogPreview from './components/blog_preview';
 import BlogLoad from '../../redux/actions/blog_get';
 import './css/blog_page.css';
 

@@ -5,14 +5,15 @@ import './about.css';
 const App = () => {
 
     const aboutInfo = [
-        <div className="gifDiv">
+
+        <div className="gifDiv" key="item1">
             <p>Because Enterprise development feels like this...</p>
-            <img src='https://media.giphy.com/media/ZKZiW6GSx8eSA/giphy.gif' />
+            <img src='https://media.giphy.com/media/w87yLYL7lwDWE/giphy.gif' />
         </div>,
-        <div className="gifDiv">
+        <div className="gifDiv" key="item2">
             <p>And <em>This</em> feels like this</p>
-        <img src='https://media.giphy.com/media/QHE5gWI0QjqF2/giphy.gif' />
-    </div>
+            <img src='https://media.giphy.com/media/HuVCpmfKheI2Q/giphy.gif' />
+        </div>
         
     ];
 

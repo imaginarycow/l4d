@@ -1,14 +1,22 @@
 import React, {Component} from 'react';
 import { Link, Redirect } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import BlogLoad from '../../../redux/actions/blog_get';
 import '../css/blog_preview.css';
 import StringShortener from '../../../utils/string_shortener';
 import HR from './HR/hr';
 
-export class BlogPreview extends Component {
+class BlogPreview extends Component {
 
   constructor() {
     super();
 
+    this.handleBlogSelect = this.handleBlogSelect.bind(this);
+  }
+
+  handleBlogSelect() {
+    this.props.BlogLoad(this.props.blog.urltitle);
   }
 
   render () {
@@ -32,7 +40,7 @@ export class BlogPreview extends Component {
           {/* <h4 id="subtitle">{subtitle}</h4> */}
           <h4 id="postedBy">{date}</h4>
           <div id="image">
-            <Link to={`/Blog/${urltitle}`} ><img src={url} alt='blog'/></Link>
+            <Link to={`/Blog/${urltitle}`} ><img src={url} alt='blog' onClick={this.handleBlogSelect}/></Link>
           </div>
           <div id="blogtext" >{text}</div>
           <HR text="ʘ‿ʘ"/>
@@ -42,3 +50,9 @@ export class BlogPreview extends Component {
     }
 
   }
+
+  function mapDispatchToProps(dispatch) {
+    return bindActionCreators({BlogLoad}, dispatch);
+  }
+
+  export default connect(null, mapDispatchToProps)(BlogPreview);
