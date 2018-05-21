@@ -3,7 +3,6 @@ const loginUser = (state = {uid: 'undefined'}, action) => {
     case 'LOGIN_USER':
       return action.payload;
     case 'LOGOUT_USER':
-    console.log('in logout user reducer ' + action.payload);
       return action.payload;
     default:
       return state;
@@ -18,6 +17,5 @@ const createUser = (state = {}, action) => {
       return state;
   }
 }
-
 
 export {loginUser, createUser};

@@ -27,10 +27,6 @@ class Admin extends Component {
     this.updateDisplay = this.updateDisplay.bind(this);
   }
 
-  componentDidMount() {
-    console.log(this.props);
-  }
-
   handleChange(e) {
     e.preventDefault();
     var appSelected = e.target.value;

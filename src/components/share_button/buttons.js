@@ -6,7 +6,7 @@ export default class ShareButtons extends Component {
 
   constructor(props) {
     super(props);
-    console.log(props);
+    
     this.state = {
       comment: props.comment,
       hashtags: props.hashtags,
@@ -60,7 +60,7 @@ export default class ShareButtons extends Component {
   componentWillReceiveProps(nextProps) {
 
     if (this.props.hashtags !== nextProps.hashtags) {
-      console.log('hashtags changed' + nextProps.hashtags);
+      
       this.setState({comment: nextProps.comment, hashtags: nextProps.hashtags,url: nextProps.pagelink});
       this.getLinks();
     }

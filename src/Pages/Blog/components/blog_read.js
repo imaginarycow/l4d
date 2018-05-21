@@ -16,7 +16,7 @@ class BlogRead extends Component {
 
   constructor() {
     super();
-    console.log(this.props);
+    
     this.state = {
       blog: null,
       hashtags: '',
@@ -60,7 +60,7 @@ class BlogRead extends Component {
     }
 
     if (document.getElementById("blogreadtext") !== null && this.props.currBlog !== null) {
-      console.log('blogreadtext is not null');
+      
       document.getElementById("blogreadtext").innerHTML = this.props.currBlog.blog;
     }
   }

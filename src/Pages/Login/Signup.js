@@ -59,7 +59,7 @@ class Signup extends Component {
     var errorThrown = false;
     firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.pass)
       .then((user) => {
-        console.log(user);
+        
         this.setState({stepTwo: true});
         user.sendEmailVerification().then(() => {
             toastr.success('An email verification has been sent to '+user.email+'.' +

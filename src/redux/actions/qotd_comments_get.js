@@ -15,7 +15,7 @@ function getQotwComments(comms) {
 }
 
 export default function GetQotwComments(commentGroup) {
-  console.log('commentGroupId' + commentGroup);
+
   return function(dispatch) {
 
     var qotdCommentsRef = firebase.database().ref('comments/qotw/'+commentGroup);

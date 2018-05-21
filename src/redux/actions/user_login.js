@@ -3,8 +3,6 @@ import toastr from 'toastr';
 import '../../toastr/build/toastr.css';
 
 export function updateLoggedInUser(user) {
-  console.log('user updated');
-  console.log(user.email);
 
   return {
     type: 'LOGIN_USER',
@@ -13,8 +11,7 @@ export function updateLoggedInUser(user) {
 }
 
 export function updateLocalUserObject(user) {
-  console.log('user type');
-  console.log(typeof user);
+
   if (user !== null) {
 
     return function(dispatch) {

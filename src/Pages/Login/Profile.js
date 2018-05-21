@@ -213,7 +213,6 @@ class Profile extends Component {
   setUser(user) {
     this.setState({email: user.email});
   }
-
   logout(e) {
     e.preventDefault();
     this.props.LogOutUser();
@@ -224,7 +223,6 @@ class Profile extends Component {
     });
     that.setState({returnToLogin: true});
   }
-
   setActiveColor(e) {
 
     if (typeof e.target !== 'undefined'){

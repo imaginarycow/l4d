@@ -10,7 +10,6 @@ export default class Choice extends Component {
   constructor(props) {
     super(props);
 
-    console.log(props);
     this.state = {voted: props.voted, option: props.option};
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -39,7 +38,7 @@ export default class Choice extends Component {
     hasVotedRef.once('value', function(snapshot) {
       //user has not voted, allow them to vote
       if (snapshot.val() === null) {
-        console.log(snapshot.val());
+        
         var voteCountRef = firebase.database().ref('apps/qotw/'+qotwKey+'/'+voteKey);
         voteCountRef.once('value', function(snapshot) {
           var updates = {};
@@ -49,12 +48,6 @@ export default class Choice extends Component {
           that.setState({voted: true});
         }).then(() => {
           firebase.database().ref('users/'+user.uid+'/votes/QW'+qotwKey+'/').set(voteKey)
-          .then((response) => {
-            console.log('successful vote');
-          })
-          .catch((error) => {
-            console.log(error);
-          });
         });
 
       }

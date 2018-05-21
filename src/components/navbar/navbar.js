@@ -106,7 +106,7 @@ class NavigationBar extends Component {
 
     render() {
       let tabs = this.getAvailableTabs();
-      console.log(this.props.user);
+      
   		return (
         <div id="navContainer">
           <Logo subtitle='Because Life is too short' />

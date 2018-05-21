@@ -21,7 +21,6 @@ export default class ChoiceArea extends Component {
 
     if (typeof props.question.date !== 'undefined') {
       let question = props.question;
-      console.log(question.option1);
 
       return (<Choice id="option1" key={question.option1} option="1" qotdKey={question.dateKey}
         text={question.option1} votes={question.votes1} img={question.img1} vote={this.setVote}
@@ -32,7 +31,6 @@ export default class ChoiceArea extends Component {
 
     if (typeof props.question.date !== 'undefined') {
       let question = props.question;
-      console.log(question.option2);
 
       return (<Choice id="option2" key={question.option2} option="2" qotdKey={question.dateKey}
         text={question.option2} votes={question.votes2} img={question.img2} vote={this.setVote}
@@ -50,8 +48,6 @@ export default class ChoiceArea extends Component {
     //this.setChoices();
     const choice1 = this.setChoice1(this.props);
     const choice2 = this.setChoice2(this.props);
-
-    console.log(this.props);
 
     return (
       <div id="choice-area">

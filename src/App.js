@@ -23,11 +23,6 @@ import PageNotFound from './pages/404/App';
 
 class App extends Component {
 
-  componentDidMount () {
-
-    
-  }
-
   render() {
 
     return (
@@ -64,9 +59,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-
   return bindActionCreators({}, dispatch);
-
 }
 
 export default connect(mapStateToProps, null)(App);
